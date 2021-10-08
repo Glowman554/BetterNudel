@@ -3,6 +3,7 @@ package io.github.glowman554.nudel.discord.commands.impl;
 import java.io.File;
 
 import io.github.glowman554.nudel.api.CatApi;
+import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
 import io.github.glowman554.nudel.utils.FileUtils;
@@ -33,28 +34,24 @@ public class CatCommand implements Command
 	@Override
 	public void on_register()
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public String get_short_help()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return "See a cute cat!";
 	}
 
 	@Override
 	public String get_long_help()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("Use '%scat' to see a cute cat!", Discord.discord.commandManager.prefix);
 	}
 
 	@Override
 	public String get_permission()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
