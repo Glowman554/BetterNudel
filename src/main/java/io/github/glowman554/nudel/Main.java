@@ -12,6 +12,7 @@ import io.github.glowman554.nudel.discord.commands.impl.PingCommand;
 import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
+import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.utils.ArgParser;
 import io.github.glowman554.nudel.utils.FileUtils;
 import net.shadew.json.Json;
@@ -24,15 +25,29 @@ public class Main {
 		ArgParser parser = new ArgParser(args);
 		parser.parse();
 
-		String config_file = parser.consume_option("--config", "config.json");
-		String config = FileUtils.readFile(config_file);
+		String token;
+		int port = 8888;
 
-		Json config_json = Json.json();
-		JsonNode config_root = config_json.parse(config);
+		if (parser.is_option("--no-cfg"))
+		{
+			token = System.getenv("DISCORD_TOKEN");
+			port = Integer.parseInt(System.getenv("PORT"));
+		}
+		else
+		{
 
-		String token = config_root.get("token").asString();
+			String config_file = parser.consume_option("--config", "config.json");
+			String config = FileUtils.readFile(config_file);
+
+			Json config_json = Json.json();
+			JsonNode config_root = config_json.parse(config);
+
+			token = config_root.get("token").asString();
+		}
 
 		Discord.init(token);
+
+		HttpApi http_api = new HttpApi(port);
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());
