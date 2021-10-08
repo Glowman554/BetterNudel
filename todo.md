@@ -6,17 +6,16 @@
 - [x] furry
 - [x] yiff
 - [ ] corona
-- [ ] coinflip
+- [x] coinflip
 - [ ] commit
 - [ ] fact
 - [ ] joke
-- [ ] year
-- [ ] nick
+- [x] nick
 - [ ] tts
 - [ ] meme
 - [ ] spotify
 - [x] ping
-- [ ] say
+- [x] say
 - [ ] role
 - [ ] status
 - [x] repeat
