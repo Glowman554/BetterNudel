@@ -68,7 +68,7 @@ public class YiffCommand implements Command
 	@Override
 	public String get_permission()
 	{
-		return null;
+		return "im_18";
 	}
 	
 }

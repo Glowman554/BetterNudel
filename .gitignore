@@ -1,3 +1,6 @@
 target
 dependency-reduced-pom.xml
 test.txt
+tmp
+config.json
+perms.json
