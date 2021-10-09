@@ -16,6 +16,7 @@ import io.github.glowman554.nudel.discord.commands.impl.NickCommand;
 import io.github.glowman554.nudel.discord.commands.impl.PingCommand;
 import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
+import io.github.glowman554.nudel.discord.commands.impl.StatusCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
 import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
@@ -105,6 +106,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("say", new SayCommand());
 		Discord.discord.commandManager.addCommand("meme", new MemeCommand());
 		Discord.discord.commandManager.addCommand("commit", new CommitCommand());
+		Discord.discord.commandManager.addCommand("status", new StatusCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();
