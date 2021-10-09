@@ -39,4 +39,9 @@ public class Discord
 	{
 		jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(this.commandManager.prefix + "help", "https://www.twitch.tv/glowman434"));
 	}
+
+	public void setRP(String rp)
+	{
+		jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(rp, "https://www.twitch.tv/glowman434"));
+	}
 }
