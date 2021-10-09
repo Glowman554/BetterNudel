@@ -20,6 +20,7 @@ import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiPermsHandler;
 import io.github.glowman554.nudel.httpapi.impl.RootHttpHandler;
+import io.github.glowman554.nudel.plugin.PluginsLoader;
 import io.github.glowman554.nudel.utils.ArgParser;
 import io.github.glowman554.nudel.utils.FileUtils;
 import net.shadew.json.Json;
@@ -96,5 +97,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("nick", new NickCommand());
 		Discord.discord.commandManager.addCommand("say", new SayCommand());
 		Discord.discord.commandManager.addCommand("meme", new MemeCommand());
+
+		new PluginsLoader("plugins").load_all();
 	}
 }

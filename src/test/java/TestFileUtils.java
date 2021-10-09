@@ -1,6 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,5 +17,9 @@ public class TestFileUtils
 		assertEquals("hello world", FileUtils.readFile("test.txt"));
 
 		assertEquals("txt", FileUtils.getFileExtension("test.txt"));
+
+		InputStream is = new File("test.txt").toURI().toURL().openStream();
+
+		assertEquals("hello world", FileUtils.readFile(is));
 	}
 }
