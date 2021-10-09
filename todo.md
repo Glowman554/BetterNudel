@@ -17,7 +17,7 @@
 - [x] ping
 - [x] say
 - [ ] role
-- [ ] status
+- [x] status
 - [x] repeat
 - [ ] wikipedia
 - [ ] pronoundb
