@@ -72,24 +72,25 @@ public class CommandManager
 		else
 		{
 			Command command = commands.get(event.command);
-			String permission = command.get_permission();
-
-			if (permission != null)
-			{
-				if (!permissionManager.hasPermission(event.event.getAuthor().getId(), permission))
-				{
-					event.permFail();
-					return;
-				}
-			}
 
 			if (command != null)
 			{
+				String permission = command.get_permission();
+
+				if (permission != null)
+				{
+					if (!permissionManager.hasPermission(event.event.getAuthor().getId(), permission))
+					{
+						event.permFail();
+						return;
+					}
+				}
+
 				command.execute(event);
 			}
 			else
 			{
-				event.event.getChannel().sendMessage("Command not found.").queue();
+				event.commandFail("Command not found.");
 			}
 		}
 	}

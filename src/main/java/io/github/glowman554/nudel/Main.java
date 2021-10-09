@@ -7,6 +7,7 @@ import io.github.glowman554.nudel.discord.commands.impl.DogCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FoxCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FurryCommand;
 import io.github.glowman554.nudel.discord.commands.impl.Im18Command;
+import io.github.glowman554.nudel.discord.commands.impl.MemeCommand;
 import io.github.glowman554.nudel.discord.commands.impl.NickCommand;
 import io.github.glowman554.nudel.discord.commands.impl.PingCommand;
 import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
@@ -64,5 +65,6 @@ public class Main {
 		Discord.discord.commandManager.addCommand("coinflip", new CoinflipCommand());
 		Discord.discord.commandManager.addCommand("nick", new NickCommand());
 		Discord.discord.commandManager.addCommand("say", new SayCommand());
+		Discord.discord.commandManager.addCommand("meme", new MemeCommand());
 	}
 }

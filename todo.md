@@ -12,7 +12,7 @@
 - [ ] joke
 - [x] nick
 - [ ] tts
-- [ ] meme
+- [x] meme
 - [ ] spotify
 - [x] ping
 - [x] say
