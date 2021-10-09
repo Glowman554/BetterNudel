@@ -30,6 +30,10 @@ import net.shadew.json.JsonSyntaxException;
 @SuppressWarnings("unused")
 public class Main {
 
+	public static HttpApi http_api;
+	public static PluginsLoader pluginsLoader;
+	public static ArgParser argParser;
+
 	public static void main(String[] args) throws Exception
 	{
 		ArgParser parser = new ArgParser(args);
@@ -80,7 +84,7 @@ public class Main {
 
 		Discord.init(token);
 
-		HttpApi http_api = new HttpApi(port);
+		http_api = new HttpApi(port);
 
 		HttpApiBaseHandler root_path = new HttpApiBaseHandler(new RootHttpHandler(), http_api, "/");
 		HttpApiBaseHandler api_perms_path = new HttpApiBaseHandler(new ApiPermsHandler(), http_api, "/api/perms");
@@ -98,6 +102,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("say", new SayCommand());
 		Discord.discord.commandManager.addCommand("meme", new MemeCommand());
 
-		new PluginsLoader("plugins").load_all();
+		pluginsLoader = new PluginsLoader("plugins");
+		pluginsLoader.load_all();
 	}
 }
