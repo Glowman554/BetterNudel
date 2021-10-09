@@ -38,11 +38,19 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>com.glowman554.bot.Main</mainClass>
+                    <mainClass>io.github.glowman554.nudel.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+	<distributionManagement>
+		<repository>
+		<id>github</id>
+		<name>GitHub Glowman554 Apache Maven Packages</name>
+		<url>https://maven.pkg.github.com/Glowman554/BetterNudel</url>
+		</repository>
+	</distributionManagement>
 
     <repositories>
         <repository>
