@@ -26,4 +26,4 @@
 
 - [ ] /api/status
 - [ ] /api/message
-- [ ] a http api
+- [x] a http api

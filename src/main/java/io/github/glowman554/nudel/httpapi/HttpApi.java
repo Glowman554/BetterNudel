@@ -1,14 +1,12 @@
 package io.github.glowman554.nudel.httpapi;
 
-import com.sun.net.httpserver.HttpContext;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpServer;
-
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.sun.net.httpserver.HttpContext;
+import com.sun.net.httpserver.HttpServer;
 
 public class HttpApi
 {
@@ -18,12 +16,10 @@ public class HttpApi
 	public HttpApi(int port) throws IOException
 	{
 		this.server = HttpServer.create(new InetSocketAddress(port), 0);
-		this.context = server.createContext("/");
-		context.setHandler(this::handleRequest);
 		server.start();
 	}
 
-	public Map<String, String> query_to_map(String query)
+	public static Map<String, String> query_to_map(String query)
 	{
 		if(query == null)
 		{
@@ -43,17 +39,5 @@ public class HttpApi
 			}
 		}
 		return result;
-	}
-
-	private void handleRequest(HttpExchange exchange) throws IOException
-	{
-		// Map<String, String> query = this.query_to_map(exchange.getRequestURI().getQuery());
-
-		String response = "Hello world!";
-
-		exchange.sendResponseHeaders(200, response.getBytes().length);
-		OutputStream os = exchange.getResponseBody();
-		os.write(response.getBytes());
-		os.close();
 	}
 }

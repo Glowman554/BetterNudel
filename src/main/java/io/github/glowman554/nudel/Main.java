@@ -13,6 +13,8 @@ import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
 import io.github.glowman554.nudel.httpapi.HttpApi;
+import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
+import io.github.glowman554.nudel.httpapi.impl.RootHttpHandler;
 import io.github.glowman554.nudel.utils.ArgParser;
 import io.github.glowman554.nudel.utils.FileUtils;
 import net.shadew.json.Json;
@@ -48,6 +50,8 @@ public class Main {
 		Discord.init(token);
 
 		HttpApi http_api = new HttpApi(port);
+
+		HttpApiBaseHandler root_path = new HttpApiBaseHandler(new RootHttpHandler(), http_api, "/");
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());
