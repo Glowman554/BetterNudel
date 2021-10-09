@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface HttpApiHandler
 {
-	String execute(Map<String, String> query);
+	String execute(Map<String, String> query) throws Exception;
 }

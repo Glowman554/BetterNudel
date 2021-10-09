@@ -1,5 +1,8 @@
 package io.github.glowman554.nudel;
 
+import java.io.IOException;
+
+import io.github.glowman554.nudel.api.BaseApi;
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.impl.CatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.CoinflipCommand;
@@ -15,12 +18,15 @@ import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
 import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
+import io.github.glowman554.nudel.httpapi.impl.ApiPermsHandler;
 import io.github.glowman554.nudel.httpapi.impl.RootHttpHandler;
 import io.github.glowman554.nudel.utils.ArgParser;
 import io.github.glowman554.nudel.utils.FileUtils;
 import net.shadew.json.Json;
 import net.shadew.json.JsonNode;
+import net.shadew.json.JsonSyntaxException;
 
+@SuppressWarnings("unused")
 public class Main {
 
 	public static void main(String[] args) throws Exception
@@ -30,6 +36,29 @@ public class Main {
 
 		String token;
 		int port = 8888;
+
+		try
+		{
+			String _url = parser.consume_option("--download-perms");
+			String perms = new BaseApi().request(_url);
+
+			Json _json = Json.json();
+			JsonNode _root = _json.parse(perms);
+
+			FileUtils.writeFile("perms.json", perms);
+
+			System.out.println("Downloaded perms");
+			System.exit(0);
+		}
+		catch (IllegalArgumentException e)
+		{
+
+		}
+		catch (IOException|JsonSyntaxException e)
+		{
+			e.printStackTrace();
+			System.exit(0);
+		}
 
 		if (parser.is_option("--no-cfg"))
 		{
@@ -53,6 +82,7 @@ public class Main {
 		HttpApi http_api = new HttpApi(port);
 
 		HttpApiBaseHandler root_path = new HttpApiBaseHandler(new RootHttpHandler(), http_api, "/");
+		HttpApiBaseHandler api_perms_path = new HttpApiBaseHandler(new ApiPermsHandler(), http_api, "/api/perms");
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());
