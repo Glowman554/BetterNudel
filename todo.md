@@ -7,7 +7,7 @@
 - [x] yiff
 - [ ] corona
 - [x] coinflip
-- [ ] commit
+- [x] commit
 - [ ] fact
 - [ ] joke
 - [x] nick
