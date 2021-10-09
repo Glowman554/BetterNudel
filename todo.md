@@ -24,7 +24,7 @@
 
 # api todo
 
-- [ ] /api/status
+- [x] /api/status
 - [ ] /api/message
 - [x] /api/perms
 - [x] a http api
