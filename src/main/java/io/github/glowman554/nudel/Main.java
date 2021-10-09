@@ -6,6 +6,7 @@ import io.github.glowman554.nudel.api.BaseApi;
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.impl.CatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.CoinflipCommand;
+import io.github.glowman554.nudel.discord.commands.impl.CommitCommand;
 import io.github.glowman554.nudel.discord.commands.impl.DogCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FoxCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FurryCommand;
@@ -101,6 +102,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("nick", new NickCommand());
 		Discord.discord.commandManager.addCommand("say", new SayCommand());
 		Discord.discord.commandManager.addCommand("meme", new MemeCommand());
+		Discord.discord.commandManager.addCommand("commit", new CommitCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();
