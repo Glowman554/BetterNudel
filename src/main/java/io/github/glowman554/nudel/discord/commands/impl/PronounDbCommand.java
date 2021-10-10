@@ -1,6 +1,7 @@
 package io.github.glowman554.nudel.discord.commands.impl;
 
 import io.github.glowman554.nudel.api.PronounDbApi;
+import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
 import net.dv8tion.jda.api.entities.Message;
@@ -33,28 +34,24 @@ public class PronounDbCommand implements Command
 	@Override
 	public void on_register()
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public String get_short_help()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return "Get the pronouns of a user.";
 	}
 
 	@Override
 	public String get_long_help()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("Use '%spronoun [@user]' to get the pronouns of a user.", Discord.discord.commandManager.prefix);
 	}
 
 	@Override
 	public String get_permission()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

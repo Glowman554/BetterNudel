@@ -35,6 +35,7 @@ public class CommandManager
 						builder.setTitle("Help");
 
 						commands.forEach((key, value) -> {
+							System.out.println(key);
 							builder.addField(key, value.get_short_help(), false);
 						});
 
