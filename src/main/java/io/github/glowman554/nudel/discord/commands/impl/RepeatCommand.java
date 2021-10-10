@@ -26,7 +26,7 @@ public class RepeatCommand implements Command
 				args[0] = Discord.discord.commandManager.prefix + args[0];
 			}
 
-			if (args[0] == Discord.discord.commandManager.prefix + "repeat")
+			if (args[0].equals(Discord.discord.commandManager.prefix + "repeat"))
 			{
 				event.commandFail("You can't repeat a repeat command");
 			}
