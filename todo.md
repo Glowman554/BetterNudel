@@ -5,7 +5,7 @@
 - [x] fox
 - [x] furry
 - [x] yiff
-- [ ] corona
+- [x] corona
 - [x] coinflip
 - [x] commit
 - [x] fact
