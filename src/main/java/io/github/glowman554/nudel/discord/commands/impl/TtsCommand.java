@@ -3,6 +3,7 @@ package io.github.glowman554.nudel.discord.commands.impl;
 import java.io.File;
 
 import io.github.glowman554.nudel.api.GoogleTtsApi;
+import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
 import io.github.glowman554.nudel.utils.ArrayUtils;
@@ -37,28 +38,24 @@ public class TtsCommand implements Command
 	@Override
 	public void on_register() 
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public String get_short_help()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return "Sends a mp3 file of the text specified";
 	}
 
 	@Override
 	public String get_long_help()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("Use '%stts [text]' to send a mp3 file of the text specified", Discord.discord.commandManager.prefix);
 	}
 
 	@Override
 	public String get_permission()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
