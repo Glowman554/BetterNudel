@@ -19,7 +19,7 @@
 - [ ] role
 - [x] status
 - [x] repeat
-- [ ] wikipedia
+- [x] wikipedia
 - [ ] pronoundb
 
 # api todo
