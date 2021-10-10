@@ -1,7 +1,9 @@
 target
 dependency-reduced-pom.xml
 test.txt
-tmp
+*tmp*
 config.json
 perms.json
 plugins
+*nsjail*
+0
