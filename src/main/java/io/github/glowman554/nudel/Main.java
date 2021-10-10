@@ -16,6 +16,7 @@ import io.github.glowman554.nudel.discord.commands.impl.JokeCommand;
 import io.github.glowman554.nudel.discord.commands.impl.MemeCommand;
 import io.github.glowman554.nudel.discord.commands.impl.NickCommand;
 import io.github.glowman554.nudel.discord.commands.impl.PingCommand;
+import io.github.glowman554.nudel.discord.commands.impl.PronounDbCommand;
 import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
 import io.github.glowman554.nudel.discord.commands.impl.StatusCommand;
@@ -115,6 +116,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("joke", new JokeCommand());
 		Discord.discord.commandManager.addCommand("wikipedia", new WikipediaCommand());
 		Discord.discord.commandManager.addCommand("tts", new TtsCommand());
+		Discord.discord.commandManager.addCommand("pronoun", new PronounDbCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();

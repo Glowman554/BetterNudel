@@ -13,14 +13,13 @@
 - [x] nick
 - [x] tts
 - [x] meme
-- [ ] spotify
 - [x] ping
 - [x] say
 - [ ] role
 - [x] status
 - [x] repeat
 - [x] wikipedia
-- [ ] pronoundb
+- [x] pronoundb
 
 # api todo
 
