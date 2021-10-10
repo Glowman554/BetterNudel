@@ -7,7 +7,7 @@ import io.github.glowman554.nudel.furrywrapper.FurryBotApi;
 
 public class TestFurryBotApi
 {
-	@Test
+	//@Test
 	public void testFurryBotApiFull() throws InterruptedException
 	{
 		FurryBotApi api = new FurryBotApi();
