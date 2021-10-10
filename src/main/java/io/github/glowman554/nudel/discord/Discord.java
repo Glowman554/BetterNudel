@@ -21,6 +21,8 @@ public class Discord
 	public JDA jda;
 	public CommandManager commandManager;
 
+	public DiscordReceiver receiver;
+
 	private Discord(String token) throws LoginException
 	{
 		this.token = token;
@@ -28,7 +30,9 @@ public class Discord
 		JDABuilder jdaBuilder = JDABuilder.createDefault(this.token);
         jda = jdaBuilder.build();
 
-		jda.addEventListener(new DiscordReceiver());
+		receiver = new DiscordReceiver();
+
+		jda.addEventListener(receiver);
 
 		commandManager = new CommandManager("-");
 

@@ -41,11 +41,11 @@ public class Main {
 
 	public static HttpApi http_api;
 	public static PluginsLoader pluginsLoader;
-	public static ArgParser argParser;
+	public static ArgParser parser;
 
 	public static void main(String[] args) throws Exception
 	{
-		ArgParser parser = new ArgParser(args);
+		parser = new ArgParser(args);
 		parser.parse();
 
 		String token;
@@ -92,6 +92,8 @@ public class Main {
 		}
 
 		Discord.init(token);
+
+		Discord.discord.receiver.tiny_crash_report = parser.is_option("--tiny-crash");
 
 		http_api = new HttpApi(port);
 
