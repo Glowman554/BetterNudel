@@ -19,6 +19,7 @@ import io.github.glowman554.nudel.discord.commands.impl.PingCommand;
 import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
 import io.github.glowman554.nudel.discord.commands.impl.StatusCommand;
+import io.github.glowman554.nudel.discord.commands.impl.TtsCommand;
 import io.github.glowman554.nudel.discord.commands.impl.WikipediaCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
 import io.github.glowman554.nudel.httpapi.HttpApi;
@@ -113,6 +114,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("fact", new FactCommand());
 		Discord.discord.commandManager.addCommand("joke", new JokeCommand());
 		Discord.discord.commandManager.addCommand("wikipedia", new WikipediaCommand());
+		Discord.discord.commandManager.addCommand("tts", new TtsCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();

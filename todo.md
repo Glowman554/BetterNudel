@@ -11,7 +11,7 @@
 - [x] fact
 - [x] joke
 - [x] nick
-- [ ] tts
+- [x] tts
 - [x] meme
 - [ ] spotify
 - [x] ping
