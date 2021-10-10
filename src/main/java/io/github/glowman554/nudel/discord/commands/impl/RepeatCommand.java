@@ -26,18 +26,33 @@ public class RepeatCommand implements Command
 				args[0] = Discord.discord.commandManager.prefix + args[0];
 			}
 
-			if (count < 11)
+			if (args[0] == Discord.discord.commandManager.prefix + "repeat")
 			{
-				CommandEvent newEvent = new CommandEvent(ArrayUtils.stringify(args, " "), args[0], CommandEvent.getArguments(args), event.event);
-
-				for (int i = 0; i < count; i++)
-				{
-					Discord.discord.commandManager.onCommand(newEvent);
-				}
+				event.commandFail("You can't repeat a repeat command");
 			}
 			else
 			{
-				event.commandFail("Count must be less than 10");
+				if (count < 11)
+				{
+					
+					if (count < 0)
+					{
+						event.commandFail("Count must be greater than 0");
+					}
+					else
+					{
+						CommandEvent newEvent = new CommandEvent(ArrayUtils.stringify(args, " "), args[0], CommandEvent.getArguments(args), event.event);
+
+						for (int i = 0; i < count; i++)
+						{
+							Discord.discord.commandManager.onCommand(newEvent);
+						}
+					}
+				}
+				else
+				{
+					event.commandFail("Count must be less than 10");
+				}
 			}
 		}
 	}
