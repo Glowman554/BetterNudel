@@ -8,8 +8,8 @@
 - [ ] corona
 - [x] coinflip
 - [x] commit
-- [ ] fact
-- [ ] joke
+- [x] fact
+- [x] joke
 - [x] nick
 - [ ] tts
 - [x] meme

@@ -8,9 +8,11 @@ import io.github.glowman554.nudel.discord.commands.impl.CatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.CoinflipCommand;
 import io.github.glowman554.nudel.discord.commands.impl.CommitCommand;
 import io.github.glowman554.nudel.discord.commands.impl.DogCommand;
+import io.github.glowman554.nudel.discord.commands.impl.FactCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FoxCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FurryCommand;
 import io.github.glowman554.nudel.discord.commands.impl.Im18Command;
+import io.github.glowman554.nudel.discord.commands.impl.JokeCommand;
 import io.github.glowman554.nudel.discord.commands.impl.MemeCommand;
 import io.github.glowman554.nudel.discord.commands.impl.NickCommand;
 import io.github.glowman554.nudel.discord.commands.impl.PingCommand;
@@ -107,6 +109,8 @@ public class Main {
 		Discord.discord.commandManager.addCommand("meme", new MemeCommand());
 		Discord.discord.commandManager.addCommand("commit", new CommitCommand());
 		Discord.discord.commandManager.addCommand("status", new StatusCommand());
+		Discord.discord.commandManager.addCommand("fact", new FactCommand());
+		Discord.discord.commandManager.addCommand("joke", new JokeCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();
