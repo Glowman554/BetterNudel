@@ -23,49 +23,55 @@ public class DiscordReceiver extends ListenerAdapter
 
 		CommandEvent commandEvent = new CommandEvent(event.getMessage().getContentRaw(), event.getMessage().getContentRaw().split(" ")[0], CommandEvent.getArguments(event.getMessage().getContentRaw().split(" ")), event);
 
-		try
+		new Thread()
 		{
-			Discord.discord.commandManager.onCommand(commandEvent);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-
-			String stacktrace = sw.toString();
-
-			if (tiny_crash_report)
+			public void run()
 			{
-				commandEvent.commandFail(e.getClass().getSimpleName() + ": " + e.getMessage());
-			}
-			else
-			{
-				if (stacktrace.length() > 2000)
+				try
 				{
-					int numChunks = (int) Math.ceil(stacktrace.length() / 2000.0);
-
-					for (int i = 0, o = 0; i < numChunks; i++)
+					Discord.discord.commandManager.onCommand(commandEvent);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+		
+					StringWriter sw = new StringWriter();
+					PrintWriter pw = new PrintWriter(sw);
+					e.printStackTrace(pw);
+		
+					String stacktrace = sw.toString();
+		
+					if (tiny_crash_report)
 					{
-						int x = stacktrace.length() < o + 2000 ? stacktrace.length() - o - 1 : 2000;
-
-						while (stacktrace.charAt(o + x) != '\n')
+						commandEvent.commandFail(e.getClass().getSimpleName() + ": " + e.getMessage());
+					}
+					else
+					{
+						if (stacktrace.length() > 2000)
 						{
-							x--;
+							int numChunks = (int) Math.ceil(stacktrace.length() / 2000.0);
+		
+							for (int i = 0, o = 0; i < numChunks; i++)
+							{
+								int x = stacktrace.length() < o + 2000 ? stacktrace.length() - o - 1 : 2000;
+		
+								while (stacktrace.charAt(o + x) != '\n')
+								{
+									x--;
+								}
+		
+								event.getChannel().sendMessage("```" + stacktrace.substring(o, o + x) + "```").queue();
+		
+								o += x;
+							}
 						}
-
-						event.getChannel().sendMessage("```" + stacktrace.substring(o, o + x) + "```").queue();
-
-						o += x;
+						else
+						{
+							commandEvent.commandFail(sw.toString());
+						}
 					}
 				}
-				else
-				{
-					commandEvent.commandFail(sw.toString());
-				}
-			}
-		}
+			};
+		}.start();
 	}
 }
