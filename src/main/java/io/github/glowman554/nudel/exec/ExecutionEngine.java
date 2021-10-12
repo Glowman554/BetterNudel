@@ -123,7 +123,7 @@ public class ExecutionEngine
 			String output = null;
 			while ((output = bufferedReader.readLine()) != null)
 			{
-				_output.append(output);
+				_output.append(output + "\n");
 				System.out.println(output);
 			}
 

@@ -9,6 +9,7 @@ import io.github.glowman554.nudel.discord.commands.impl.CoinflipCommand;
 import io.github.glowman554.nudel.discord.commands.impl.CommitCommand;
 import io.github.glowman554.nudel.discord.commands.impl.CoronaCommand;
 import io.github.glowman554.nudel.discord.commands.impl.DogCommand;
+import io.github.glowman554.nudel.discord.commands.impl.ExecCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FactCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FoxCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FurryCommand;
@@ -121,6 +122,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("tts", new TtsCommand());
 		Discord.discord.commandManager.addCommand("pronoun", new PronounDbCommand());
 		Discord.discord.commandManager.addCommand("corona", new CoronaCommand());
+		Discord.discord.commandManager.addCommand("exec", new ExecCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();

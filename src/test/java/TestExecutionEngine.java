@@ -17,6 +17,6 @@ public class TestExecutionEngine
 
 		System.out.println(result);
 
-		assertEquals("test", result);
+		assertEquals("test\n", result);
 	}
 }
