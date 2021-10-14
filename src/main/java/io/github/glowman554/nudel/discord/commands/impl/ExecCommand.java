@@ -48,7 +48,7 @@ public class ExecCommand implements Command
 	@Override
 	public String get_permission()
 	{
-		return null;
+		return "exec";
 	}
 	
 }

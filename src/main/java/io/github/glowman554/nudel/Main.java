@@ -20,6 +20,7 @@ import io.github.glowman554.nudel.discord.commands.impl.NickCommand;
 import io.github.glowman554.nudel.discord.commands.impl.PingCommand;
 import io.github.glowman554.nudel.discord.commands.impl.PronounDbCommand;
 import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
+import io.github.glowman554.nudel.discord.commands.impl.RoleCommand;
 import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
 import io.github.glowman554.nudel.discord.commands.impl.StatusCommand;
 import io.github.glowman554.nudel.discord.commands.impl.TtsCommand;
@@ -123,6 +124,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("pronoun", new PronounDbCommand());
 		Discord.discord.commandManager.addCommand("corona", new CoronaCommand());
 		Discord.discord.commandManager.addCommand("exec", new ExecCommand());
+		Discord.discord.commandManager.addCommand("role", new RoleCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();
