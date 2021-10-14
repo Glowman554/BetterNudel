@@ -3,6 +3,7 @@ package io.github.glowman554.nudel.discord;
 import javax.security.auth.login.LoginException;
 
 import io.github.glowman554.nudel.discord.commands.CommandManager;
+import io.github.glowman554.nudel.discord.MessageLogger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -33,6 +34,7 @@ public class Discord
 		receiver = new DiscordReceiver();
 
 		jda.addEventListener(receiver);
+		jda.addEventListener(new MessageLogger());
 
 		commandManager = new CommandManager("-");
 
