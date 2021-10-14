@@ -8,29 +8,29 @@ import io.github.glowman554.nudel.furrywrapper.FurryBotApi;
 public class TestFurryBotApi
 {
 	//@Test
-	public void testFurryBotApiFull() throws InterruptedException
-	{
-		FurryBotApi api = new FurryBotApi();
-		assertNotNull(api);
+	//public void testFurryBotApiFull() throws InterruptedException
+	//{
+	//	FurryBotApi api = new FurryBotApi();
+	//	assertNotNull(api);
 
-		for (String i : api._methods)
-		{
-			String result = null;
-			try
-			{
-				result = api.random_image(i).url;
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
+	//	for (String i : api._methods)
+	//	{
+	//		String result = null;
+	//		try
+	//		{
+	//			result = api.random_image(i).url;
+	//		}
+	//		catch (Exception e)
+	//		{
+	//			e.printStackTrace();
+	//		}
 
-			assertNotNull(result);
+	//		assertNotNull(result);
 
-			System.out.println(i + ": " + result);
-			Thread.sleep(1000);
-		}
-	}
+	//		System.out.println(i + ": " + result);
+	//		Thread.sleep(1000);
+	//	}
+	//}
 
 	@Test
 	public void testFurryBotApi() throws InterruptedException
