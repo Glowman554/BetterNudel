@@ -32,7 +32,8 @@ public class FurryBotApi
 
 	private String request(String endpoint) throws IOException
 	{
-		URL url = new URL(String.format("https://yiff.rest/v2/%s?limit=1", endpoint));
+		URL url = new URL(String.format("https://v2.yiff.rest/%s?limit=1&notes=disabled", endpoint));
+		//                                                               ^ not needed but decreases the response size
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
 		con.setRequestMethod("GET");
