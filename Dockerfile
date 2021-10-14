@@ -12,7 +12,7 @@ RUN mkdir plugins
 
 WORKDIR /srv/target/plugins
 
-RUN curl https://github.com/Nudeltruppe/NudelAutoBackup/releases/download/latest/nudel-autobackup.jar -o nudel-autobackup.jar
+RUN curl https://github.com/Nudeltruppe/NudelAutoBackup/releases/download/latest/nudel-autobackup.jar -o nudel-autobackup.jar -L
 
 WORKDIR /srv/target
 
