@@ -15,7 +15,7 @@
 - [x] meme
 - [x] ping
 - [x] say
-- [ ] role
+- [x] role
 - [x] status
 - [x] repeat
 - [x] wikipedia
@@ -24,6 +24,5 @@
 # api todo
 
 - [x] /api/status
-- [ ] /api/message
 - [x] /api/perms
 - [x] a http api
