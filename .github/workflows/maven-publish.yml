@@ -34,11 +34,3 @@ jobs:
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
-    - uses: marvinpinto/action-automatic-releases@latest
-      with:
-        repo_token: ${{ github.token }}
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: "Development Build"
-        files: | 
-            target/*.jar
