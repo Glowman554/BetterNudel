@@ -29,6 +29,7 @@ public class HttpApiBaseHandler
 
 			if (respone != null)
 			{
+				exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
 				exchange.sendResponseHeaders(200, respone.length());
 				exchange.getResponseBody().write(respone.getBytes());
 			}
