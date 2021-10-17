@@ -15,6 +15,7 @@ RUN mkdir plugins
 WORKDIR /srv/target/plugins
 
 RUN curl https://github.com/Nudeltruppe/NudelAutoBackup/releases/download/latest/nudel-autobackup.jar -o nudel-autobackup.jar -L
+RUN curl https://github.com/Glowman554/Glowman554.github.io/raw/main/WebsiteDownNotify/website-down-notify.jar -o website-down-notify.jar -L
 
 WORKDIR /srv/target
 
