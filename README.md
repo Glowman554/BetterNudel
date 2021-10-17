@@ -25,4 +25,6 @@
 
 - [x] /api/status
 - [x] /api/perms
+- [ ] /api/science (get the science.json file)
+- [ ] /api/collect (collecte science information like user num visits and the location and last visit time)
 - [x] a http api
