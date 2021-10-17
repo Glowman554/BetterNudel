@@ -28,7 +28,9 @@ import io.github.glowman554.nudel.discord.commands.impl.WikipediaCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
 import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
+import io.github.glowman554.nudel.httpapi.impl.ApiCollectHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiPermsHandler;
+import io.github.glowman554.nudel.httpapi.impl.ApiScienceHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiStatusHandler;
 import io.github.glowman554.nudel.httpapi.impl.RootHttpHandler;
 import io.github.glowman554.nudel.plugin.PluginsLoader;
@@ -76,6 +78,29 @@ public class Main {
 			System.exit(0);
 		}
 
+		try
+		{
+			String _url = parser.consume_option("--download-science");
+			String perms = new BaseApi().request(_url);
+
+			Json _json = Json.json();
+			JsonNode _root = _json.parse(perms);
+
+			FileUtils.writeFile("science.json", perms);
+
+			System.out.println("Downloaded science");
+			System.exit(0);
+		}
+		catch (IllegalArgumentException e)
+		{
+
+		}
+		catch (IOException|JsonSyntaxException e)
+		{
+			e.printStackTrace();
+			System.exit(0);
+		}
+
 		if (parser.is_option("--no-cfg"))
 		{
 			token = System.getenv("DISCORD_TOKEN");
@@ -102,6 +127,8 @@ public class Main {
 		HttpApiBaseHandler root_path = new HttpApiBaseHandler(new RootHttpHandler(), http_api, "/");
 		HttpApiBaseHandler api_perms_path = new HttpApiBaseHandler(new ApiPermsHandler(), http_api, "/api/perms");
 		HttpApiBaseHandler api_status_path = new HttpApiBaseHandler(new ApiStatusHandler(), http_api, "/api/status");
+		HttpApiBaseHandler api_collect_path = new HttpApiBaseHandler(new ApiCollectHandler("science.json"), http_api, "/api/collect");
+		HttpApiBaseHandler api_science_path = new HttpApiBaseHandler(new ApiScienceHandler(), http_api, "/api/science");
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());
