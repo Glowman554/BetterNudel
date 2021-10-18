@@ -21,7 +21,19 @@ public class HttpApiBaseHandler
 
 	private void handleRequest(HttpExchange exchange) throws IOException
 	{
+		System.out.println("Request: " + exchange.getRequestMethod() + " " + exchange.getRequestURI() + " " + exchange.getProtocol() + " " + exchange.getRequestHeaders().getFirst("X-Forwarded-For") + " " + exchange.getRemoteAddress().getAddress().getHostAddress());
+
 		Map<String, String> query = HttpApi.query_to_map(exchange.getRequestURI().getQuery());
+
+		if (query.containsKey("ip"))
+		{
+			String ip = exchange.getRemoteAddress().getAddress().getHostAddress();
+			if (!query.get("ip").equals(ip) && !query.get("ip").equals(exchange.getRequestHeaders().getFirst("X-Forwarded-For")))
+			{
+				System.out.println("IP check failed for " + ip + " " + query.get("ip"));
+				query.remove("ip");
+			}
+		}
 
 		try
 		{
