@@ -25,14 +25,16 @@ public class HttpApiBaseHandler
 
 		Map<String, String> query = HttpApi.query_to_map(exchange.getRequestURI().getQuery());
 
-		if (query.containsKey("ip"))
+		String ip = exchange.getRemoteAddress().getAddress().getHostAddress();
+		String ip_forwarded = exchange.getRequestHeaders().getFirst("X-Forwarded-For");
+
+		if (ip_forwarded != null)
 		{
-			String ip = exchange.getRemoteAddress().getAddress().getHostAddress();
-			if (!query.get("ip").equals(ip) && !query.get("ip").equals(exchange.getRequestHeaders().getFirst("X-Forwarded-For")))
-			{
-				System.out.println("IP check failed for " + ip + " " + query.get("ip"));
-				query.remove("ip");
-			}
+			query.put("ip", ip_forwarded);
+		}
+		else
+		{
+			query.put("ip", ip);
 		}
 
 		try
