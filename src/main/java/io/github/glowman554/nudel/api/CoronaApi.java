@@ -43,7 +43,7 @@ public class CoronaApi extends BaseApi
 
 	public CoronaApiResult fetchCountry(String country) throws IOException, JsonSyntaxException
 	{
-		String res = request("https://corona.lmao.ninja/v2/countries/" + country);
+		String res = request("https://disease.sh/v3/covid-19/countries/" + country);
 
 		Json json = Json.json();
 		JsonNode root = json.parse(res);
