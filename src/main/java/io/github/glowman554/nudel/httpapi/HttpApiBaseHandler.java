@@ -37,6 +37,8 @@ public class HttpApiBaseHandler
 			query.put("ip", ip);
 		}
 
+		query.put("user_agent", exchange.getRequestHeaders().getFirst("User-Agent"));
+
 		try
 		{
 			String respone = handler.execute(query);
