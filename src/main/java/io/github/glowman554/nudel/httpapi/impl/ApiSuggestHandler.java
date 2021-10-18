@@ -1,5 +1,6 @@
 package io.github.glowman554.nudel.httpapi.impl;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import io.github.glowman554.nudel.discord.Discord;
@@ -9,6 +10,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 
 public class ApiSuggestHandler implements HttpApiHandler
 {
+	HashMap<String, Long> rate_limit = new HashMap<String, Long>();
 
 	@Override
 	public String execute(Map<String, String> query) throws Exception
@@ -24,6 +26,17 @@ public class ApiSuggestHandler implements HttpApiHandler
 		{
 			return "Missing ip";
 		}
+
+		if (rate_limit.containsKey(ip))
+		{
+			long last_suggestion = rate_limit.get(ip);
+			if (System.currentTimeMillis() - last_suggestion < 1000 * 60 * 10)
+			{
+				return "Rate limit exceeded please wait " + ((1000 * 60 * 10 - (System.currentTimeMillis() - last_suggestion)) / 1000) + "s";
+			}
+		}
+
+		rate_limit.put(ip, System.currentTimeMillis());
 
 		TextChannel c = (TextChannel) Discord.discord.jda.getGuildChannelById(System.getenv("NOTIFY_CHANNEL"));
 
