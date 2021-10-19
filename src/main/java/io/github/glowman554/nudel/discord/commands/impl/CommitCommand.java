@@ -1,5 +1,8 @@
 package io.github.glowman554.nudel.discord.commands.impl;
 
+import java.io.IOException;
+
+import io.github.glowman554.nudel.Main;
 import io.github.glowman554.nudel.api.CommitApi;
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
@@ -26,7 +29,35 @@ public class CommitCommand implements Command
 	@Override
 	public void on_register()
 	{
-		
+		if (Main.parser.is_option("--random-rp"))
+		{
+			new Thread() {
+				public void run()
+				{
+					while (true)
+					{
+						try
+						{
+							Discord.discord.setRP(new CommitApi().getCommit());
+						}
+						catch (IOException e)
+						{
+							e.printStackTrace();
+						}
+
+						try
+						{
+							Thread.sleep(1000);
+						}
+						catch (InterruptedException e)
+						{
+							e.printStackTrace();
+							return;
+						}
+					}
+				};
+			}.start();
+		}
 	}
 
 	@Override
