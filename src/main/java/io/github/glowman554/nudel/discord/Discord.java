@@ -12,11 +12,13 @@ public class Discord
 	// ------------------- static fields -------------------
 	public static Discord discord;
 	
-	public static void init(String token) throws LoginException
+	public static void init(String token) throws LoginException, InterruptedException
 	{
 		Discord.discord = new Discord(token);
 	}
 	// -----------------------------------------------------
+
+	String current_rp;
 
 	private String token;
 	public JDA jda;
@@ -24,12 +26,14 @@ public class Discord
 
 	public DiscordReceiver receiver;
 
-	private Discord(String token) throws LoginException
+	private Discord(String token) throws LoginException, InterruptedException
 	{
 		this.token = token;
 
 		JDABuilder jdaBuilder = JDABuilder.createDefault(this.token);
         jda = jdaBuilder.build();
+
+		jda.awaitReady();
 
 		receiver = new DiscordReceiver();
 
@@ -39,15 +43,43 @@ public class Discord
 		commandManager = new CommandManager("-");
 
 		this.setDefaultRP();
+
+		new Thread() {
+			@Override
+			public void run()
+			{
+				while (true)
+				{
+					try
+					{
+						Thread.sleep(1000 * 60);
+					}
+					catch (InterruptedException e)
+					{
+						e.printStackTrace();
+						return;
+					}
+
+					Discord.discord.updateRP();
+				}
+			}
+		}.start();
 	}
 
 	public void setDefaultRP()
 	{
-		jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(this.commandManager.prefix + "help", "https://www.twitch.tv/glowman434"));
+		this.current_rp = this.commandManager.prefix + "help";
+		jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(this.current_rp, "https://www.twitch.tv/glowman434"));
 	}
 
 	public void setRP(String rp)
 	{
-		jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(rp, "https://www.twitch.tv/glowman434"));
+		this.current_rp = rp;
+		jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(this.current_rp, "https://www.twitch.tv/glowman434"));
+	}
+
+	public void updateRP()
+	{
+		jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(this.current_rp, "https://www.twitch.tv/glowman434"));
 	}
 }
