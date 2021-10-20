@@ -30,3 +30,6 @@
 - [x] /api/suggest (suggest a command or feature)
 - [x] /api/message (send a message using the bot)
 - [x] a http api
+
+owo
+
