@@ -38,7 +38,18 @@ public class CommitCommand implements Command
 					{
 						try
 						{
-							Discord.discord.setRP(new CommitApi().getCommit());
+							String rp = new CommitApi().getCommit();
+
+
+							while (rp.length() > 100)
+							{
+								System.out.println("Not using rp: " + rp);
+								rp = new CommitApi().getCommit();
+							}
+
+							System.out.println("Setting rp to: " + rp);;
+
+							Discord.discord.setRP(rp);
 						}
 						catch (IOException e)
 						{
