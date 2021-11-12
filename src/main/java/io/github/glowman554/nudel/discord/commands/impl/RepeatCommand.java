@@ -32,7 +32,7 @@ public class RepeatCommand implements Command
 			}
 			else
 			{
-				if (count < 11)
+				if (count < 11 || Discord.discord.commandManager.permissionManager.hasPermission(event.event.getAuthor().getId(), "no_limit"))
 				{
 					
 					if (count < 0)
