@@ -9,6 +9,32 @@ import net.shadew.json.JsonSyntaxException;
 
 public class CoronaApi extends BaseApi
 {
+	public static String[] countries = new String[] {
+		"germany",
+		"usa",
+		"italy",
+		"spain",
+		"france",
+		"uk",
+		"sweden",
+		"norway",
+		"denmark",
+		"switzerland",
+		"austria",
+		"netherlands",
+		"ireland",
+		"poland",
+		"finland",
+		"serbia",
+		"montenegro",
+		"bulgaria",
+		"greece",
+		"malta",
+		"cyprus",
+		"macedonia",
+		"slovenia",
+		"russia"
+	};
 	public class CoronaApiResult
 	{
 		String country;

@@ -1,13 +1,19 @@
 package io.github.glowman554.nudel.discord.commands.impl;
 
+import java.io.IOException;
+
 import io.github.glowman554.nudel.api.PronounDbApi;
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
+import io.github.glowman554.nudel.discord.commands.SlashCommand;
+import io.github.glowman554.nudel.discord.commands.SlashCommandParameter;
+import io.github.glowman554.nudel.discord.commands.SlashCommandRegister;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
-public class PronounDbCommand implements Command
+public class PronounDbCommand implements Command, SlashCommand
 {
 
 	@Override
@@ -53,6 +59,34 @@ public class PronounDbCommand implements Command
 	public String get_permission()
 	{
 		return null;
+	}
+
+	@Override
+	public void execute(SlashCommandEvent event) throws Exception
+	{
+		String user_id = event.getOption("user").getAsString();
+
+		PronounDbApi api = new PronounDbApi();
+		api.fetchPronoun(user_id);
+
+		event.reply(String.format("The pronouns of %s are %s!", event.getOption("user").getAsUser().getAsMention(), api.translatePronoun())).queue();
+	}
+
+	@Override
+	public void on_slash_register()
+	{
+		SlashCommandRegister reg = new SlashCommandRegister("pronoun", this.get_short_help(), SlashCommandRegister.CHAT_INPUT, new SlashCommandParameter[] {
+			new SlashCommandParameter("user", "User to fetch pronouns from", SlashCommandParameter.USER, true)
+		});
+
+		try
+		{
+			reg.doRegister(Discord.discord.token, Discord.discord.application_id);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 }

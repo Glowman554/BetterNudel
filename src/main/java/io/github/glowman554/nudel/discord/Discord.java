@@ -12,23 +12,25 @@ public class Discord
 	// ------------------- static fields -------------------
 	public static Discord discord;
 	
-	public static void init(String token) throws LoginException, InterruptedException
+	public static void init(String token, String application_id) throws LoginException, InterruptedException
 	{
-		Discord.discord = new Discord(token);
+		Discord.discord = new Discord(token, application_id);
 	}
 	// -----------------------------------------------------
 
 	String current_rp;
 
-	private String token;
+	public String token;
+	public String application_id;
 	public JDA jda;
 	public CommandManager commandManager;
 
 	public DiscordReceiver receiver;
 
-	private Discord(String token) throws LoginException, InterruptedException
+	private Discord(String token, String application_id) throws LoginException, InterruptedException
 	{
 		this.token = token;
+		this.application_id = application_id;
 
 		JDABuilder jdaBuilder = JDABuilder.createDefault(this.token);
         jda = jdaBuilder.build();

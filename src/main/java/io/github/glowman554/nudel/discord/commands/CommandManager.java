@@ -4,10 +4,12 @@ import java.util.HashMap;
 
 import io.github.glowman554.nudel.discord.Discord;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
 public class CommandManager
 {
-	public HashMap<String, Command> commands;	
+	public HashMap<String, Command> commands;
+	public HashMap<String, SlashCommand> slashCommands;	
 	public final String prefix;
 	public PermissionManager permissionManager;
 
@@ -15,6 +17,7 @@ public class CommandManager
 	{
 		this.prefix = prefix;
 		commands = new HashMap<String, Command>();
+		slashCommands = new HashMap<String, SlashCommand>();
 		permissionManager = new PermissionManager("perms.json");
 	}
 
@@ -96,6 +99,31 @@ public class CommandManager
 		}
 	}
 
+	public void onSlashCommand(SlashCommandEvent event) throws Exception
+	{
+		SlashCommand command = slashCommands.get(event.getName());
+
+		if (command != null)
+		{
+			String permission = command.get_permission();
+
+			if (permission != null)
+			{
+				if (!permissionManager.hasPermission(event.getUser().getId(), permission))
+				{
+					event.reply("You do not have permission to use this command.").queue();
+					return;
+				}
+			}
+
+			command.execute(event);
+		}
+		else
+		{
+			event.reply("Command not found.").queue();
+		}
+	}
+
 	public void addCommand(String what, Command command)
 	{
 		what = prefix + what;
@@ -104,5 +132,13 @@ public class CommandManager
 
 		commands.put(what, command);
 		System.out.printf("[%s] Command register complete\n", what);
+	}
+
+	public void addSlashCommand(String what, SlashCommand command)
+	{
+		command.on_slash_register();
+
+		slashCommands.put(what, command);
+		System.out.printf("[%s] Slash command register complete\n", what);
 	}
 }

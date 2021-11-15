@@ -1,11 +1,17 @@
 package io.github.glowman554.nudel.discord.commands.impl;
 
+import java.io.IOException;
+
 import io.github.glowman554.nudel.api.JokeApi;
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
+import io.github.glowman554.nudel.discord.commands.SlashCommand;
+import io.github.glowman554.nudel.discord.commands.SlashCommandParameter;
+import io.github.glowman554.nudel.discord.commands.SlashCommandRegister;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
-public class JokeCommand implements Command
+public class JokeCommand implements Command, SlashCommand
 {
 
 	@Override
@@ -44,6 +50,28 @@ public class JokeCommand implements Command
 	public String get_permission()
 	{
 		return null;
+	}
+
+	@Override
+	public void execute(SlashCommandEvent event) throws Exception
+	{
+		JokeApi api = new JokeApi();
+		event.reply(api.getJoke()).queue();
+	}
+
+	@Override
+	public void on_slash_register()
+	{
+		SlashCommandRegister reg = new SlashCommandRegister("joke", this.get_short_help(), SlashCommandRegister.CHAT_INPUT, new SlashCommandParameter[] {});
+
+		try
+		{
+			reg.doRegister(Discord.discord.token, Discord.discord.application_id);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 }

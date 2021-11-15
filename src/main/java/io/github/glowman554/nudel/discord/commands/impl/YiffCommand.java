@@ -1,16 +1,21 @@
 package io.github.glowman554.nudel.discord.commands.impl;
 
 import java.io.File;
+import java.io.IOException;
 
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
+import io.github.glowman554.nudel.discord.commands.SlashCommand;
+import io.github.glowman554.nudel.discord.commands.SlashCommandParameter;
+import io.github.glowman554.nudel.discord.commands.SlashCommandRegister;
 import io.github.glowman554.nudel.furrywrapper.FurryBotApi;
 import io.github.glowman554.nudel.furrywrapper.FurryResult;
 import io.github.glowman554.nudel.utils.ArrayUtils;
 import io.github.glowman554.nudel.utils.FileUtils;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
-public class YiffCommand implements Command
+public class YiffCommand implements Command, SlashCommand
 {
 
 	@Override
@@ -69,6 +74,50 @@ public class YiffCommand implements Command
 	public String get_permission()
 	{
 		return "im_18";
+	}
+
+	@Override
+	public void execute(SlashCommandEvent event) throws Exception
+	{
+		String method = event.getOption("method") != null ? event.getOption("method").getAsString() : "straight";
+
+		FurryBotApi api = new FurryBotApi();
+
+		method = "furry/yiff/" + method;
+
+		if (!ArrayUtils.contains(api._methods, method))
+		{
+			event.reply("Invalid method").queue();;
+		}
+		else
+		{
+			event.reply("Please wait...").queue();
+
+			FurryResult result = api.random_image(method);
+			String tmp_file = FileUtils.randomTmpFile(FileUtils.getFileExtension(result.url));
+
+			result.download(tmp_file);
+
+			event.getHook().editOriginal(new File(tmp_file)).queue();
+			event.getHook().editOriginal("").queue();
+		}
+	}
+
+	@Override
+	public void on_slash_register()
+	{
+		SlashCommandRegister reg = new SlashCommandRegister("yiff", this.get_short_help(), SlashCommandRegister.CHAT_INPUT, new SlashCommandParameter[] {
+			new SlashCommandParameter("method", "Method to fetch", SlashCommandParameter.STRING, false)
+		});
+
+		try
+		{
+			reg.doRegister(Discord.discord.token, Discord.discord.application_id);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 }

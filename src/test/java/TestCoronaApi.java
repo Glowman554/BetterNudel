@@ -41,4 +41,17 @@ public class TestCoronaApi
 	
 	// currently 502 no idea why
 	// fixed by using a different api lol apparently the old one is deprecated or something idk
+
+	@Test
+	public void testCoronaApiAll() throws IOException, JsonSyntaxException
+	{
+		System.out.println("Length: " + CoronaApi.countries.length);
+		for (String country : CoronaApi.countries)
+		{
+			CoronaApi coronaApi = new CoronaApi();
+			CoronaApi.CoronaApiResult result = coronaApi.fetchCountry(country);
+			
+			System.out.println(result.toString());
+		}
+	}
 }

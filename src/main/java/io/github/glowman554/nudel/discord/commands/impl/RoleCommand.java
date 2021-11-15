@@ -1,12 +1,18 @@
 package io.github.glowman554.nudel.discord.commands.impl;
 
+import java.io.IOException;
+
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
+import io.github.glowman554.nudel.discord.commands.SlashCommand;
+import io.github.glowman554.nudel.discord.commands.SlashCommandParameter;
+import io.github.glowman554.nudel.discord.commands.SlashCommandRegister;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
-public class RoleCommand implements Command
+public class RoleCommand implements Command, SlashCommand
 {
 
 	@Override
@@ -154,6 +160,94 @@ public class RoleCommand implements Command
 	public String get_permission()
 	{
 		return "role";
+	}
+
+	@Override
+	public void execute(SlashCommandEvent event) throws Exception
+	{
+		String function = event.getOption("sub_command").getAsString();
+
+		switch (function)
+		{
+			case "add":
+				{
+					if (event.getOption("user") == null || event.getOption("role") == null)
+					{
+						event.reply("Please specify a user and a role").queue();;
+					}
+					else
+					{
+						String user = event.getOption("user").getAsString();
+						String role = event.getOption("role").getAsString();
+
+						Discord.discord.commandManager.permissionManager.addPermission(user, role);
+
+						event.reply("Added <@!" + user + "> to " + role).queue();
+					}
+				}
+				break;
+			
+			case "remove":
+				{
+					if (event.getOption("user") == null || event.getOption("role") == null)
+					{
+						event.reply("Please specify a user and a role").queue();;
+					}
+					else
+					{
+						String user = event.getOption("user").getAsString();
+						String role = event.getOption("role").getAsString();
+
+						Discord.discord.commandManager.permissionManager.removePermission(user, role);
+
+						event.reply("Removed <@!" + user + "> from " + role).queue();
+					}
+				}
+				break;
+			
+			case "list":
+				{
+					String user = event.getUser().getId();
+
+					if (event.getOption("user") != null)
+					{
+						user = event.getOption("user").getAsString();
+					}
+					
+
+					StringBuilder sb = new StringBuilder();
+					sb.append("Permissions for <@!" + user + ">: ");
+						
+					for (String role : Discord.discord.commandManager.permissionManager.getPermissions(user))
+					{
+						sb.append(role + ", ");
+					}
+
+					sb.deleteCharAt(sb.length() - 2);
+						
+					event.reply(sb.toString()).queue();
+				}
+				break;
+		}
+	}
+
+	@Override
+	public void on_slash_register()
+	{
+		SlashCommandRegister reg = new SlashCommandRegister("role", this.get_short_help(), SlashCommandRegister.CHAT_INPUT, new SlashCommandParameter[] {
+			new SlashCommandParameter("sub_command", "Function to performe", SlashCommandParameter.STRING, true, new String[] { "add", "remove", "list" }),
+			new SlashCommandParameter("user", "User to fetch pronouns from", SlashCommandParameter.USER, false),
+			new SlashCommandParameter("role", "Role to fetch pronouns from", SlashCommandParameter.STRING, false)
+		});
+
+		try
+		{
+			reg.doRegister(Discord.discord.token, Discord.discord.application_id);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 }

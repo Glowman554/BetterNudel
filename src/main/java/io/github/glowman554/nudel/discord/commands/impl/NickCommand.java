@@ -1,10 +1,16 @@
 package io.github.glowman554.nudel.discord.commands.impl;
 
+import java.io.IOException;
+
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
+import io.github.glowman554.nudel.discord.commands.SlashCommand;
+import io.github.glowman554.nudel.discord.commands.SlashCommandParameter;
+import io.github.glowman554.nudel.discord.commands.SlashCommandRegister;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
-public class NickCommand implements Command
+public class NickCommand implements Command, SlashCommand
 {
 
 	@Override
@@ -46,6 +52,33 @@ public class NickCommand implements Command
 	public String get_permission()
 	{
 		return "nick";
+	}
+
+	@Override
+	public void execute(SlashCommandEvent event) throws Exception
+	{
+		String nick = event.getOption("nickname").getAsString();
+
+		event.getGuild().getSelfMember().modifyNickname(nick).queue();
+
+		event.reply("Nickname changed to " + nick).queue();
+	}
+
+	@Override
+	public void on_slash_register()
+	{
+		SlashCommandRegister reg = new SlashCommandRegister("nick", this.get_short_help(), SlashCommandRegister.CHAT_INPUT, new SlashCommandParameter[] {
+			new SlashCommandParameter("nickname", "Nickname to set", SlashCommandParameter.STRING, true)
+		});
+
+		try
+		{
+			reg.doRegister(Discord.discord.token, Discord.discord.application_id);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 }

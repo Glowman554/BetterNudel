@@ -2,7 +2,7 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
-import io.github.glowman554.nudel.discord.commands.SlashCommand;
+import io.github.glowman554.nudel.discord.commands.SlashCommandRegister;
 import io.github.glowman554.nudel.discord.commands.SlashCommandParameter;
 
 public class TestSlashCommand
@@ -21,7 +21,7 @@ public class TestSlashCommand
 
 		System.out.println(slashCommandParameter2.toString());
 
-		SlashCommand slashCommand = new SlashCommand("test", "test_something", SlashCommand.CHAT_INPUT, new SlashCommandParameter[] { slashCommandParameter, slashCommandParameter2 });
+		SlashCommandRegister slashCommand = new SlashCommandRegister("test", "test_something", SlashCommandRegister.CHAT_INPUT, new SlashCommandParameter[] { slashCommandParameter, slashCommandParameter2 });
 
 		System.out.println(slashCommand.toString());
 	}

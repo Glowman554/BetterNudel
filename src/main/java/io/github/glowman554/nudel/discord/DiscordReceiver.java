@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -72,6 +73,68 @@ public class DiscordReceiver extends ListenerAdapter
 					}
 				}
 			};
+		}.start();
+	}
+
+	@Override
+	public void onSlashCommand(SlashCommandEvent event)
+	{
+		super.onSlashCommand(event);
+
+		new Thread()
+		{
+			public void run()
+			{
+				try
+				{
+					Discord.discord.commandManager.onSlashCommand(event);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+		
+					StringWriter sw = new StringWriter();
+					PrintWriter pw = new PrintWriter(sw);
+					e.printStackTrace(pw);
+		
+					String stacktrace = sw.toString();
+
+					if (!event.isAcknowledged())
+					{
+						event.reply("Oops something went wrong!\n").queue();
+					}
+		
+					if (tiny_crash_report)
+					{
+						event.getChannel().sendMessage(e.getClass().getSimpleName() + ": " + e.getMessage()).queue();
+					}
+					else
+					{
+						if (stacktrace.length() > 2000)
+						{
+							int numChunks = (int) Math.ceil(stacktrace.length() / 2000.0);
+		
+							for (int i = 0, o = 0; i < numChunks; i++)
+							{
+								int x = stacktrace.length() < o + 2000 ? stacktrace.length() - o - 1 : 2000;
+		
+								while (stacktrace.charAt(o + x) != '\n')
+								{
+									x--;
+								}
+		
+								event.getChannel().sendMessage("```" + stacktrace.substring(o, o + x) + "```").queue();
+								
+								o += x;
+							}
+						}
+						else
+						{
+							event.getChannel().sendMessage("```" + stacktrace + "```").queue();
+						}
+					}
+				}
+			}
 		}.start();
 	}
 }
