@@ -236,8 +236,8 @@ public class RoleCommand implements Command, SlashCommand
 	{
 		SlashCommandRegister reg = new SlashCommandRegister("role", this.get_short_help(), SlashCommandRegister.CHAT_INPUT, new SlashCommandParameter[] {
 			new SlashCommandParameter("sub_command", "Function to performe", SlashCommandParameter.STRING, true, new String[] { "add", "remove", "list" }),
-			new SlashCommandParameter("user", "User to fetch pronouns from", SlashCommandParameter.USER, false),
-			new SlashCommandParameter("role", "Role to fetch pronouns from", SlashCommandParameter.STRING, false)
+			new SlashCommandParameter("user", "User to perform action on", SlashCommandParameter.USER, false),
+			new SlashCommandParameter("role", "Role to add/remove", SlashCommandParameter.STRING, false)
 		});
 
 		try
