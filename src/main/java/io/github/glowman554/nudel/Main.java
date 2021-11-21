@@ -170,7 +170,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("exec", new ExecCommand());
 		Discord.discord.commandManager.addCommand("role", new RoleCommand());
 		Discord.discord.commandManager.addCommand("chatbot", new ChatBotCommand());
-		Discord.discord.commandManager.addCommand("translate", new TranslateCommand());
+		// Discord.discord.commandManager.addCommand("translate", new TranslateCommand());
 
 		if (register_slash_commands)
 		{
@@ -196,7 +196,7 @@ public class Main {
 			Discord.discord.commandManager.addSlashCommand("wikipedia", new WikipediaCommand());
 			Discord.discord.commandManager.addSlashCommand("yiff", new YiffCommand());
 			Discord.discord.commandManager.addSlashCommand("chatbot", new ChatBotCommand());
-			Discord.discord.commandManager.addSlashCommand("translate", new TranslateCommand());
+			// Discord.discord.commandManager.addSlashCommand("translate", new TranslateCommand());
 		}
 
 		pluginsLoader = new PluginsLoader("plugins");
