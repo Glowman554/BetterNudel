@@ -57,6 +57,7 @@ public class Main {
 		String token;
 		String application_id;
 		int port = 8888;
+		boolean register_slash_commands = true;
 
 		try
 		{
@@ -121,6 +122,10 @@ public class Main {
 
 			token = config_root.get("token").asString();
 			application_id = config_root.get("application_id").asString();
+			if (config_root.get("register_slash_commands") != null)
+			{
+				register_slash_commands = config_root.get("register_slash_commands").asBoolean();
+			}
 		}
 
 		Discord.init(token, application_id);
@@ -160,27 +165,30 @@ public class Main {
 		Discord.discord.commandManager.addCommand("exec", new ExecCommand());
 		Discord.discord.commandManager.addCommand("role", new RoleCommand());
 
-		Discord.discord.commandManager.addSlashCommand("say", new SayCommand());
-		Discord.discord.commandManager.addSlashCommand("cat", new CatCommand());
-		Discord.discord.commandManager.addSlashCommand("coinflip", new CoinflipCommand());
-		Discord.discord.commandManager.addSlashCommand("commit", new CommitCommand());
-		Discord.discord.commandManager.addSlashCommand("corona", new CoronaCommand());
-		Discord.discord.commandManager.addSlashCommand("dog", new DogCommand());
-		Discord.discord.commandManager.addSlashCommand("exec", new ExecCommand());
-		Discord.discord.commandManager.addSlashCommand("fact", new FactCommand());
-		Discord.discord.commandManager.addSlashCommand("fox", new FoxCommand());
-		Discord.discord.commandManager.addSlashCommand("furry", new FurryCommand());
-		Discord.discord.commandManager.addSlashCommand("im_18", new Im18Command());
-		Discord.discord.commandManager.addSlashCommand("joke", new JokeCommand());
-		Discord.discord.commandManager.addSlashCommand("meme", new MemeCommand());
-		Discord.discord.commandManager.addSlashCommand("nick", new NickCommand());
-		Discord.discord.commandManager.addSlashCommand("ping", new PingCommand());
-		Discord.discord.commandManager.addSlashCommand("pronoun", new PronounDbCommand());
-		Discord.discord.commandManager.addSlashCommand("role", new RoleCommand());
-		Discord.discord.commandManager.addSlashCommand("status", new StatusCommand());
-		Discord.discord.commandManager.addSlashCommand("tts", new TtsCommand());
-		Discord.discord.commandManager.addSlashCommand("wikipedia", new WikipediaCommand());
-		Discord.discord.commandManager.addSlashCommand("yiff", new YiffCommand());
+		if (register_slash_commands)
+		{
+			Discord.discord.commandManager.addSlashCommand("say", new SayCommand());
+			Discord.discord.commandManager.addSlashCommand("cat", new CatCommand());
+			Discord.discord.commandManager.addSlashCommand("coinflip", new CoinflipCommand());
+			Discord.discord.commandManager.addSlashCommand("commit", new CommitCommand());
+			Discord.discord.commandManager.addSlashCommand("corona", new CoronaCommand());
+			Discord.discord.commandManager.addSlashCommand("dog", new DogCommand());
+			Discord.discord.commandManager.addSlashCommand("exec", new ExecCommand());
+			Discord.discord.commandManager.addSlashCommand("fact", new FactCommand());
+			Discord.discord.commandManager.addSlashCommand("fox", new FoxCommand());
+			Discord.discord.commandManager.addSlashCommand("furry", new FurryCommand());
+			Discord.discord.commandManager.addSlashCommand("im_18", new Im18Command());
+			Discord.discord.commandManager.addSlashCommand("joke", new JokeCommand());
+			Discord.discord.commandManager.addSlashCommand("meme", new MemeCommand());
+			Discord.discord.commandManager.addSlashCommand("nick", new NickCommand());
+			Discord.discord.commandManager.addSlashCommand("ping", new PingCommand());
+			Discord.discord.commandManager.addSlashCommand("pronoun", new PronounDbCommand());
+			Discord.discord.commandManager.addSlashCommand("role", new RoleCommand());
+			Discord.discord.commandManager.addSlashCommand("status", new StatusCommand());
+			Discord.discord.commandManager.addSlashCommand("tts", new TtsCommand());
+			Discord.discord.commandManager.addSlashCommand("wikipedia", new WikipediaCommand());
+			Discord.discord.commandManager.addSlashCommand("yiff", new YiffCommand());
+		}
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();
