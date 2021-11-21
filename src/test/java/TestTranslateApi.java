@@ -16,4 +16,17 @@ public class TestTranslateApi
 
 		System.out.println(response);
 	}
+
+	@Test
+	public void testTranslateApi2() throws IOException, JsonSyntaxException
+	{
+		TranslateApi api = new TranslateApi();
+		
+		for (String lang : TranslateApi.languages)
+		{
+			String response = api.translate("Hallo wie heißen sie?", lang);
+
+			System.out.println(response);
+		}
+	}
 }

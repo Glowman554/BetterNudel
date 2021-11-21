@@ -8,6 +8,19 @@ import net.shadew.json.JsonSyntaxException;
 
 public class TranslateApi extends BaseApi
 {
+	public static String[] languages = new String[] {
+		"de",
+		"en",
+		"es",
+		"fr",
+		"it",
+		"ja",
+		"ko",
+		"pt",
+		"ru",
+		"zh"
+	};
+
 	public String translate(String message, String to) throws IOException, JsonSyntaxException
 	{
 		message = message.replace("#", "%23");
