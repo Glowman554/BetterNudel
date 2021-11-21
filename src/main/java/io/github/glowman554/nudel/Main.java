@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import io.github.glowman554.nudel.api.BaseApi;
 import io.github.glowman554.nudel.api.ChatBotApi;
+import io.github.glowman554.nudel.api.TranslateApi;
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.impl.CatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.ChatBotCommand;
@@ -25,6 +26,7 @@ import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.RoleCommand;
 import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
 import io.github.glowman554.nudel.discord.commands.impl.StatusCommand;
+import io.github.glowman554.nudel.discord.commands.impl.TranslateCommand;
 import io.github.glowman554.nudel.discord.commands.impl.TtsCommand;
 import io.github.glowman554.nudel.discord.commands.impl.WikipediaCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
@@ -168,6 +170,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("exec", new ExecCommand());
 		Discord.discord.commandManager.addCommand("role", new RoleCommand());
 		Discord.discord.commandManager.addCommand("chatbot", new ChatBotCommand());
+		Discord.discord.commandManager.addCommand("translate", new TranslateCommand());
 
 		if (register_slash_commands)
 		{
@@ -193,6 +196,7 @@ public class Main {
 			Discord.discord.commandManager.addSlashCommand("wikipedia", new WikipediaCommand());
 			Discord.discord.commandManager.addSlashCommand("yiff", new YiffCommand());
 			Discord.discord.commandManager.addSlashCommand("chatbot", new ChatBotCommand());
+			Discord.discord.commandManager.addSlashCommand("translate", new TranslateCommand());
 		}
 
 		pluginsLoader = new PluginsLoader("plugins");
