@@ -3,8 +3,10 @@ package io.github.glowman554.nudel;
 import java.io.IOException;
 
 import io.github.glowman554.nudel.api.BaseApi;
+import io.github.glowman554.nudel.api.ChatBotApi;
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.impl.CatCommand;
+import io.github.glowman554.nudel.discord.commands.impl.ChatBotCommand;
 import io.github.glowman554.nudel.discord.commands.impl.CoinflipCommand;
 import io.github.glowman554.nudel.discord.commands.impl.CommitCommand;
 import io.github.glowman554.nudel.discord.commands.impl.CoronaCommand;
@@ -48,6 +50,7 @@ public class Main {
 	public static HttpApi http_api;
 	public static PluginsLoader pluginsLoader;
 	public static ArgParser parser;
+	public static String config_file = "config.json";
 
 	public static void main(String[] args) throws Exception
 	{
@@ -114,7 +117,7 @@ public class Main {
 		else
 		{
 
-			String config_file = parser.consume_option("--config", "config.json");
+			config_file = parser.consume_option("--config", "config.json");
 			String config = FileUtils.readFile(config_file);
 
 			Json config_json = Json.json();
@@ -164,6 +167,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("corona", new CoronaCommand());
 		Discord.discord.commandManager.addCommand("exec", new ExecCommand());
 		Discord.discord.commandManager.addCommand("role", new RoleCommand());
+		Discord.discord.commandManager.addCommand("chatbot", new ChatBotCommand());
 
 		if (register_slash_commands)
 		{
@@ -188,6 +192,7 @@ public class Main {
 			Discord.discord.commandManager.addSlashCommand("tts", new TtsCommand());
 			Discord.discord.commandManager.addSlashCommand("wikipedia", new WikipediaCommand());
 			Discord.discord.commandManager.addSlashCommand("yiff", new YiffCommand());
+			Discord.discord.commandManager.addSlashCommand("chatbot", new ChatBotCommand());
 		}
 
 		pluginsLoader = new PluginsLoader("plugins");
