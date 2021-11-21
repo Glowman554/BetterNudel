@@ -11,8 +11,8 @@ import net.shadew.json.JsonSyntaxException;
 public class ChatBotApi extends BaseApi
 {
 	// https://brainshop.ai/
-	public static String key = null;
-	public static String bid = null;
+	public String key = null;
+	public String bid = null;
 
 	public ChatBotApi()
 	{

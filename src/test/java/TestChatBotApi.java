@@ -11,6 +11,13 @@ public class TestChatBotApi
 	public void testChatBotApiSingleWord() throws IOException, JsonSyntaxException
 	{
 		ChatBotApi api = new ChatBotApi();
+
+		if (api.key == null || api.bid == null)
+		{
+			System.out.println("API key or bid not set skipping...");
+			return;
+		}
+
 		String res = api.response("Hello", "[test]");
 
 		System.out.println(res);
@@ -20,6 +27,13 @@ public class TestChatBotApi
 	public void testChatBotApiMultipleWords() throws IOException, JsonSyntaxException
 	{
 		ChatBotApi api = new ChatBotApi();
+
+		if (api.key == null || api.bid == null)
+		{
+			System.out.println("API key or bid not set skipping...");
+			return;
+		}
+		
 		String res = api.response("Hello world", "[test]");
 
 		System.out.println(res);
