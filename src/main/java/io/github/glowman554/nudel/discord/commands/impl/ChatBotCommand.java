@@ -10,6 +10,7 @@ import io.github.glowman554.nudel.discord.commands.SlashCommand;
 import io.github.glowman554.nudel.discord.commands.SlashCommandParameter;
 import io.github.glowman554.nudel.discord.commands.SlashCommandRegister;
 import io.github.glowman554.nudel.utils.ArrayUtils;
+import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -84,18 +85,23 @@ public class ChatBotCommand extends ListenerAdapter implements Command, SlashCom
 	public void onMessageReceived(MessageReceivedEvent event) {
 		super.onMessageReceived(event);
 
-		if(event.getAuthor().isBot()) {
+		if(event.getAuthor().isBot())
+		{
 			return;
 		}
 
-		if(event.getTextChannel().getName().contains("chatbot")) {
-			try
+		if (event.isFromType(ChannelType.TEXT))
+		{
+			if(event.getTextChannel().getName().contains("chatbot"))
 			{
-				event.getTextChannel().sendMessage(api.response(event.getMessage().getContentRaw(), event.getTextChannel().getId())).queue();
-			}
-			catch (IOException | JsonSyntaxException e)
-			{
-				e.printStackTrace();
+				try
+				{
+					event.getTextChannel().sendMessage(api.response(event.getMessage().getContentRaw(), event.getTextChannel().getId())).queue();
+				}
+				catch (IOException | JsonSyntaxException e)
+				{
+					e.printStackTrace();
+				}
 			}
 		}
     }
