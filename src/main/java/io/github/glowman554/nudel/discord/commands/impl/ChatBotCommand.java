@@ -82,7 +82,8 @@ public class ChatBotCommand extends ListenerAdapter implements Command, SlashCom
 	}
 	
 	@Override
-	public void onMessageReceived(MessageReceivedEvent event) {
+	public void onMessageReceived(MessageReceivedEvent event)
+	{
 		super.onMessageReceived(event);
 
 		if(event.getAuthor().isBot())
