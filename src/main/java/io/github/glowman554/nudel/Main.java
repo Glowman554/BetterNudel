@@ -32,6 +32,7 @@ import io.github.glowman554.nudel.discord.commands.impl.WikipediaCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
 import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
+import io.github.glowman554.nudel.httpapi.impl.ApiBrainshopHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiCollectHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiMessageHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiPermsHandler;
@@ -146,6 +147,7 @@ public class Main {
 		HttpApiBaseHandler api_science_path = new HttpApiBaseHandler(new ApiScienceHandler(), http_api, "/api/science");
 		HttpApiBaseHandler api_suggest_path = new HttpApiBaseHandler(new ApiSuggestHandler(), http_api, "/api/suggest");
 		HttpApiBaseHandler api_message_path = new HttpApiBaseHandler(new ApiMessageHandler(), http_api, "/api/message");
+		HttpApiBaseHandler api_brainshop_path = new HttpApiBaseHandler(new ApiBrainshopHandler(), http_api, "/api/brainshop");
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());
