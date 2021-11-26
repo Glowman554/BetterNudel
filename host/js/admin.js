@@ -242,7 +242,7 @@ function render_uploaded_file_internal(file) {
 	var uploader_card = create_card(join_components(
 		create_heading(3, "Uploader"),
 		create_text("Discord username: " + file.uploader.name + "#" + file.uploader.discriminator),
-		from_html("<img src='" + file.uploader.avatar_url + "' style='width: 100px; height: 100px; border-radius: 50%; position: relative; top: -100px; left: -50px; float: right;' />"),
+		from_html("<img src='" + file.uploader.avatar_url + "' style='width: 100px; height: 100px; border-radius: 50%; position: relative; top: -100px; left: -50px; float: right;' class='hide-small hide-medium' />"),
 		create_input("Message user", "le message", (value, input) => {
 			input.disabled = true;
 			input.innerText = "Sending...";
