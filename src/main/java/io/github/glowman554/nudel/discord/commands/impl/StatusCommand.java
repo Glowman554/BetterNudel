@@ -52,7 +52,7 @@ public class StatusCommand implements Command, SlashCommand
 	@Override
 	public String get_permission()
 	{
-		return null;
+		return "status";
 	}
 
 	@Override

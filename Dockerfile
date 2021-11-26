@@ -2,7 +2,7 @@ FROM maven:3.8.3-openjdk-16
 
 COPY . /srv
 
-RUN curl https://betternudel-production.up.railway.app/api/status?status=Deploying%20update...
+#RUN curl https://betternudel-production.up.railway.app/api/status?status=Deploying%20update...
 
 WORKDIR /srv
 RUN mvn package

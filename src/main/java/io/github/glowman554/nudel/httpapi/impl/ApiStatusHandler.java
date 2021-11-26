@@ -11,6 +11,17 @@ public class ApiStatusHandler implements HttpApiHandler
 	@Override
 	public String execute(Map<String, String> query) throws Exception
 	{
+		String token = query.get("token");
+		if (token == null)
+		{
+			return "Missing token";
+		}
+		
+		if (!token.equals(System.getenv("TOKEN")))
+		{
+			return "Invalid token";
+		}
+
 		String status = query.get("status");
 
 		if (status == null)
