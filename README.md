@@ -39,4 +39,4 @@
 - [x] /api/endpoints (list api endpoints)
 - [x] /api/check-token (check if token is valid)
 - [x] a http api
-- [ ] a simple webinterface
+- [x] a simple webinterface

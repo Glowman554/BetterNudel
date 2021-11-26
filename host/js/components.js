@@ -2,6 +2,18 @@ var __navigation = [
 	{
 		name: "Home",
 		link: "/index.html"
+	},
+	{
+		name: "Commands",
+		link: "/commands.html"
+	},
+	{
+		name: "Admin",
+		link: "/admin.html"
+	},
+	{
+		name: "Themes",
+		link: "/theme.html"
 	}
 ];
 

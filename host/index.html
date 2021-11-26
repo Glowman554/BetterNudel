@@ -5,17 +5,57 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="/css/style.css">
 		<script src="/js/components.js"></script>
+		<script src="/js/admin.js"></script>
 
 		<title>BetterNudel | Home</title>
 
 	</head>
 	<body>
 		<script>
-			document.body.append(create_navbar());
+			(async _ => {
+				document.body.append(create_navbar());
 
-			document.body.append(create_header("BetterNudel", "Nothing here yet!"));
+				document.body.append(create_header("BetterNudel", "The home of BetterNudel"));
 
-			document.body.append(create_footer());
+				var commands = JSON.parse(await api_request("/api/commands"));
+				var n_commands = commands.commands.length;
+				var n_slash_commands = commands.slash_commands.length;
+
+				document.body.append(create_card(create_text("Hello my name is BetterNudel and I'm happy to meet you 👍!<br>The person who programs me does this mainly in his free time so don't expect too much from me 🤪!<br>I'm mainly made to have fun 👾!")));
+
+				document.body.append(create_card(join_components(
+					create_heading(2, "Some information about me"),
+					join_components(
+						create_card(create_text("I'm currently programmed to handle " + n_commands + " commands and " + n_slash_commands + " slash commands.")),
+						await render_uptime()
+					)
+				)));
+
+				document.body.append(create_card(join_components(
+					create_heading(2, "Who is my creator?"),
+					create_text("Hi im Janick aka <a href='https://glowman554.gq'>Glowman554</a> and im developing this bot mainly in my free time so don't expect too much from it 😼.")
+				)));
+
+				async function input_handler(value, input) {
+					console.log(value);
+
+					fetch("https://x.glowman554.gq/api/suggest?suggestion=" + "BetterNudel: " + value.replace(/#/g, "%23")).then(async response => {
+						var res = await response.text();
+
+						console.log(res);
+
+						alert("Server responded with: " + res);
+					});
+				}
+
+				document.body.append(create_card(join_components(
+					create_heading(1, "Suggestions"),
+					create_text("Sending a suggestion will save you ip because of security reasons."),
+					create_input("Send a suggestion", "give me free money", input_handler)
+				)));
+
+				document.body.append(create_footer());
+			})();
 		</script>
 	</body>
 </html>
