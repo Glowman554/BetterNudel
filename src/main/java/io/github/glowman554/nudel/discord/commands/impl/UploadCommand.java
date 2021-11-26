@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import io.github.glowman554.nudel.Main;
+import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.Command;
 import io.github.glowman554.nudel.discord.commands.CommandEvent;
 import io.github.glowman554.nudel.utils.FileUtils;
@@ -89,20 +90,18 @@ public class UploadCommand implements Command
 	@Override
 	public String get_short_help()
 	{
-		return null;
+		return "Uploads a file to the server";
 	}
 
 	@Override
 	public String get_long_help()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("Use '%supload' to upload the attached files!", Discord.discord.commandManager.prefix);
 	}
 
 	@Override
 	public String get_permission()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
