@@ -20,7 +20,7 @@
 - [x] repeat
 - [x] wikipedia
 - [x] pronoundb
-- [ ] upload
+- [x] upload
 - [x] load-plugin (load from url or attachment)
 
 # api todo
