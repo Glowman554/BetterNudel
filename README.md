@@ -37,5 +37,6 @@
 - [x] /api/load-plugin (load a plugin from url needs auth)
 - [x] /api/commands (list commands)
 - [x] /api/endpoints (list api endpoints)
+- [x] /api/check-token (check if token is valid)
 - [x] a http api
 - [ ] a simple webinterface

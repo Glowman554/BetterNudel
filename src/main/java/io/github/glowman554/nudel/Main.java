@@ -36,6 +36,7 @@ import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
 import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiBrainshopHandler;
+import io.github.glowman554.nudel.httpapi.impl.ApiCheckTokenHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiCollectHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiCommandsHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiEndpointsHandler;
@@ -192,6 +193,7 @@ public class Main {
 		HttpApiBaseHandler api_upload_path = new HttpApiBaseHandler(new ApiUploadHandler(), http_api, "/api/upload");
 		HttpApiBaseHandler api_commands_path = new HttpApiBaseHandler(new ApiCommandsHandler(), http_api, "/api/commands");
 		HttpApiBaseHandler api_endpoints_path = new HttpApiBaseHandler(new ApiEndpointsHandler(), http_api, "/api/endpoints");
+		HttpApiBaseHandler api_check_token_path = new HttpApiBaseHandler(new ApiCheckTokenHandler(), http_api, "/api/check-token");
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());
