@@ -52,6 +52,7 @@ public class HttpApiBaseHandler
 			else
 			{
 				System.out.printf("Sending file: %s\n", request_uri);
+				exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
 				exchange.sendResponseHeaders(200, 0);
 				InputStream s = new File(request_uri).toURI().toURL().openStream();
 				exchange.getResponseBody().write(s.readAllBytes());
