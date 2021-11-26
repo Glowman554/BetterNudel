@@ -72,7 +72,7 @@ public class RepeatCommand implements Command
 	@Override
 	public String get_long_help()
 	{
-		return String.format("Use '%srepeat [count][command]' to repeat a command!", "repeat 10 furry", Discord.discord.commandManager.prefix);
+		return String.format("Use '%srepeat [count][command]' to repeat a command!", Discord.discord.commandManager.prefix);
 	}
 
 	@Override
