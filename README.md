@@ -35,5 +35,7 @@
 - [x] host a directory (current pwd + host or path specified in config or env)
 - [x] /api/uptime (get uptime)
 - [x] /api/load-plugin (load a plugin from url needs auth)
+- [ ] /api/commands (list commands)
+- [ ] /api/endpoints (list api endpoints)
 - [x] a http api
 - [ ] a simple webinterface
