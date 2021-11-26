@@ -22,6 +22,9 @@ public class HttpApiBaseHandler
 
 		HttpContext context = api.server.createContext(path);
 		context.setHandler(this::handleRequest);
+
+		System.out.printf("[%s] Registered handler!\n", path);
+		api.handlers.put(path, this.handler);
 	}
 
 	private void handleRequest(HttpExchange exchange) throws IOException

@@ -36,6 +36,6 @@
 - [x] /api/uptime (get uptime)
 - [x] /api/load-plugin (load a plugin from url needs auth)
 - [x] /api/commands (list commands)
-- [ ] /api/endpoints (list api endpoints)
+- [x] /api/endpoints (list api endpoints)
 - [x] a http api
 - [ ] a simple webinterface

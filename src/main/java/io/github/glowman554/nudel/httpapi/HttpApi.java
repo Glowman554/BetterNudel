@@ -13,6 +13,8 @@ public class HttpApi
 	public HttpServer server;
 	public HttpContext context;
 
+	public HashMap<String, HttpApiHandler> handlers = new HashMap<String, HttpApiHandler>();
+
 	public HttpApi(int port) throws IOException
 	{
 		this.server = HttpServer.create(new InetSocketAddress(port), 0);
