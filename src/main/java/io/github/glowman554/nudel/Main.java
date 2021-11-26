@@ -19,6 +19,7 @@ import io.github.glowman554.nudel.discord.commands.impl.FoxCommand;
 import io.github.glowman554.nudel.discord.commands.impl.FurryCommand;
 import io.github.glowman554.nudel.discord.commands.impl.Im18Command;
 import io.github.glowman554.nudel.discord.commands.impl.JokeCommand;
+import io.github.glowman554.nudel.discord.commands.impl.LoadPluginCommand;
 import io.github.glowman554.nudel.discord.commands.impl.MemeCommand;
 import io.github.glowman554.nudel.discord.commands.impl.NickCommand;
 import io.github.glowman554.nudel.discord.commands.impl.PingCommand;
@@ -197,6 +198,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("exec", new ExecCommand());
 		Discord.discord.commandManager.addCommand("role", new RoleCommand());
 		Discord.discord.commandManager.addCommand("chatbot", new ChatBotCommand());
+		Discord.discord.commandManager.addCommand("load-plugin", new LoadPluginCommand());
 		// Discord.discord.commandManager.addCommand("translate", new TranslateCommand());
 
 		if (register_slash_commands)
@@ -223,6 +225,7 @@ public class Main {
 			Discord.discord.commandManager.addSlashCommand("wikipedia", new WikipediaCommand());
 			Discord.discord.commandManager.addSlashCommand("yiff", new YiffCommand());
 			Discord.discord.commandManager.addSlashCommand("chatbot", new ChatBotCommand());
+			Discord.discord.commandManager.addSlashCommand("load-plugin", new LoadPluginCommand());
 			// Discord.discord.commandManager.addSlashCommand("translate", new TranslateCommand());
 		}
 

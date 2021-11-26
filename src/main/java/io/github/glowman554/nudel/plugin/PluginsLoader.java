@@ -10,7 +10,7 @@ import io.github.glowman554.nudel.api.BaseApi;
 
 public class PluginsLoader
 {
-	String plugin_dir;
+	public String plugin_dir;
 	ArrayList<PluginLoader> plugins = new ArrayList<PluginLoader>();
 
 	public PluginsLoader(String plugin_dir)

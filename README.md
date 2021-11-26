@@ -21,7 +21,7 @@
 - [x] wikipedia
 - [x] pronoundb
 - [ ] upload
-- [ ] load-plugin (load from url or attachment)
+- [x] load-plugin (load from url or attachment)
 
 # api todo
 
