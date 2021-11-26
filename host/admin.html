@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		<script src="/js/components.js"></script>
+		<script src="/js/admin.js"></script>
+
+		<title>BetterNudel | Admin</title>
+
+	</head>
+	<body>
+		<script>
+			(async _ => {
+				document.body.append(create_navbar());
+
+				document.body.append(create_header("BetterNudel", "Admin panel"));
+
+				var token_input = await render_token_input();
+
+				if (token_input) {
+					document.body.append(token_input);
+				} else {
+					document.body.append(await render_uptime());
+					document.body.append(await render_set_status());
+					document.body.append(await render_load_plugin());
+					document.body.append(await render_send_message());
+					document.body.append(await render_uploaded_files_list());
+					document.body.append(await render_commands_list());
+					document.body.append(await render_api_endpoints());
+				}
+
+				document.body.append(create_footer());
+			})();
+		</script>
+	</body>
+</html>
