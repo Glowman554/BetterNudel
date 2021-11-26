@@ -1,5 +1,6 @@
 package io.github.glowman554.nudel;
 
+import java.io.File;
 import java.io.IOException;
 
 import io.github.glowman554.nudel.api.BaseApi;
@@ -54,6 +55,16 @@ public class Main {
 	public static PluginsLoader pluginsLoader;
 	public static ArgParser parser;
 	public static String config_file = "config.json";
+	public static String http_host_path = System.getProperty("user.dir") + "/host";
+
+	static
+	{
+		if (!new File(http_host_path).exists())
+		{
+			System.out.println("Creating http host directory");
+			new File(http_host_path).mkdir();
+		}
+	}
 
 	public static void main(String[] args) throws Exception
 	{
@@ -116,6 +127,11 @@ public class Main {
 			token = System.getenv("DISCORD_TOKEN");
 			application_id = System.getenv("DISCORD_APP_ID");
 			port = Integer.parseInt(System.getenv("PORT"));
+
+			if (System.getenv("HTTP_HOST_PATH") != null)
+			{
+				http_host_path = System.getenv("HTTP_HOST_PATH");
+			}
 		}
 		else
 		{
@@ -131,6 +147,11 @@ public class Main {
 			if (config_root.get("register_slash_commands") != null)
 			{
 				register_slash_commands = config_root.get("register_slash_commands").asBoolean();
+			}
+
+			if (config_root.get("http_host_path") != null)
+			{
+				http_host_path = config_root.get("http_host_path").asString();
 			}
 		}
 

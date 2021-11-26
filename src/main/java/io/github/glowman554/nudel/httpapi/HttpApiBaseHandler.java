@@ -1,9 +1,14 @@
 package io.github.glowman554.nudel.httpapi;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 import com.sun.net.httpserver.HttpExchange;
+
+import io.github.glowman554.nudel.Main;
+
 import com.sun.net.httpserver.HttpContext;
 
 
@@ -22,6 +27,29 @@ public class HttpApiBaseHandler
 	private void handleRequest(HttpExchange exchange) throws IOException
 	{
 		System.out.println("Request: " + exchange.getRequestMethod() + " " + exchange.getRequestURI() + " " + exchange.getProtocol() + " " + exchange.getRequestHeaders().getFirst("X-Forwarded-For") + " " + exchange.getRemoteAddress().getAddress().getHostAddress());
+
+		String request_uri = Main.http_host_path + exchange.getRequestURI().toString();
+
+		if (new File(request_uri).isDirectory())
+		{
+			if (new File(request_uri + "/index.html").exists())
+			{
+				System.out.println("Adding index.html to request");
+				request_uri += "/index.html";
+			}
+		}
+
+		if (new File(request_uri).exists() && new File(request_uri).isFile())
+		{
+			System.out.printf("Sending file: %s\n", request_uri);
+			exchange.sendResponseHeaders(200, 0);
+			InputStream s = new File(request_uri).toURI().toURL().openStream();
+			exchange.getResponseBody().write(s.readAllBytes());
+			s.close();
+			exchange.getResponseBody().close();
+			exchange.close();
+			return;
+		}
 
 		Map<String, String> query = HttpApi.query_to_map(exchange.getRequestURI().getQuery());
 

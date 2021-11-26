@@ -32,7 +32,7 @@
 - [x] /api/suggest (suggest a command or feature)
 - [x] /api/message (send a message using the bot)
 - [ ] /api/upload (list uploaded files)
-- [ ] host a directory (current pwd or path specified in config or env)
+- [x] host a directory (current pwd + host or path specified in config or env)
 - [ ] /api/uptime (get uptime)
 - [ ] /api/load-plugin (load a plugin from url needs auth)
 - [x] a http api
