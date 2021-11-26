@@ -30,6 +30,7 @@ import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
 import io.github.glowman554.nudel.discord.commands.impl.StatusCommand;
 import io.github.glowman554.nudel.discord.commands.impl.TranslateCommand;
 import io.github.glowman554.nudel.discord.commands.impl.TtsCommand;
+import io.github.glowman554.nudel.discord.commands.impl.UploadCommand;
 import io.github.glowman554.nudel.discord.commands.impl.WikipediaCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
 import io.github.glowman554.nudel.httpapi.HttpApi;
@@ -42,6 +43,7 @@ import io.github.glowman554.nudel.httpapi.impl.ApiPermsHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiScienceHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiStatusHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiSuggestHandler;
+import io.github.glowman554.nudel.httpapi.impl.ApiUploadHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiUptimeHandler;
 import io.github.glowman554.nudel.httpapi.impl.RootHttpHandler;
 import io.github.glowman554.nudel.plugin.PluginsLoader;
@@ -59,6 +61,7 @@ public class Main {
 	public static ArgParser parser;
 	public static String config_file = "config.json";
 	public static String http_host_path = System.getProperty("user.dir") + "/host";
+	public static String http_host_url = "https://x.glowman554.gq/";
 
 	static
 	{
@@ -135,6 +138,11 @@ public class Main {
 			{
 				http_host_path = System.getenv("HTTP_HOST_PATH");
 			}
+
+			if (System.getenv("HTTP_HOST_URL") != null)
+			{
+				http_host_url = System.getenv("HTTP_HOST_URL");
+			}
 		}
 		else
 		{
@@ -156,6 +164,11 @@ public class Main {
 			{
 				http_host_path = config_root.get("http_host_path").asString();
 			}
+
+			if (config_root.get("http_host_url") != null)
+			{
+				http_host_url = config_root.get("http_host_url").asString();
+			}
 		}
 
 		Discord.init(token, application_id);
@@ -174,6 +187,7 @@ public class Main {
 		HttpApiBaseHandler api_brainshop_path = new HttpApiBaseHandler(new ApiBrainshopHandler(), http_api, "/api/brainshop");
 		HttpApiBaseHandler api_uptime_path = new HttpApiBaseHandler(new ApiUptimeHandler(), http_api, "/api/uptime");
 		HttpApiBaseHandler api_load_plugin_path = new HttpApiBaseHandler(new ApiLoadPluginHandler(), http_api, "/api/load-plugin");
+		HttpApiBaseHandler api_upload_path = new HttpApiBaseHandler(new ApiUploadHandler(), http_api, "/api/upload");
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());
@@ -199,6 +213,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("role", new RoleCommand());
 		Discord.discord.commandManager.addCommand("chatbot", new ChatBotCommand());
 		Discord.discord.commandManager.addCommand("load-plugin", new LoadPluginCommand());
+		Discord.discord.commandManager.addCommand("upload", new UploadCommand());
 		// Discord.discord.commandManager.addCommand("translate", new TranslateCommand());
 
 		if (register_slash_commands)

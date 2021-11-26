@@ -64,6 +64,11 @@ public class FileUtils
 		return "./tmp/nudel_" + System.currentTimeMillis() + "_" + Math.random() + "." + extension;
 	}
 
+	public static String randomFileId(String extension)
+	{
+		return "nudel_" + System.currentTimeMillis() + "_" + Math.random() + "." + extension;
+	}
+
 	public static String getFileExtension(String file_name)
 	{
 		int dot = file_name.lastIndexOf('.');

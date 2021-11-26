@@ -31,7 +31,7 @@
 - [x] /api/collect (collect science information like user num visits and the location and last visit time)
 - [x] /api/suggest (suggest a command or feature)
 - [x] /api/message (send a message using the bot)
-- [ ] /api/upload (list uploaded files)
+- [x] /api/upload (list uploaded files)
 - [x] host a directory (current pwd + host or path specified in config or env)
 - [x] /api/uptime (get uptime)
 - [x] /api/load-plugin (load a plugin from url needs auth)

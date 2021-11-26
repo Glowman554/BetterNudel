@@ -4,6 +4,7 @@ import java.util.Map;
 
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.httpapi.HttpApiHandler;
+import io.github.glowman554.nudel.utils.TokenUtils;
 
 public class ApiStatusHandler implements HttpApiHandler
 {
@@ -12,15 +13,7 @@ public class ApiStatusHandler implements HttpApiHandler
 	public String execute(Map<String, String> query) throws Exception
 	{
 		String token = query.get("token");
-		if (token == null)
-		{
-			return "Missing token";
-		}
-		
-		if (!token.equals(System.getenv("TOKEN")))
-		{
-			return "Invalid token";
-		}
+		TokenUtils.checkToken(token);
 
 		String status = query.get("status");
 

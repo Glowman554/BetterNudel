@@ -4,6 +4,7 @@ import java.util.Map;
 
 import io.github.glowman554.nudel.Main;
 import io.github.glowman554.nudel.httpapi.HttpApiHandler;
+import io.github.glowman554.nudel.utils.TokenUtils;
 
 public class ApiLoadPluginHandler implements HttpApiHandler
 {
@@ -12,15 +13,7 @@ public class ApiLoadPluginHandler implements HttpApiHandler
 	public String execute(Map<String, String> query) throws Exception
 	{
 		String token = query.get("token");
-		if (token == null)
-		{
-			return "Missing token";
-		}
-		
-		if (!token.equals(System.getenv("TOKEN")))
-		{
-			return "Invalid token";
-		}
+		TokenUtils.checkToken(token);
 
 		if (query.get("url") == null)
 		{

@@ -41,14 +41,25 @@ public class HttpApiBaseHandler
 
 		if (new File(request_uri).exists() && new File(request_uri).isFile())
 		{
-			System.out.printf("Sending file: %s\n", request_uri);
-			exchange.sendResponseHeaders(200, 0);
-			InputStream s = new File(request_uri).toURI().toURL().openStream();
-			exchange.getResponseBody().write(s.readAllBytes());
-			s.close();
-			exchange.getResponseBody().close();
-			exchange.close();
-			return;
+			if (request_uri.contains("!!hidden!!"))
+			{
+				System.out.println("Requested file is hidden!!");
+				exchange.sendResponseHeaders(403, 0);
+				exchange.getResponseBody().write("403 Forbidden".getBytes());
+				exchange.getResponseBody().close();
+				return;
+			}
+			else
+			{
+				System.out.printf("Sending file: %s\n", request_uri);
+				exchange.sendResponseHeaders(200, 0);
+				InputStream s = new File(request_uri).toURI().toURL().openStream();
+				exchange.getResponseBody().write(s.readAllBytes());
+				s.close();
+				exchange.getResponseBody().close();
+				exchange.close();
+				return;
+			}
 		}
 
 		Map<String, String> query = HttpApi.query_to_map(exchange.getRequestURI().getQuery());
