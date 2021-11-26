@@ -2,6 +2,7 @@ package io.github.glowman554.nudel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import io.github.glowman554.nudel.api.BaseApi;
 import io.github.glowman554.nudel.api.ChatBotApi;
@@ -80,8 +81,8 @@ public class Main {
 		parser = new ArgParser(args);
 		parser.parse();
 
-		String token;
-		String application_id;
+		String token = null;
+		String application_id = null;
 		int port = 8888;
 		boolean register_slash_commands = true;
 
@@ -130,13 +131,24 @@ public class Main {
 			e.printStackTrace();
 			System.exit(0);
 		}
-
+		
 		if (parser.is_option("--no-cfg"))
 		{
-			token = System.getenv("DISCORD_TOKEN");
-			application_id = System.getenv("DISCORD_APP_ID");
-			port = Integer.parseInt(System.getenv("PORT"));
-
+			if (System.getenv("DISCORD_TOKEN") != null)
+			{
+				token = System.getenv("DISCORD_TOKEN");
+			}
+			
+			if (System.getenv("DISCORD_APP_ID") != null)
+			{
+				application_id = System.getenv("DISCORD_APP_ID");
+			}
+			
+			if (System.getenv("PORT") != null)
+			{
+				port = Integer.parseInt(System.getenv("PORT"));
+			}
+			
 			if (System.getenv("HTTP_HOST_PATH") != null)
 			{
 				http_host_path = System.getenv("HTTP_HOST_PATH");
@@ -171,6 +183,72 @@ public class Main {
 			if (config_root.get("http_host_url") != null)
 			{
 				http_host_url = config_root.get("http_host_url").asString();
+			}
+		}
+		
+		if (parser.is_option("--load-host"))
+		{
+			try
+			{
+				String nudel_token;
+				
+				if (!parser.is_option("--token"))
+				{
+					Scanner input = new Scanner(System.in);
+					
+					System.out.print("Token to acces betternudel: ");
+					nudel_token = input.nextLine();
+	
+					input.close();
+				}
+				else
+				{
+					nudel_token = parser.consume_option("--token");
+				}
+				
+				System.out.println("Using token " + nudel_token);
+				
+				String result = new BaseApi().request(http_host_url + "api/check-token?token=" + nudel_token);
+				
+				if (!result.equals("OK"))
+				{
+					System.err.println("You provided a invalid token!");
+					System.exit(-1);
+				}
+				else
+				{
+					System.out.println("Token check ok!");
+				}
+				
+				String uploaded_files = new BaseApi().request(http_host_url + "api/upload?token=" + nudel_token);
+				
+				if (!new File(http_host_path + "/files").isDirectory())
+				{
+					System.out.println("Creating directory " + http_host_path + "/files");
+					new File(http_host_path + "/files").mkdir();
+				}
+				
+				Json _json = Json.json();
+				
+				JsonNode root_node = _json.parse(uploaded_files);
+				
+				for (JsonNode node : root_node.asList())
+				{
+					String download_path = http_host_path + "/files/" + node.get("file_id").asString();
+					String metadata_path = download_path + "!!hidden!!.json";
+					
+					System.out.println("Loading " + download_path + "...");
+					
+					FileUtils.writeFile(metadata_path, _json.serialize(node));
+					new BaseApi().download(download_path, node.get("download_url").asString());
+				}
+				
+				System.exit(0);
+			}
+			catch (IOException|JsonSyntaxException|IllegalArgumentException e)
+			{
+				e.printStackTrace();
+				System.exit(0);
 			}
 		}
 
