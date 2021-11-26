@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+import io.github.glowman554.nudel.api.BaseApi;
+
 public class PluginsLoader
 {
 	String plugin_dir;
@@ -24,6 +26,27 @@ public class PluginsLoader
 	public void load_all() throws IOException
 	{
 		Files.walk(new File(this.plugin_dir).toPath()).forEach(this::loader);
+	}
+
+	public void load_from_url_or_path(String url_or_path) throws IOException
+	{
+		String regex = "^(http|https):\\/\\/([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?$";
+		if (url_or_path.matches(regex))
+		{
+			// URL
+			String download_path = this.plugin_dir + "/" + url_or_path.substring(url_or_path.lastIndexOf("/") + 1);
+			System.out.println("Downloading " + url_or_path + " to " + download_path);
+
+			BaseApi api = new BaseApi();
+			api.download(download_path, url_or_path);
+
+			loader(new File(download_path).toPath());
+		}
+		else
+		{
+			// Path
+			loader(new File(url_or_path).toPath());
+		}
 	}
 
 	private void loader(Path file)

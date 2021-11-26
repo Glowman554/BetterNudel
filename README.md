@@ -34,6 +34,6 @@
 - [ ] /api/upload (list uploaded files)
 - [x] host a directory (current pwd + host or path specified in config or env)
 - [x] /api/uptime (get uptime)
-- [ ] /api/load-plugin (load a plugin from url needs auth)
+- [x] /api/load-plugin (load a plugin from url needs auth)
 - [x] a http api
 - [ ] a simple webinterface
