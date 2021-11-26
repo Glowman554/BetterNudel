@@ -6,6 +6,7 @@ import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.httpapi.HttpApiHandler;
 import io.github.glowman554.nudel.utils.TokenUtils;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 
 public class ApiMessageHandler implements HttpApiHandler
 {
@@ -32,7 +33,16 @@ public class ApiMessageHandler implements HttpApiHandler
 
 		if (c == null)
 		{
-			return "Invalid channel";
+			// try opening dm channel
+			User u = Discord.discord.jda.getUserById(channel);
+			if (u == null)
+			{
+				return "Invalid channel";
+			}
+
+			u.openPrivateChannel().complete().sendMessage(body).queue();
+
+			return "Message sent";
 		}
 
 		c.sendMessage(body).queue();

@@ -99,7 +99,7 @@ public class HttpApiBaseHandler
 		}
 		catch (Exception e)
 		{
-			exchange.sendResponseHeaders(500, e.getMessage().length());
+			exchange.sendResponseHeaders(200, e.getMessage().length());
 			exchange.getResponseBody().write(e.getMessage().getBytes());
 		}
 
