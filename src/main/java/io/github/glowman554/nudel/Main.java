@@ -40,6 +40,7 @@ import io.github.glowman554.nudel.httpapi.impl.ApiPermsHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiScienceHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiStatusHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiSuggestHandler;
+import io.github.glowman554.nudel.httpapi.impl.ApiUptimeHandler;
 import io.github.glowman554.nudel.httpapi.impl.RootHttpHandler;
 import io.github.glowman554.nudel.plugin.PluginsLoader;
 import io.github.glowman554.nudel.utils.ArgParser;
@@ -169,6 +170,7 @@ public class Main {
 		HttpApiBaseHandler api_suggest_path = new HttpApiBaseHandler(new ApiSuggestHandler(), http_api, "/api/suggest");
 		HttpApiBaseHandler api_message_path = new HttpApiBaseHandler(new ApiMessageHandler(), http_api, "/api/message");
 		HttpApiBaseHandler api_brainshop_path = new HttpApiBaseHandler(new ApiBrainshopHandler(), http_api, "/api/brainshop");
+		HttpApiBaseHandler api_uptime_path = new HttpApiBaseHandler(new ApiUptimeHandler(), http_api, "/api/uptime");
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());
