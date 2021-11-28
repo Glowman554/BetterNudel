@@ -50,6 +50,8 @@ import io.github.glowman554.nudel.httpapi.impl.ApiSuggestHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiUploadHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiUptimeHandler;
 import io.github.glowman554.nudel.httpapi.impl.RootHttpHandler;
+import io.github.glowman554.nudel.httpapi.impl.SyncRecvHandler;
+import io.github.glowman554.nudel.httpapi.impl.SyncSendHandler;
 import io.github.glowman554.nudel.plugin.PluginsLoader;
 import io.github.glowman554.nudel.utils.ArgParser;
 import io.github.glowman554.nudel.utils.FileUtils;
@@ -272,6 +274,8 @@ public class Main {
 		HttpApiBaseHandler api_commands_path = new HttpApiBaseHandler(new ApiCommandsHandler(), http_api, "/api/commands");
 		HttpApiBaseHandler api_endpoints_path = new HttpApiBaseHandler(new ApiEndpointsHandler(), http_api, "/api/endpoints");
 		HttpApiBaseHandler api_check_token_path = new HttpApiBaseHandler(new ApiCheckTokenHandler(), http_api, "/api/check-token");
+		HttpApiBaseHandler sync_send_handler = new HttpApiBaseHandler(new SyncSendHandler(), http_api, "/api/sync/sync-send");
+		HttpApiBaseHandler sync_recv_handler = new HttpApiBaseHandler(new SyncRecvHandler(), http_api, "/api/sync/sync-recv");
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());

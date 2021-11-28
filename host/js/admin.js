@@ -276,3 +276,34 @@ async function render_uploaded_files_list() {
 		files_div
 	));
 }
+
+function render_host_sync_controls() {
+	var channel_input = create_input("Channel", "le channel", console.log);
+	channel_input.querySelector("input").setAttribute("id", "host_channel_input");
+
+	var start_sync_recv_button = create_button("Start receiving", async (button) => {
+		var result = await api_request("/api/sync/sync-recv?enable=true");
+		console.log(result);
+		alert(result);
+	});
+
+	var stop_sync_recv_button = create_button("Stop receiving", async (button) => {
+		var result = await api_request("/api/sync/sync-recv?enable=false");
+		console.log(result);
+		alert(result);
+	});
+
+	var start_sync_send_button = create_button("Start sending", async (button) => {
+		var result = await api_request("/api/sync/sync-send?channel=" + document.getElementById("host_channel_input").value);
+		console.log(result);
+		alert(result);
+	});
+
+	return create_card(join_components(
+		create_heading(2, "Host sync"),
+		channel_input,
+		start_sync_recv_button,
+		stop_sync_recv_button,
+		start_sync_send_button
+	));
+}
