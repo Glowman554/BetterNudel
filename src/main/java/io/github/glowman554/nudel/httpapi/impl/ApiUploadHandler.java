@@ -24,27 +24,52 @@ public class ApiUploadHandler implements HttpApiHandler
 		TokenUtils.checkToken(token);
 
 		Json _json = Json.json();
-		JsonNode root = JsonNode.array();
 
-		Files.walk(new File(this.upload_path).toPath()).forEach(path -> {
-			if (Files.isRegularFile(path) && path.toString().endsWith("!!hidden!!.json"))
+		if (query.get("delete") == null)
+		{
+			JsonNode root = JsonNode.array();
+
+			Files.walk(new File(this.upload_path).toPath()).forEach(path -> {
+				if (Files.isRegularFile(path) && path.toString().endsWith("!!hidden!!.json"))
+				{
+					try
+					{
+						String content = FileUtils.readFile(path.toString());
+
+						JsonNode node = _json.parse(content);
+
+						root.add(node);
+					}
+					catch (IOException|JsonSyntaxException e)
+					{
+						e.printStackTrace();
+					}
+				}
+			});
+
+			return _json.serialize(root);
+		}
+		else
+		{
+			String file = query.get("id");
+
+			if (file == null)
 			{
-				try
-				{
-					String content = FileUtils.readFile(path.toString());
-
-					JsonNode node = _json.parse(content);
-
-					root.add(node);
-				}
-				catch (IOException|JsonSyntaxException e)
-				{
-					e.printStackTrace();
-				}
+				return "missing id";
 			}
-		});
 
-		return _json.serialize(root);
+			String path = this.upload_path + file;
+
+			if (!Files.exists(new File(path).toPath()))
+			{
+				return "file not found";
+			}
+
+			new File(path).delete();
+			new File(path + "!!hidden!!.json").delete();
+
+			return "deleted " + file;
+		}
 	}
 	
 }
