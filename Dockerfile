@@ -4,7 +4,7 @@ COPY . /srv/
 
 ARG TOKEN
 
-RUN curl https://betternudel-production.up.railway.app/api/status?status=Deploying%20update...&token=$TOKEN
+RUN curl https://betternudel-production.up.railway.app/api/status?status=Deploying%20update...\&token=$TOKEN
 
 ARG BRAIN_SHOP_BID
 ARG BRAIN_SHOP_KEY
