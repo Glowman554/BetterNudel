@@ -264,7 +264,7 @@ function render_uploaded_file_internal(file) {
 		create_button("Delete", async (button) => {
 			var result = await api_request("/api/upload?id=" + file.file_id + "&delete=true");
 			alert(result);
-			button.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
+			button.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
 		})
 	));
 
