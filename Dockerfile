@@ -20,6 +20,7 @@ RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-perms=https://betternudel-prod
 RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-science=https://betternudel-production.up.railway.app/api/science
 
 ARG TOKEN
+ARG HTTP_HOST_PATH
 
 RUN java -jar nudel-0.0.1-SNAPSHOT.jar --load-host --token=$TOKEN --no-cfg
 
