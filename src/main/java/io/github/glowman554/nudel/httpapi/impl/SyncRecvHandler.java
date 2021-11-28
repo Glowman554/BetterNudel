@@ -16,7 +16,7 @@ import net.shadew.json.JsonSyntaxException;
 
 public class SyncRecvHandler extends ListenerAdapter implements HttpApiHandler
 {
-	public boolean enabled = true; // TODO change to false
+	public boolean enabled = false;
 
 	public SyncRecvHandler()
 	{
