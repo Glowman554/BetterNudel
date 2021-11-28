@@ -66,6 +66,17 @@
 						localStorage.setItem("base_color", "black");
 						location.reload();
 					}),
+					document.createElement("br"),
+					document.createElement("br"),
+					create_button("Input has submit button", (component) => {
+						localStorage.setItem("input_has_submit_button", "true");
+						location.reload();
+					}),
+					document.createElement("br"),
+					create_button("Input has no submit button", (component) => {
+						localStorage.removeItem("input_has_submit_button");
+						location.reload();
+					})
 				)))
 
 				document.body.append(create_footer());

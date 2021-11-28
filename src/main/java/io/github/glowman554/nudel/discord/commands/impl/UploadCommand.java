@@ -61,6 +61,7 @@ public class UploadCommand implements Command
 				root.set("original_name", event.event.getMessage().getAttachments().get(i).getFileName());
 				root.set("upload_time", System.currentTimeMillis());
 				root.set("download_url", Main.http_host_url + "files/" + file_path);
+				root.set("source_channel_id", event.event.getChannel().getId());
 
 				JsonNode uploader_info = JsonNode.object();
 				uploader_info.set("id", event.event.getAuthor().getId());

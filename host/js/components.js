@@ -189,6 +189,17 @@ function create_input(title, placeholder, callback) {
 	root.appendChild(title_text);
 	root.appendChild(input);
 
+	if (localStorage.getItem("input_has_submit_button") != null && localStorage.getItem("input_has_submit_button") == "true" && callback && callback != console.log) {
+		var submit_button = document.createElement("button");
+		submit_button.innerHTML = "Submit";
+		submit_button.className = "button " + base_color;
+		submit_button.setAttribute("style", "margin-left: 0px;");
+		submit_button.addEventListener("click", function(event) {
+			callback(input.value, input);
+		});
+		root.appendChild(submit_button);
+	}
+
 	return root;
 }
 

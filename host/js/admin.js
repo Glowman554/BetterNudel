@@ -251,6 +251,15 @@ function render_uploaded_file_internal(file) {
 				input.innerText = "";
 				input.disabled = false;
 			});
+		}),
+		create_input("Message channel", "le message", (value, input) => {
+			input.disabled = true;
+			input.innerText = "Sending...";
+			api_request("/api/message?body=" + value + "&channel=" + file.source_channel_id).then(result => {
+				alert(result);
+				input.innerText = "";
+				input.disabled = false;
+			});
 		})
 	));
 
