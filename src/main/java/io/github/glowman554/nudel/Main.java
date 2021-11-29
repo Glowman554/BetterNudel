@@ -52,6 +52,7 @@ import io.github.glowman554.nudel.httpapi.impl.ApiUptimeHandler;
 import io.github.glowman554.nudel.httpapi.impl.RootHttpHandler;
 import io.github.glowman554.nudel.httpapi.impl.SyncRecvHandler;
 import io.github.glowman554.nudel.httpapi.impl.SyncSendHandler;
+import io.github.glowman554.nudel.plugin.JSPlugin;
 import io.github.glowman554.nudel.plugin.PluginsLoader;
 import io.github.glowman554.nudel.utils.ArgParser;
 import io.github.glowman554.nudel.utils.FileUtils;

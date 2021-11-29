@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+import javax.script.ScriptException;
+
 import io.github.glowman554.nudel.api.BaseApi;
 
 public class PluginsLoader
@@ -56,7 +58,7 @@ public class PluginsLoader
 		{
 			//System.out.println(String.format("[%s] Not a file!", f.getName()));
 		}
-		else
+		else if (f.getName().endsWith(".jar"))
 		{
 			System.out.println(String.format("[%s] Loading plugin...", f.getName()));
 			PluginLoader pl = new PluginLoader(f.getAbsolutePath());
@@ -75,6 +77,23 @@ public class PluginsLoader
 			{
 				System.out.println(String.format("[%s] Failed to load plugin: %s", f.getName(), e.getMessage()));
 			}
+		}
+		else if (f.getName().endsWith(".js"))
+		{
+			System.out.println(String.format("[%s] Loading plugin...", f.getName()));
+			try
+			{
+				JSPlugin plugin = new JSPlugin(f);
+				plugin.on_load();
+			}
+			catch (Exception e)
+			{
+				System.out.println(String.format("[%s] Failed to load plugin: %s", f.getName(), e.getMessage()));
+			}
+		}
+		else
+		{
+			System.out.println(String.format("[%s] Not a valid plugin!", f.getName()));
 		}
 	}
 }
