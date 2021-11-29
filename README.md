@@ -40,5 +40,3 @@
 - [x] /api/check-token (check if token is valid)
 - [x] a http api
 - [x] a simple webinterface
-
-test
