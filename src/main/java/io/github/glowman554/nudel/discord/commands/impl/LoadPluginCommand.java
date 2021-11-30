@@ -27,7 +27,7 @@ public class LoadPluginCommand implements Command, SlashCommand
 			else
 			{
 				String plugin_path = Main.pluginsLoader.plugin_dir + "/" + event.event.getMessage().getAttachments().get(0).getFileName();
-				event.event.getMessage().getAttachments().get(0).downloadToFile(plugin_path);
+				event.event.getMessage().getAttachments().get(0).downloadToFile(plugin_path).join();
 				Main.pluginsLoader.load_from_url_or_path(plugin_path);
 			}
 		}

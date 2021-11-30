@@ -8,6 +8,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import io.github.glowman554.nudel.Main;
 import io.github.glowman554.nudel.utils.FileUtils;
 
 public class JSPlugin implements Plugin
@@ -17,10 +18,9 @@ public class JSPlugin implements Plugin
 
 	private ScriptEngine scriptEngine;
 	private Invocable scriptEval;
+	private String injected = "";
 	
-	private String injected = "var on_load = function() { throw new Error('Please specify a on_load function like \\'on_load = function() {}\\''); };\nvar api = Java.type('io.github.glowman554.nudel.plugin.JSPluginApi');\nvar main = Java.type('io.github.glowman554.nudel.Main');\nvar discord = Java.type('io.github.glowman554.nudel.discord.Discord').discord;\nvar file = Java.type('io.github.glowman554.nudel.utils.FileUtils');\n";
-	
-	public JSPlugin(String file) throws ScriptException
+	public JSPlugin(String file) throws ScriptException, IOException
 	{
 		this.file_content = file;
 		this._init();
@@ -33,8 +33,13 @@ public class JSPlugin implements Plugin
 		this._init();
 	}
 	
-	private void _init() throws ScriptException
+	private void _init() throws ScriptException, IOException
 	{
+		this.injected = FileUtils.readFile(Main.class.getResourceAsStream("/jsplugin_bootstrap.js"));
+		this.injected = injected.replaceAll("\n", " ");
+		this.injected = injected.replaceAll("\r", " ");
+		this.injected = injected.replaceAll("\t", " ");
+
 		this.scriptEngine = new ScriptEngineManager().getEngineByName("JavaScript");
 		
 		this.scriptEngine.eval(injected + this.file_content);
@@ -45,7 +50,14 @@ public class JSPlugin implements Plugin
 	@Override
 	public void on_load() throws Exception
 	{
-		this.scriptEval.invokeFunction("on_load");
+		if ((boolean) this.scriptEval.invokeFunction("bootstrap"))
+		{
+			this.scriptEval.invokeFunction("on_load");
+		}
+		else
+		{
+			System.out.printf("[%s] Plugin failed to load. Bootstrap failed.\n", this.file);
+		}
 	}
 
 }
