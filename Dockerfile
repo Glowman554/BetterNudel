@@ -20,6 +20,7 @@ RUN curl https://github.com/Nudeltruppe/NudelAutoBackup/releases/download/latest
 RUN curl https://github.com/Glowman554/BetterNudelAutoBackup/releases/download/latest/better-nudel-autobackup.jar -o better-nudel-autobackup.jar -L
 RUN curl https://github.com/Glowman554/Glowman554.github.io/raw/main/WebsiteDownNotify/website-down-notify.jar -o website-down-notify.jar -L
 RUN cp /srv/host/js/uwuify.js /srv/target/plugins/uwuify.js
+RUN cp /srv/host/js/eval.js /srv/target/plugins/eval.js
 
 WORKDIR /srv/target
 RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-perms=https://betternudel-production.up.railway.app/api/perms
