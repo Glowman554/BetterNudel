@@ -100,7 +100,7 @@ async function render_api_endpoints() {
 function render_native_command(command) {
 	var name = create_heading(3, command.name);
 
-	var perms = command.permission ? create_text("Tis command needs special permissions: " + command.permission) : from_html("");
+	var perms = command.permission ? create_text("This command needs special permissions: " + command.permission) : from_html("");
 
 	var help_table = create_table([
 		["Short help", command.help.short],
