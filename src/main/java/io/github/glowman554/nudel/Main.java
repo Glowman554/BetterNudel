@@ -39,6 +39,7 @@ import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiBrainshopHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiCheckTokenHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiCollectHandler;
+import io.github.glowman554.nudel.httpapi.impl.ApiCollectV2Handler;
 import io.github.glowman554.nudel.httpapi.impl.ApiCommandsHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiEndpointsHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiIpinfoHandler;
@@ -46,6 +47,7 @@ import io.github.glowman554.nudel.httpapi.impl.ApiLoadPluginHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiMessageHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiPermsHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiScienceHandler;
+import io.github.glowman554.nudel.httpapi.impl.ApiScienceV2Handler;
 import io.github.glowman554.nudel.httpapi.impl.ApiStatusHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiSuggestHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiUploadHandler;
@@ -117,6 +119,29 @@ public class Main {
 		{
 			String _url = parser.consume_option("--download-science");
 			String perms = new BaseApi().request(_url);
+
+			Json _json = Json.json();
+			JsonNode _root = _json.parse(perms);
+
+			FileUtils.writeFile("science.json", perms);
+
+			System.out.println("Downloaded science");
+			System.exit(0);
+		}
+		catch (IllegalArgumentException e)
+		{
+
+		}
+		catch (IOException|JsonSyntaxException e)
+		{
+			e.printStackTrace();
+			System.exit(0);
+		}
+
+		try
+		{
+			String _url = parser.consume_option("--download-science-v2");
+			String perms = new BaseApi().request(_url + "?token=" + parser.consume_option("--token"));
 
 			Json _json = Json.json();
 			JsonNode _root = _json.parse(perms);
@@ -279,6 +304,8 @@ public class Main {
 		HttpApiBaseHandler sync_send_handler = new HttpApiBaseHandler(new SyncSendHandler(), http_api, "/api/sync/sync-send");
 		HttpApiBaseHandler sync_recv_handler = new HttpApiBaseHandler(new SyncRecvHandler(), http_api, "/api/sync/sync-recv");
 		HttpApiBaseHandler api_ipinfo_path = new HttpApiBaseHandler(new ApiIpinfoHandler(), http_api, "/api/ipinfo");
+		HttpApiBaseHandler api_collect_v2_path = new HttpApiBaseHandler(new ApiCollectV2Handler("sciencev2.json"), http_api, "/api/collect/v2");
+		HttpApiBaseHandler api_science_v2_path = new HttpApiBaseHandler(new ApiScienceV2Handler(), http_api, "/api/science/v2");
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());

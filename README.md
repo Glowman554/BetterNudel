@@ -38,8 +38,8 @@
 - [x] /api/commands (list commands)
 - [x] /api/endpoints (list api endpoints)
 - [x] /api/check-token (check if token is valid)
-- [ ] /api/collect/v2
-- [ ] /api/science/v2
+- [x] /api/collect/v2
+- [x] /api/science/v2
 - [x] /api/ipinfo
 - [x] a http api
 - [x] a simple webinterface

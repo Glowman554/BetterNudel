@@ -25,6 +25,7 @@ RUN cp /srv/host/js/eval.js /srv/target/plugins/eval.js
 WORKDIR /srv/target
 RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-perms=https://betternudel-production.up.railway.app/api/perms
 RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-science=https://betternudel-production.up.railway.app/api/science
+RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-science-v2=https://betternudel-production.up.railway.app/api/science/v2 --token=$TOKEN
 
 ARG HTTP_HOST_PATH
 
