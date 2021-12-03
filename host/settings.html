@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		<script src="/js/components.js"></script>
+		<script src="/js/admin.js"></script>
+
+		<title>BetterNudel | Settings</title>
+
+	</head>
+	<body>
+		<script>
+			window.on_tracking_ready = async (response) => {
+				document.getElementById("tracking_data").innerHTML = (await render_v2_science_internal(response)).innerHTML;
+			}
+
+			(async _ => {
+				document.body.append(create_navbar());
+
+				document.body.append(create_header("BetterNudel", "Settings for this website."));
+
+				document.body.append(create_card(join_components(
+					create_card(join_components(
+						create_heading(1, "Color theme"),
+						create_input("color", color, (value, component) => {
+							localStorage.setItem("color", value);
+							location.reload();
+						}),
+
+						create_input("base_color", base_color, (value, component) => {
+							localStorage.setItem("base_color", value);
+							location.reload();
+						}),
+						document.createElement("br"),
+						create_button("Reset color's", (component) => {
+							localStorage.removeItem("color");
+							localStorage.removeItem("base_color");
+							location.reload();
+						}),
+
+						document.createElement("br"),
+						document.createElement("br"),
+
+						create_button("Load black theme", (component) => {
+							localStorage.setItem("color", "dark-grey");
+							localStorage.setItem("base_color", "black");
+							location.reload();
+						}),
+						document.createElement("br"),
+						create_button("Load white theme", (component) => {
+							localStorage.setItem("color", "white");
+							localStorage.setItem("base_color", "sand");
+							location.reload();
+						}),
+						document.createElement("br"),
+						create_button("Load ultra black theme", (component) => {
+							localStorage.setItem("color", "black");
+							localStorage.setItem("base_color", "black");
+							location.reload();
+						}),
+						document.createElement("br"),
+						create_button("Load ultra white theme", (component) => {
+							localStorage.setItem("color", "white");
+							localStorage.setItem("base_color", "white");
+							location.reload();
+						}),
+						document.createElement("br"),
+						create_button("Load pink theme", (component) => {
+							localStorage.setItem("color", "pink");
+							localStorage.setItem("base_color", "black");
+							location.reload();
+						})
+					)),
+					create_card(join_components(
+						create_heading(1, "Input settings"),
+						create_button("Input has no submit button", (component) => {
+							localStorage.removeItem("input_has_submit_button");
+							location.reload();
+						}),
+						create_button("Input has submit button", (component) => {
+							localStorage.setItem("input_has_submit_button", "true");
+							location.reload();
+						})
+					)),
+					create_card(join_components(
+						create_heading(1, "Allow tracking"),
+						create_text("Current setting: " + (localStorage.getItem("allow_tracking") === "true" ? "Yes" : "No")),
+						create_button("Yes", () => {
+							localStorage.setItem("allow_tracking", "true");
+							location.reload();
+						}),
+						create_button("No", () => {
+							localStorage.setItem("allow_tracking", "false");
+							location.reload();
+						}),
+						create_button("Reset", () => {
+							localStorage.removeItem("allow_tracking");
+							location.reload();
+						})
+					)),
+					create_card(join_components(
+						create_heading(1, "Reset settings"),
+						create_button("Reset settings", () => {
+							localStorage.clear();
+							location.reload();
+						})
+					))
+				)))
+
+				document.body.append(create_card(join_components(
+					create_heading(1, "Current tracking data"),
+					localStorage.getItem("allow_tracking") === "true" ? from_html("<div id='tracking_data'><p>Please wait...</p></div>") : create_text("Tracking is disabled."),
+				)));
+
+				document.body.append(create_footer());
+			})();
+		</script>
+	</body>
+</html>

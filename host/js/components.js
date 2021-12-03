@@ -12,8 +12,8 @@ var __navigation = [
 		link: "/admin.html"
 	},
 	{
-		name: "Themes",
-		link: "/theme.html"
+		name: "Settings",
+		link: "/settings.html"
 	}
 ];
 
@@ -21,8 +21,24 @@ var base_color = "black";
 var color = "dark-grey";
 
 window.onload = async function() {
-	var response = await (await fetch(window.origin + "/api/collect/v2")).json();
-	console.log(response);
+	if (window.on_ask_tracking_site == undefined) {
+		if (localStorage.getItem("allow_tracking") === null || localStorage.getItem("allow_tracking") === undefined) {
+			console.log("No tracking key found, prompting user...");
+			window.location.href = window.location.origin + "/tracking.html#" + window.location.href;
+		} else {
+			if (localStorage.getItem("allow_tracking") === "true") {
+				var response = await (await fetch(window.origin + "/api/collect/v2")).json();
+				window.tracking_data = response;
+				if (window.on_tracking_ready) {
+					window.on_tracking_ready(response);
+				}
+			} else {
+				console.log("Not collecting data");
+			}
+		}
+	} else {
+		console.log("Currently prompting user for tracking");
+	}
 
 	document.body.setAttribute("style", "background-color: " + base_color + ";");
 }

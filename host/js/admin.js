@@ -81,6 +81,8 @@ async function render_token_input() {
 async function api_request(api_path) {
 	var token = localStorage.getItem("token");
 
+	console.log("Requesting " + api_path + " with token '" + token + "'");
+
 	if (token) {
 		return await (await fetch(api_path + `${api_path.indexOf("?") != -1 ? "&" : "?"}token=${token}`)).text();
 	} else {
@@ -326,14 +328,13 @@ async function render_v2_science_internal(science) {
 	try {
 		var ip_info = JSON.parse(await api_request("/api/ipinfo?ip-override=" + science.ip));
 		// var ip_info = JSON.parse(await api_request("/api/ipinfo?ip-override=" + "8.8.8.8"));
-		console.log(ip_info);
 
 		return create_card(join_components(
 			create_heading(3, science.ip),
 			create_text("Last seen: " + new Date(science.last_seen).toLocaleString()),
 			create_text("Known user agents"),
 			create_list(science.user_agent),
-			create_text("Ip info"),
+			create_text("Ip info (from ipinfo.io)"),
 			create_table([
 				["Country", ip_info.country],
 				["City", ip_info.city],

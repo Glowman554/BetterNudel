@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		
+		<script>
+			window.on_ask_tracking_site = true;
+		</script>
+
+		<script src="/js/components.js"></script>
+		<script src="/js/admin.js"></script>
+
+		<title>BetterNudel | Tracking</title>
+
+	</head>
+	<body>
+		<script>
+			(async _ => {
+				document.body.append(create_navbar());
+
+				document.body.append(create_header("BetterNudel", "Allow tracking?"));
+
+				document.body.append(create_card(join_components(
+					create_heading(1, "Tracking"),
+					create_text("Do you want to allow tracking? This helps me to improve this website."),
+					document.createElement("br"),
+					create_text("We store the following information:"),
+					create_list([
+						"Your IP address",
+						"Your browser user agent",
+						"The current time"
+					]),
+					create_text("You can always change this on the settings page."),
+					document.createElement("br"),
+					create_button("Yes", () => {
+						localStorage.setItem("allow_tracking", "true");
+						var referring_site = window.location.hash.substr(1);
+						if (referring_site) {
+							window.location.href = referring_site;
+						}
+					}),
+					create_button("No", () => {
+						localStorage.setItem("allow_tracking", "false");
+						var referring_site = window.location.hash.substr(1);
+						if (referring_site) {
+							window.location.href = referring_site;
+						}
+					})
+				)));
+
+				document.body.append(create_footer());
+			})();
+		</script>
+	</body>
+</html>
