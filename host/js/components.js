@@ -20,7 +20,10 @@ var __navigation = [
 var base_color = "black";
 var color = "dark-grey";
 
-window.onload = function() {
+window.onload = async function() {
+	var response = await (await fetch(window.origin + "/api/collect/v2")).json();
+	console.log(response);
+
 	document.body.setAttribute("style", "background-color: " + base_color + ";");
 }
 

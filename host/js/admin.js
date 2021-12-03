@@ -321,3 +321,44 @@ function render_host_sync_controls() {
 		start_sync_send_button
 	));
 }
+
+async function render_v2_science_internal(science) {
+	try {
+		var ip_info = JSON.parse(await api_request("/api/ipinfo?ip-override=" + science.ip));
+		// var ip_info = JSON.parse(await api_request("/api/ipinfo?ip-override=" + "8.8.8.8"));
+		console.log(ip_info);
+
+		return create_card(join_components(
+			create_heading(3, science.ip),
+			create_text("Last seen: " + new Date(science.last_seen).toLocaleString()),
+			create_text("Known user agents"),
+			create_list(science.user_agent),
+			create_text("Ip info"),
+			create_table([
+				["Country", ip_info.country],
+				["City", ip_info.city],
+				["Region", ip_info.region],
+				["Location", ip_info.loc],
+			])
+		));
+	} catch (e) {
+		return create_card(join_components(
+			create_text("Error: " + e.message),
+		));
+	}
+}
+
+async function render_v2_science() {
+	var science_data = JSON.parse(await api_request("/api/science/v2"));
+
+	var science_div = document.createElement('div');
+
+	for (let science of science_data.known_users) {
+		science_div.appendChild(await render_v2_science_internal(science));
+	}
+
+	return create_card(join_components(
+		create_heading(2, "Science"),
+		science_div
+	));
+}
