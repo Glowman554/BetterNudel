@@ -40,6 +40,6 @@
 - [x] /api/check-token (check if token is valid)
 - [ ] /api/collect/v2
 - [ ] /api/science/v2
-- [ ] /api/ipinfo
+- [x] /api/ipinfo
 - [x] a http api
 - [x] a simple webinterface
