@@ -23,8 +23,10 @@ var color = "dark-grey";
 window.onload = async function() {
 	if (window.on_ask_tracking_site == undefined) {
 		if (localStorage.getItem("allow_tracking") === null || localStorage.getItem("allow_tracking") === undefined) {
-			console.log("No tracking key found, prompting user...");
-			window.location.href = window.location.origin + "/tracking.html#" + window.location.href;
+			localStorage.setItem("allow_tracking", "false")
+			
+			//console.log("No tracking key found, prompting user...");
+			//window.location.href = window.location.origin + "/tracking.html#" + window.location.href;
 		} else {
 			if (localStorage.getItem("allow_tracking") === "true") {
 				var response = await (await fetch(window.origin + "/api/collect/v2")).json();
