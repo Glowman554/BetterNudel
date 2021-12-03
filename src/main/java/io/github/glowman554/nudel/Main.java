@@ -146,7 +146,7 @@ public class Main {
 			Json _json = Json.json();
 			JsonNode _root = _json.parse(perms);
 
-			FileUtils.writeFile("science.json", perms);
+			FileUtils.writeFile("sciencev2.json", perms);
 
 			System.out.println("Downloaded science");
 			System.exit(0);
