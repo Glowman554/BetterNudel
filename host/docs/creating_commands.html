@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/prism.css">
+		<script src="/js/components.js"></script>
+		<script src="/js/prism.js"></script>
+
+
+		<title>BetterNudel | Documentation</title>
+
+	</head>
+	<body>
+		<script>
+			(async _ => {
+				document.body.append(documentation_page("Creating commands", {
+					name: "Creating commands in java with a class",
+					content: join_components(
+						create_text("Let' say we want to create a command that prints a message to the console. The basic structure needed to create a command is (without the imports):"),
+						create_code_block(`
+public class TestCommand implements Command {
+
+	@Override
+	public void execute(CommandEvent event) throws Exception {
+	}
+						
+	@Override
+	public void on_register() {
+	}
+						
+	@Override
+	public String get_short_help() {
+		return null;
+	}
+	
+	@Override
+	public String get_long_help() {
+		return null;
+	}
+						
+	@Override
+	public String get_permission() {
+		return null;
+	}
+}`),
+						create_text("Visual studio code can autogenerate this code for you!"),
+						document.createElement("br"),
+						create_text("Now let implement the methods in the Command interface!"),
+						create_code_block(`
+public String get_short_help() {
+	return "Prints a message to the console";
+}
+`),
+						create_code_block(`
+public String get_long_help() {
+	// i really recommend you to use this way of writing get_long_help so if you change the prefix it automatically updates
+	return String.format("Use '%stest [message]' to print the message to the console!", Discord.discord.commandManager.prefix);
+}
+`),
+						document.createElement("br"),
+						create_text("We won't need to implement the on_register method or the get_permission method for now but still here is a short explanation of the method's:"),
+						create_list([
+							"The on_register method is called when the command is registered. This is the place where you can add your listeners or initialize other stuff the command needs.",
+							"The get_permission method is called when the command is executed. Here you can simply return a string with a permission name or null if you don't need one. The command will only be executed if the user has the permission."
+						]),
+						document.createElement("br"),
+						create_text("Now we need to implement the execute method. This is where the magic happens!"),
+						create_code_block(`
+public void execute(CommandEvent event) throws Exception {
+	if (event.args.length == 0) {
+		event.commandFail("No args");
+	} else {
+		String text = ArrayUtils.stringify(event.args, " ");
+		System.out.println(text);
+	}
+}
+`),
+						document.createElement("br"),
+						create_text("That's it! Now we can register it (you can do this in the main or on_load method of the bot/plugin):"),
+						create_code_block(`
+Discord.discord.commandManager.addCommand("test", new TestCommand());
+`),
+						document.createElement("br"),
+						create_text("And now you can test it!")
+					)
+				},
+				{
+					name: "Replying to a command",
+					content: join_components(
+						create_text("There are multiple ways to reply to a command. The most common way is to use the recomended way is the commandSuccess method. These methods are avilable:"),
+						create_code_block(`
+event.commandSuccess("Success");
+event.commandFail("Fail");
+event.event.getChannel().sendMessage("Test").queue();
+`),
+						document.createElement("br"),
+						create_text("Note: the event member of the CommandEvent is the normal MessageReceivedEvent from jda.")
+					)
+				},
+				{
+					name: "Creating commands in a javascript plugin",
+					content: join_components(
+						create_text("If you want to create a command in a javascript plugin you can use the api.register_command method. This method takes a name, short help, long help, permission and executer. The above example would be:"),
+						create_code_block(`
+api.register_command("test", "Prints a message to the console", "Use '" + global.prefix + "test [message]' to print the message to the console!", null, function(event) {
+	if (event.args.length == 0) {
+		event.commandFail("No args");
+	} else {
+		var text = api.helper.join_java_array(event.args, " ");
+		console.log(text);
+	}
+});
+
+`, "js"),
+					)
+				}));
+			})();
+		</script>
+	</body>
+</html>

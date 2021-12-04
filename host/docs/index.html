@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		<script src="/js/components.js"></script>
+
+		<title>BetterNudel | Documentation</title>
+
+	</head>
+	<body>
+		<script>
+			(async _ => {
+				document.body.append(create_navbar());
+
+				document.body.append(create_header("BetterNudel", "Documentation"));
+
+				document.body.append(create_card(join_components(
+					create_heading(2, "Currently there are the following documentation pages:"),
+					create_list([
+						"<a href='/docs/creating_commands.html'>Creating commands</a>",
+						"<a href='/docs/creating_java_plugins.html'>Creating Java plugins</a>",
+						"<a href='/docs/creating_javascript_plugins.html'>Creating Javascript plugins</a>"
+					]),
+					document.createElement("br"),
+					create_text("More documentation will be added at some point. Stay tuned!"),
+					create_text("If you have any questions, feel free to contact me on Discord (Glowman554#4152) or create a github issue.")
+				)));
+
+				document.body.append(create_footer());
+			})();
+		</script>
+	</body>
+</html>

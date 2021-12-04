@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/prism.css">
+		<script src="/js/components.js"></script>
+		<script src="/js/prism.js"></script>
+
+
+		<title>BetterNudel | Documentation</title>
+
+	</head>
+	<body>
+		<script>
+			(async _ => {
+				document.body.append(documentation_page("Creating java plugins", {
+					name: "Create a java plugin",
+					content: join_components(
+						create_text("First of all you need to create a java project similar like this in your favorite ide (the package name can be different and the LoadBackupCommand class isn't needed)."),
+						from_html("<img src='/res/create_java_plugin.png' style='width: 100%;'>"),
+						create_text("Please note that you need to add the jar in /lib to the java class path."),
+						document.createElement("br"),
+						create_text("The content of the plugin.json file specifies the plugin name, the version and the Main entry point. It can look like this:"),
+						create_code_block(`
+{
+	"main": "io.github.glowman554.nudel.betterautobackup.Main",
+	"name": "AutoBetterNudelBackup",
+	"version": "1.0.0"
+}
+`, "js"),
+						document.createElement("br"),
+						create_text("The main class looks like this:"),
+						create_code_block(`
+public class Main implements Plugin
+{
+
+	@Override
+	public void on_load() throws Exception
+	{
+
+	}
+}
+`),
+						document.createElement("br"),
+						create_text("The on_load method is called when the plugin is loaded. You can use this method to <a href='/docs/creating_commands.html'>register commands</a>, register listeners, load stuff, etc."),
+						document.createElement("br"),
+						create_text("Now simply export the jar and place it in the plugins folder of better nudel and run it")
+					)
+				}
+				));
+			})();
+		</script>
+	</body>
+</html>

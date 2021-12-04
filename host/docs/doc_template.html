@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/prism.css">
+		<script src="/js/components.js"></script>
+		<script src="/js/prism.js"></script>
+
+
+		<title>BetterNudel | Documentation</title>
+
+	</head>
+	<body>
+		<script>
+			(async _ => {
+				document.body.append(documentation_page("test", {
+					name: "Test",
+					content: join_components(
+						create_text("Test"),
+						create_text("Test2")
+					)
+				},
+				{
+					name: "Test2",
+					content: join_components(
+						create_text("Test3"),
+						create_text("Test4"),
+						create_code_block("int x = 1;")
+					)
+				}));
+			})();
+		</script>
+	</body>
+</html>

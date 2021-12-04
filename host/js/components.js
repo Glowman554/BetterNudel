@@ -14,6 +14,10 @@ var __navigation = [
 	{
 		name: "Settings",
 		link: "/settings.html"
+	},
+	{
+		name: "Documentation",
+		link: "/docs/"
 	}
 ];
 
@@ -337,6 +341,39 @@ function create_markdown_fetchable(url, name) {
 	return join_components(button, container);
 }
 
+function create_code_block(_code, language = "java") {
+	if (_code.startsWith("\n")) {
+		_code = _code.substring(1);
+	}
+	
+	var root = document.createElement("pre");
+
+	var code = document.createElement("code");
+	code.classList = "language-" + language;
+	code.setAttribute("style", "display: block; padding: 0.5rem; width: 100%; overflow-x: auto;");
+	code.innerHTML = _code;
+
+	root.appendChild(code);
+
+	return root;
+}
+
+function documentation_page(topic, ...components) {
+	var root = document.createElement("div");
+	root.appendChild(create_navbar());
+	root.appendChild(create_header("BetterNudel Documentation", topic));
+
+	for (let i of components) {
+		root.appendChild(create_card(join_components(
+			create_heading(2, i.name),
+			i.content
+		)));
+	}
+
+	root.appendChild(create_footer());
+
+	return root;
+}
 
 function from_html(__content) {
 	return document.createRange().createContextualFragment(__content);

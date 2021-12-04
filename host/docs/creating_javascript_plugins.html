@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/prism.css">
+		<script src="/js/components.js"></script>
+		<script src="/js/prism.js"></script>
+
+
+		<title>BetterNudel | Documentation</title>
+
+	</head>
+	<body>
+		<script>
+			(async _ => {
+				document.body.append(documentation_page("Creating javascript plugins", {
+					name: "Create a java plugin",
+					content: join_components(
+						create_text("Creating a javascript plugin is very simple. Just create a javascript file with the following content:"),
+						create_code_block(`
+on_load = function() {
+
+}
+`, "js"),
+						create_text("The on_load function is called when the plugin is loaded and works just like the java plugin version.")
+					)
+				}
+				));
+			})();
+		</script>
+	</body>
+</html>
