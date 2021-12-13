@@ -43,3 +43,7 @@
 - [x] /api/ipinfo
 - [x] a http api
 - [x] a simple webinterface
+
+# Untis libary
+
+Yoinked from [untis4j](https://github.com/ByteDream/untis4j)
