@@ -215,6 +215,11 @@ public class Main {
 			}
 		}
 		
+		if (System.getenv("NO_SLASH") != null)
+		{
+			register_slash_commands = false;
+		}
+		
 		if (parser.is_option("--load-host"))
 		{
 			try

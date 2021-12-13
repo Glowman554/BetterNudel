@@ -42,7 +42,7 @@ public class Discord
 		jda.addEventListener(receiver);
 		jda.addEventListener(new MessageLogger());
 
-		commandManager = new CommandManager("-");
+		commandManager = new CommandManager(System.getenv("PREFIX") == null ? "-" : System.getenv("PREFIX"));
 
 		this.setDefaultRP();
 
