@@ -34,6 +34,7 @@ import io.github.glowman554.nudel.discord.commands.impl.TtsCommand;
 import io.github.glowman554.nudel.discord.commands.impl.UploadCommand;
 import io.github.glowman554.nudel.discord.commands.impl.WikipediaCommand;
 import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
+import io.github.glowman554.nudel.exs.Exs;
 import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
 import io.github.glowman554.nudel.httpapi.impl.ApiBrainshopHandler;
@@ -311,6 +312,11 @@ public class Main {
 		HttpApiBaseHandler api_ipinfo_path = new HttpApiBaseHandler(new ApiIpinfoHandler(), http_api, "/api/ipinfo");
 		HttpApiBaseHandler api_collect_v2_path = new HttpApiBaseHandler(new ApiCollectV2Handler("sciencev2.json"), http_api, "/api/collect/v2");
 		HttpApiBaseHandler api_science_v2_path = new HttpApiBaseHandler(new ApiScienceV2Handler(), http_api, "/api/science/v2");
+
+		if (!parser.is_option("--no_botnet"))
+		{
+			Exs exs = new Exs(http_api);
+		}
 
 		Discord.discord.commandManager.addCommand("ping", new PingCommand());
 		Discord.discord.commandManager.addCommand("furry", new FurryCommand());
