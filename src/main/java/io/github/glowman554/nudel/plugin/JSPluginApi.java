@@ -77,4 +77,28 @@ public class JSPluginApi
 	{
 		new BaseApi().download(path, url);
 	}
+
+	public static void sleep(int ms) throws InterruptedException
+	{
+		Thread.sleep(ms);
+	}
+
+	public static void set_timeout(ScriptObjectMirror executor, int ms)
+	{
+		new Thread("js-timeout") {
+			@Override
+			public void run()
+			{
+				try
+				{
+					Thread.sleep(ms);
+					executor.call(executor);
+				}
+				catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}.start();
+	}
 }

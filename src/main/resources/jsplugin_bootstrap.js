@@ -174,6 +174,18 @@ function setup_global_api() {
 		js_plugin_api.register_http_handler(path, handler_function);
 	};
 
+	api.sleep = function(ms) {
+	    debug_log("Sleeping for " + ms + " ms");
+
+	    js_plugin_api.sleep(ms);
+	};
+
+	api.set_timeout = function(callback, ms) {
+	    debug_log("Setting timeout for " + ms + " ms");
+
+	    js_plugin_api.set_timeout(callback, ms);
+	};
+
 	api.network = {};
 
 	api.network.request = function(url) {
