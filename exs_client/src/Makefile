@@ -1,4 +1,4 @@
-JFLAGS = --release 8
+JFLAGS = --release 8 -verbose
 JC = javac
 
 .SUFFIXES: .java .class

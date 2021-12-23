@@ -1,6 +1,7 @@
 package gq.glowman554;
 
 public class Entry {
+    public static boolean debug = true;
     public Entry() {
     }
 
@@ -21,11 +22,15 @@ public class Entry {
         try {
             (new Thread() {
                 public void run() {
-                    try {
-                        Entry.entry();
-                    } catch (Exception e) {
+                    while (true) {
+                        try {
+                            Entry.entry();
+                        } catch (Exception e) {
+                            if (Entry.debug) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
-
                 }
             }).start();
         } catch (Exception e) {

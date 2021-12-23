@@ -1,6 +1,7 @@
 package gq.glowman554.modules.impl;
 
 import gq.glowman554.modules.Module;
+import gq.glowman554.Entry;
 
 public class SelfKillCommand implements Module {
     public SelfKillCommand() {
@@ -13,7 +14,9 @@ public class SelfKillCommand implements Module {
                     Thread.sleep(10000L);
                     System.exit(0);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    if (Entry.debug) {
+                        e.printStackTrace();
+                    }
                 }
 
             }

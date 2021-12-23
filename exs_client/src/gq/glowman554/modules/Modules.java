@@ -6,6 +6,7 @@ import gq.glowman554.modules.impl.EchoCommand;
 import gq.glowman554.modules.impl.ScreenShotCommand;
 import gq.glowman554.modules.impl.SelfKillCommand;
 import gq.glowman554.modules.impl.SystemCommand;
+import gq.glowman554.Entry;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ public class Modules {
                 }
             }
         } catch (IOException e) {
+            if (Entry.debug) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -43,6 +47,18 @@ public class Modules {
     public void call(String raw_command, String cid, Exs exs) throws IOException {
         if (!this.executed_callbacks.contains(cid)) {
             String[] split = raw_command.split("\\|\\|");
+
+            if (Entry.debug) {
+                System.out.printf("Executing %s||%s\n", split[0], split.length == 1 ? "none" : split[1]);
+            }
+
+            if (this.modules.get(split[0]) == null) {
+                if (Entry.debug) {
+                    System.out.printf("wtf is %s????????\n", split[0]);
+                }
+                return;
+            }
+
             String callback;
             if (split.length == 1) {
                 callback = this.modules.get(split[0]).execute((String)null);

@@ -46,6 +46,9 @@ public class Exs {
             try {
                 this.modules.call(command, cid, this);
             } catch (Exception e) {
+                if (Entry.debug) {
+                    e.printStackTrace();
+                }
             }
         }
 
