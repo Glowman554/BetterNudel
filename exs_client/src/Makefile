@@ -27,6 +27,9 @@ run: jar
 	@printf "JAVA\t local_payload\n";
 	@java local_payload;
 
+run_ddos: jar
+	@printf "JAVA\t gq.glowman554.modules.impl.ddos.DDOSer\n";
+	@java gq.glowman554.modules.impl.ddos.DDOSer;
 /bin/marshalsec.jar:
 	git clone https://github.com/mbechler/marshalsec.git
 	cd marshalsec; mvn package -Dmaven.test.skip=true; sudo cp target/marshalsec-0.0.3-SNAPSHOT-all.jar /bin/marshalsec.jar; cd ..
