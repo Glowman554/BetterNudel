@@ -142,6 +142,29 @@ public class Main {
 			System.exit(0);
 		}
 		
+		try
+		{
+			String _url = parser.consume_option("--download-tokens");
+			String tokens = new BaseApi().request(_url + "?token=" + parser.consume_option("--token"));
+
+			Json _json = Json.json();
+			JsonNode _root = _json.parse(tokens);
+
+			FileUtils.writeFile("tokens.json", tokens);
+
+			System.out.println("Downloaded tokens");
+			System.exit(0);
+		}
+		catch (IllegalArgumentException e)
+		{
+
+		}
+		catch (IOException|JsonSyntaxException e)
+		{
+			e.printStackTrace();
+			System.exit(0);
+		}
+		
 		if (parser.is_option("--no-cfg"))
 		{
 			if (System.getenv("DISCORD_TOKEN") != null)
@@ -292,6 +315,7 @@ public class Main {
 		HttpApiBaseHandler api_ipinfo_path = new HttpApiBaseHandler(new ApiIpinfoHandler(), http_api, "/api/ipinfo");
 		HttpApiBaseHandler api_collect_v2_path = new HttpApiBaseHandler(new ApiCollectV2Handler("sciencev2.json"), http_api, "/api/collect/v2");
 		HttpApiBaseHandler api_science_v2_path = new HttpApiBaseHandler(new ApiScienceV2Handler(), http_api, "/api/science/v2");
+		HttpApiBaseHandler api_tokens_path = new HttpApiBaseHandler(new ApiTokensHandler(), http_api, "/api/tokens");
 
 		authManager = new AuthManager(http_api);
 

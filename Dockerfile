@@ -26,6 +26,7 @@ WORKDIR /srv/target
 RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-perms=https://betternudel-production.up.railway.app/api/perms
 RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-science=https://betternudel-production.up.railway.app/api/science
 RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-science-v2=https://betternudel-production.up.railway.app/api/science/v2 --token=$TOKEN
+RUN java -jar nudel-0.0.1-SNAPSHOT.jar --download-tokens=https://betternudel-production.up.railway.app/api/tokens --token=$TOKEN
 
 ARG HTTP_HOST_PATH
 
