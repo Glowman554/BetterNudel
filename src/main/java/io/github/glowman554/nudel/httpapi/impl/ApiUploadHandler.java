@@ -20,8 +20,19 @@ public class ApiUploadHandler implements HttpApiHandler
 	@Override
 	public String execute(Map<String, String> query) throws Exception
 	{
-		String token = query.get("token");
-		TokenUtils.checkToken(token);
+		var ref = new Object() {
+			boolean full_access = false;
+			String user = null;
+		};
+
+		try {
+			String token = query.get("token");
+			TokenUtils.checkToken(token);
+			ref.full_access = true;
+		} catch (IllegalArgumentException e) {
+			String login_token = query.get("login_token");
+			ref.user = TokenUtils.checkToken(login_token, Main.authManager);
+		}
 
 		Json _json = Json.json();
 
@@ -38,7 +49,14 @@ public class ApiUploadHandler implements HttpApiHandler
 
 						JsonNode node = _json.parse(content);
 
-						root.add(node);
+						if (ref.full_access) {
+							root.add(node);
+						} else {
+							String id = node.get("uploader").get("id").asString();
+							if (id.equals(ref.user)) {
+								root.add(node);
+							}
+						}
 					}
 					catch (IOException|JsonSyntaxException e)
 					{
@@ -63,6 +81,16 @@ public class ApiUploadHandler implements HttpApiHandler
 			if (!Files.exists(new File(path).toPath()))
 			{
 				return "file not found";
+			}
+
+			if (!ref.full_access) {
+				String content = FileUtils.readFile(path + "!!hidden!!.json");
+				JsonNode node = _json.parse(content);
+
+				String id = node.get("uploader").get("id").asString();
+				if (!id.equals(ref.user)) {
+					return "Cannot delete file from other user!";
+				}
 			}
 
 			new File(path).delete();

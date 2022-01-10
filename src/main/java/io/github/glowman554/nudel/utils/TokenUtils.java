@@ -9,7 +9,8 @@ public class TokenUtils
 		if (System.getenv("TOKEN") == null)
 		{
 			System.out.println("WARNING: No token found, please set TOKEN environment variable");
-			return;
+			throw new IllegalArgumentException("Invalid token");
+			//return;
 		}
 
 		if (token == null)
