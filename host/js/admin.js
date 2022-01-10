@@ -261,11 +261,12 @@ async function render_send_message() {
 	return create_card(join_components(heading, message_input, channel_input, submit_button));
 }
 
-function render_uploaded_file_internal(file) {
+function render_uploaded_file_internal(file, allow_message) {
 	var uploader_card = create_card(join_components(
 		create_heading(3, "Uploader"),
 		create_text("Discord username: " + file.uploader.name + "#" + file.uploader.discriminator),
 		from_html("<img src='" + file.uploader.avatar_url + "' style='width: 100px; height: 100px; border-radius: 50%; position: relative; top: -100px; left: -50px; float: right;' class='hide-small hide-medium' />"),
+		allow_message ?
 		create_input("Message user", "le message", (value, input) => {
 			input.disabled = true;
 			input.innerText = "Sending...";
@@ -274,7 +275,8 @@ function render_uploaded_file_internal(file) {
 				input.innerText = "";
 				input.disabled = false;
 			});
-		}),
+		}) : document.createElement("div"),
+		allow_message ?
 		create_input("Message channel", "le message", (value, input) => {
 			input.disabled = true;
 			input.innerText = "Sending...";
@@ -283,7 +285,7 @@ function render_uploaded_file_internal(file) {
 				input.innerText = "";
 				input.disabled = false;
 			});
-		}),
+		}) : document.createElement("div"),
 		create_button("Delete", async (button) => {
 			var result = await api_request("/api/upload?id=" + file.file_id + "&delete=true");
 			alert(result);
@@ -299,13 +301,13 @@ function render_uploaded_file_internal(file) {
 	));
 }
 
-async function render_uploaded_files_list() {
+async function render_uploaded_files_list(allow_message) {
 	var files = JSON.parse(await api_request("/api/upload"));
 
 	var files_div = document.createElement('div');
 
 	files.forEach(file => {
-		files_div.appendChild(render_uploaded_file_internal(file));
+		files_div.appendChild(render_uploaded_file_internal(file, allow_message));
 	});
 
 	return create_card(join_components(
