@@ -121,9 +121,10 @@
 							});
 						})
 					)));
+
+					document.body.append(await render_uploaded_files_list());
 				}
 
-				document.body.append(await render_uploaded_files_list());
 
 				document.body.append(create_card(join_components(
 					create_heading(1, "Current tracking data"),
