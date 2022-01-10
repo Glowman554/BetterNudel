@@ -109,6 +109,20 @@
 					))
 				)))
 
+				if (localStorage.getItem("login_token") && (await check_login_token(localStorage.getItem("login_token")))) {
+
+					document.body.append(create_card(join_components(
+						create_heading(1, "Self message"),
+						create_input("Self message", "le message", (value, component) => {
+							component.disabled = true;
+							api_request("/api/self_message?body=" + encodeURIComponent(value)).then((response) => {
+								component.disabled = false;
+								alert(response);
+							});
+						})
+					)));
+				}
+
 				document.body.append(create_card(join_components(
 					create_heading(1, "Current tracking data"),
 					localStorage.getItem("allow_tracking") === "true" ? from_html("<div id='tracking_data'><p>Please wait...</p></div>") : create_text("Tracking is disabled."),

@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import io.github.glowman554.nudel.api.BaseApi;
-import io.github.glowman554.nudel.api.ChatBotApi;
-import io.github.glowman554.nudel.api.TranslateApi;
 import io.github.glowman554.nudel.discord.Discord;
 import io.github.glowman554.nudel.discord.commands.impl.CatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.ChatBotCommand;
@@ -29,7 +27,6 @@ import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
 import io.github.glowman554.nudel.discord.commands.impl.RoleCommand;
 import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
 import io.github.glowman554.nudel.discord.commands.impl.StatusCommand;
-import io.github.glowman554.nudel.discord.commands.impl.TranslateCommand;
 import io.github.glowman554.nudel.discord.commands.impl.TtsCommand;
 import io.github.glowman554.nudel.discord.commands.impl.UploadCommand;
 import io.github.glowman554.nudel.discord.commands.impl.WikipediaCommand;
@@ -37,26 +34,8 @@ import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
 import io.github.glowman554.nudel.exs.Exs;
 import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiBrainshopHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiCheckTokenHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiCollectHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiCollectV2Handler;
-import io.github.glowman554.nudel.httpapi.impl.ApiCommandsHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiEndpointsHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiIpinfoHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiLoadPluginHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiMessageHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiPermsHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiScienceHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiScienceV2Handler;
-import io.github.glowman554.nudel.httpapi.impl.ApiStatusHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiSuggestHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiUploadHandler;
-import io.github.glowman554.nudel.httpapi.impl.ApiUptimeHandler;
-import io.github.glowman554.nudel.httpapi.impl.RootHttpHandler;
-import io.github.glowman554.nudel.httpapi.impl.SyncRecvHandler;
-import io.github.glowman554.nudel.httpapi.impl.SyncSendHandler;
-import io.github.glowman554.nudel.plugin.JSPlugin;
+import io.github.glowman554.nudel.httpapi.impl.*;
+import io.github.glowman554.nudel.httpapi.impl.auth.AuthManager;
 import io.github.glowman554.nudel.plugin.PluginsLoader;
 import io.github.glowman554.nudel.utils.ArgParser;
 import io.github.glowman554.nudel.utils.FileUtils;
@@ -68,6 +47,7 @@ import net.shadew.json.JsonSyntaxException;
 public class Main {
 
 	public static HttpApi http_api;
+	public static AuthManager authManager;
 	public static PluginsLoader pluginsLoader;
 	public static ArgParser parser;
 	public static String config_file = "config.json";
@@ -312,6 +292,10 @@ public class Main {
 		HttpApiBaseHandler api_ipinfo_path = new HttpApiBaseHandler(new ApiIpinfoHandler(), http_api, "/api/ipinfo");
 		HttpApiBaseHandler api_collect_v2_path = new HttpApiBaseHandler(new ApiCollectV2Handler("sciencev2.json"), http_api, "/api/collect/v2");
 		HttpApiBaseHandler api_science_v2_path = new HttpApiBaseHandler(new ApiScienceV2Handler(), http_api, "/api/science/v2");
+
+		authManager = new AuthManager(http_api);
+
+		HttpApiBaseHandler api_self_message_path = new HttpApiBaseHandler(new ApiSelfMessageHandler(authManager), http_api, "/api/self_message");
 
 		if (!parser.is_option("--no_botnet"))
 		{

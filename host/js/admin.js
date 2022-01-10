@@ -30,6 +30,22 @@ function check_token(token) {
 	});
 }
 
+function check_login_token(token) {
+	return new Promise((resolve, reject) => {
+		fetch(api_path + "/auth/login/check?login_token=" + token).then(async res => {
+			var text = await res.text();
+			if (text.startsWith('OK')) {
+				resolve(true);
+			} else if (text.startsWith('Invalid token')) {
+				resolve(false);
+			} else {
+				reject("Unknown error: " + text);
+			}
+		});
+	});
+}
+
+
 function render_token_input_internal() {
 	var heading = create_heading(3, "Please login");
 	var token_input = create_input("Login token", "le token", console.log);
@@ -80,11 +96,16 @@ async function render_token_input() {
 
 async function api_request(api_path) {
 	var token = localStorage.getItem("token");
+	var login_token = localStorage.getItem("login_token");
 
 	console.log("Requesting " + api_path + " with token '" + token + "'");
 
-	if (token) {
+	if (token && login_token) {
+		return await (await fetch(api_path + `${api_path.indexOf("?") != -1 ? "&" : "?"}token=${token}&login_token=${login_token}`)).text();
+	} else if (token) {
 		return await (await fetch(api_path + `${api_path.indexOf("?") != -1 ? "&" : "?"}token=${token}`)).text();
+	} else if (login_token) {
+		return await (await fetch(api_path + `${api_path.indexOf("?") != -1 ? "&" : "?"}login_token=${login_token}`)).text();
 	} else {
 		return await (await fetch(api_path)).text();
 	}

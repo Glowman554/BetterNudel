@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/components.js"></script>
+    <script src="/js/admin.js"></script>
+
+    <title>BetterNudel | Admin</title>
+
+</head>
+<body>
+<script>
+			(async _ => {
+				document.body.append(create_navbar());
+
+				document.body.append(create_header("BetterNudel", "Login"));
+
+				var heading = create_heading(3, "Please login");
+                var tag_input = create_input("Discord tag", "le tag", console.log);
+                tag_input.querySelector("input").setAttribute("id", "tag_input");
+
+                var submit_button = create_button("Start login", (button) => {
+                    button.innerText = "Waiting for response...";
+                    button.disabled = true;
+
+                    var discord_tag = document.getElementById("tag_input").value;
+
+					fetch("/auth/login/start?discord_id=" + discord_tag.replace("#", "%23")).then(response => response.json()).then(response => {
+						if (response.id) {
+							button.innerText = "Waiting for ack...";
+							var id = response.id;
+							var interval = setInterval(() => {
+								fetch("/auth/login/status?login_id=" + id).then(response => response.json()).then(response => {
+									if (response.token) {
+										localStorage.setItem("login_token", response.token);
+										clearInterval(interval);
+										location.reload();
+									}
+								});
+							}, 1000);
+						} else {
+							button.innerText = "Start login";
+							button.disabled = false;
+							alert(response.msg);
+						}
+					});
+                });
+
+                if (!localStorage.getItem("login_token") || !(await check_login_token(localStorage.getItem("login_token")))) {
+                    document.body.append(create_card(join_components(heading, tag_input, submit_button)));
+                } else {
+                    document.body.append(create_card(join_components(create_text("No need to login!"), create_button("Logout", (button) => {
+						localStorage.removeItem("login_token");
+						location.reload();
+					}))));
+                }
+
+
+				document.body.append(create_footer());
+			})();
+		</script>
+</body>
+</html>

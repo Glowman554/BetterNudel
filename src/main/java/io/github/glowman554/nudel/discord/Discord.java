@@ -6,6 +6,10 @@ import io.github.glowman554.nudel.discord.commands.CommandManager;
 import io.github.glowman554.nudel.discord.MessageLogger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
+
+import java.util.Collection;
 
 public class Discord
 {
@@ -32,7 +36,13 @@ public class Discord
 		this.token = token;
 		this.application_id = application_id;
 
-		JDABuilder jdaBuilder = JDABuilder.createDefault(this.token);
+		JDABuilder jdaBuilder = JDABuilder.createDefault(this.token).setMemberCachePolicy(MemberCachePolicy.ALL);
+
+		for (GatewayIntent value : GatewayIntent.values()) {
+			System.out.println("[discord] enabling: " + value);
+			jdaBuilder.enableIntents(value);
+		}
+
         jda = jdaBuilder.build();
 
 		jda.awaitReady();

@@ -16,6 +16,10 @@ var __navigation = [
 		link: "/settings.html"
 	},
 	{
+		name: "Login",
+		link: "/login.html"
+	},
+	{
 		name: "Documentation",
 		link: "/docs/"
 	}
