@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/components.js"></script>
-    <script src="/js/admin.js"></script>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		<script src="/js/components.js"></script>
+		<script src="/js/admin.js"></script>
 
-    <title>BetterNudel | Admin</title>
+		<title>BetterNudel | Login</title>
 
-</head>
-<body>
-<script>
+	</head>
+	<body>
+		<script>
 			(async _ => {
 				document.body.append(create_navbar());
 
@@ -20,6 +20,18 @@
 				var heading = create_heading(3, "Please login");
                 var tag_input = create_input("Discord tag", "le tag", console.log);
                 tag_input.querySelector("input").setAttribute("id", "tag_input");
+
+				var debug_text = create_text("");
+				debug_text.setAttribute("id", "debug_text");
+				debug_text.setAttribute("style", "display: inline-block; padding-left: 15px;");
+				debug_text.onclick = () => {
+					if (confirm("Are you sure you want cancel the login?")) {
+						fetch("/auth/login/stop?login_id=" + window.id).then(response => response.text()).then(response => {
+							alert(response);
+							location.reload();
+						});
+					}
+				};
 
                 var submit_button = create_button("Start login", (button) => {
                     button.innerText = "Waiting for response...";
@@ -31,6 +43,7 @@
 						if (response.id) {
 							button.innerText = "Waiting for ack...";
 							var id = response.id;
+							window.id = id;
 							var interval = setInterval(() => {
 								fetch("/auth/login/status?login_id=" + id).then(response => response.json()).then(response => {
 									if (response.token) {
@@ -38,6 +51,8 @@
 										clearInterval(interval);
 										location.reload();
 									}
+
+									debug_text.innerText = response.msg;
 								});
 							}, 1000);
 						} else {
@@ -49,7 +64,7 @@
                 });
 
                 if (!localStorage.getItem("login_token") || !(await check_login_token(localStorage.getItem("login_token")))) {
-                    document.body.append(create_card(join_components(heading, tag_input, submit_button)));
+                    document.body.append(create_card(join_components(heading, tag_input, submit_button, debug_text)));
                 } else {
                     document.body.append(create_card(join_components(create_text("No need to login!"), create_button("Logout", (button) => {
 						localStorage.removeItem("login_token");
@@ -61,5 +76,5 @@
 				document.body.append(create_footer());
 			})();
 		</script>
-</body>
+	</body>
 </html>

@@ -36,6 +36,7 @@ public class AuthManager extends ListenerAdapter {
 
         new HttpApiBaseHandler(new AuthLoginStartHandler(this), api, "/auth/login/start");
         new HttpApiBaseHandler(new AuthLoginStatusHandler(this), api, "/auth/login/status");
+        new HttpApiBaseHandler(new AuthLoginStopHandler(this), api, "/auth/login/stop");
         new HttpApiBaseHandler(new AuthLoginCheckHandler(this), api, "/auth/login/check");
 
         Discord.discord.jda.addEventListener(this);
