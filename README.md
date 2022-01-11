@@ -47,3 +47,7 @@
 # Untis libary
 
 Yoinked from [untis4j](https://github.com/ByteDream/untis4j)
+
+# VirusTotal libary
+
+Yoinked from [Virustotal-Public-API-V2.0-Client](https://github.com/kdkanishka/Virustotal-Public-API-V2.0-Client)

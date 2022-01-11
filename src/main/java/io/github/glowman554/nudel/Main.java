@@ -6,31 +6,7 @@ import java.util.Scanner;
 
 import io.github.glowman554.nudel.api.BaseApi;
 import io.github.glowman554.nudel.discord.Discord;
-import io.github.glowman554.nudel.discord.commands.impl.CatCommand;
-import io.github.glowman554.nudel.discord.commands.impl.ChatBotCommand;
-import io.github.glowman554.nudel.discord.commands.impl.CoinflipCommand;
-import io.github.glowman554.nudel.discord.commands.impl.CommitCommand;
-import io.github.glowman554.nudel.discord.commands.impl.CoronaCommand;
-import io.github.glowman554.nudel.discord.commands.impl.DogCommand;
-import io.github.glowman554.nudel.discord.commands.impl.ExecCommand;
-import io.github.glowman554.nudel.discord.commands.impl.FactCommand;
-import io.github.glowman554.nudel.discord.commands.impl.FoxCommand;
-import io.github.glowman554.nudel.discord.commands.impl.FurryCommand;
-import io.github.glowman554.nudel.discord.commands.impl.Im18Command;
-import io.github.glowman554.nudel.discord.commands.impl.JokeCommand;
-import io.github.glowman554.nudel.discord.commands.impl.LoadPluginCommand;
-import io.github.glowman554.nudel.discord.commands.impl.MemeCommand;
-import io.github.glowman554.nudel.discord.commands.impl.NickCommand;
-import io.github.glowman554.nudel.discord.commands.impl.PingCommand;
-import io.github.glowman554.nudel.discord.commands.impl.PronounDbCommand;
-import io.github.glowman554.nudel.discord.commands.impl.RepeatCommand;
-import io.github.glowman554.nudel.discord.commands.impl.RoleCommand;
-import io.github.glowman554.nudel.discord.commands.impl.SayCommand;
-import io.github.glowman554.nudel.discord.commands.impl.StatusCommand;
-import io.github.glowman554.nudel.discord.commands.impl.TtsCommand;
-import io.github.glowman554.nudel.discord.commands.impl.UploadCommand;
-import io.github.glowman554.nudel.discord.commands.impl.WikipediaCommand;
-import io.github.glowman554.nudel.discord.commands.impl.YiffCommand;
+import io.github.glowman554.nudel.discord.commands.impl.*;
 import io.github.glowman554.nudel.exs.Exs;
 import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
@@ -351,6 +327,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("chatbot", new ChatBotCommand());
 		Discord.discord.commandManager.addCommand("load-plugin", new LoadPluginCommand());
 		Discord.discord.commandManager.addCommand("upload", new UploadCommand());
+		Discord.discord.commandManager.addCommand("av_scan", new AvScanCommand());
 		// Discord.discord.commandManager.addCommand("translate", new TranslateCommand());
 
 		if (register_slash_commands)
