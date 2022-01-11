@@ -21,7 +21,7 @@ classes: $(CLASSES:.java=.class)
 
 jar: classes
 	@printf "JAR\t .classes\n"
-	@jar cf client.jar `cat .classes`
+	@jar cfe client.jar gq.glowman554.Entry `cat .classes`
 
 run: jar
 	@printf "JAVA\t local_payload\n";
