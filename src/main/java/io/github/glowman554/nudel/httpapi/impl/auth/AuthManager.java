@@ -94,7 +94,7 @@ public class AuthManager extends ListenerAdapter {
             return;
         }
 
-        if (event.getMessage().getContentRaw().equals("yes")) {
+        if (event.getMessage().getContentRaw().toLowerCase().equals("yes") || event.getMessage().getContentRaw().toLowerCase().equals("no")) {
             AtomicReference<String> session_key = new AtomicReference<>(null);
             pending_tokens.forEach((key, pending_session) -> {
                 if (pending_session.discord_id.equals(event.getAuthor().getId()) && !pending_session.ack) {
@@ -103,9 +103,15 @@ public class AuthManager extends ListenerAdapter {
             });
 
             if (session_key.get() != null) {
-                event.getChannel().sendMessage("Ack ok for: " + session_key).queue();
-                System.out.println("[discord] ack for: " + session_key.get());
-                pending_tokens.get(session_key.get()).ack = true;
+                if (event.getMessage().getContentRaw().toLowerCase().equals("yes")) {
+                    event.getChannel().sendMessage("Ack ok for: " + session_key).queue();
+                    System.out.println("[discord] ack for: " + session_key.get());
+                    pending_tokens.get(session_key.get()).ack = true;
+                } else {
+                    event.getChannel().sendMessage("Ack discard for: " + session_key).queue();
+                    System.out.println("[discord] ack discard for: " + session_key.get());
+                    pending_tokens.remove(session_key.get());
+                }
             }
         }
     }

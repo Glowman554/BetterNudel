@@ -37,7 +37,7 @@ public class AuthLoginStartHandler implements HttpApiHandler {
 
         authManager.pending_tokens.put(login_id, new AuthLoginSession(u.getId(), new_token));
 
-        u.openPrivateChannel().complete().sendMessage(String.format("Login attempt from %s! Send 'yes' to accept it!", query.get("ip"))).queue();
+        u.openPrivateChannel().complete().sendMessage(String.format("Login attempt from %s! Send 'yes' to accept it or 'no' to discard it!!", query.get("ip"))).queue();
 
         return String.format("{\"id\": \"%s\", \"msg\": \"ok\"}", login_id);
     }
