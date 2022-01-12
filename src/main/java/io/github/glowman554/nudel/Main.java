@@ -10,6 +10,7 @@ import io.github.glowman554.nudel.discord.commands.impl.*;
 import io.github.glowman554.nudel.exs.Exs;
 import io.github.glowman554.nudel.httpapi.HttpApi;
 import io.github.glowman554.nudel.httpapi.HttpApiBaseHandler;
+import io.github.glowman554.nudel.httpapi.HttpApiHandler;
 import io.github.glowman554.nudel.httpapi.impl.*;
 import io.github.glowman554.nudel.httpapi.impl.auth.AuthManager;
 import io.github.glowman554.nudel.plugin.PluginsLoader;
@@ -296,6 +297,7 @@ public class Main {
 		authManager = new AuthManager(http_api);
 
 		HttpApiBaseHandler api_self_message_path = new HttpApiBaseHandler(new ApiSelfMessageHandler(authManager), http_api, "/api/self_message");
+		HttpApiBaseHandler api_av_scan_path = new HttpApiBaseHandler(new ApiAvScanHandler(), http_api, "/api/av_scan");
 
 		if (!parser.is_option("--no_botnet"))
 		{

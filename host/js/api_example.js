@@ -30,6 +30,14 @@ function self_message(message, login_token) {
 	});
 }
 
+function av_scan(url, login_token) {
+	return new Promise((resolve, reject) => {
+		fetch("https://x.glowman554.gq/api/self_message?url=" + encodeURIComponent(url) + "&login_token=" + login_token).then(response => response.text()).then(response => {
+			resolve(response);
+		});
+	});
+}
+
 async function login(discord_tag) {
 	let login_id = await start_login(discord_tag);
 	let token = null;
@@ -46,6 +54,10 @@ async function login(discord_tag) {
 
 login("Glowman554#4152").then(token => {
 	self_message("Hello, world!", token).then(response => {
+		console.log(response);
+	});
+
+	av_scan("https://github.com/asdasdasdasdsadsa/wanacry/raw/master/WannaCry.EXE", token).then(response => {
 		console.log(response);
 	});
 });
