@@ -32,7 +32,7 @@ function self_message(message, login_token) {
 
 function av_scan(url, login_token) {
 	return new Promise((resolve, reject) => {
-		fetch("https://x.glowman554.gq/api/self_message?url=" + encodeURIComponent(url) + "&login_token=" + login_token).then(response => response.text()).then(response => {
+		fetch("https://x.glowman554.gq/api/av_scan?url=" + encodeURIComponent(url) + "&login_token=" + login_token).then(response => response.text()).then(response => {
 			resolve(response);
 		});
 	});
