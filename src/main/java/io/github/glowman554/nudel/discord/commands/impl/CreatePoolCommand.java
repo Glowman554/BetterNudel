@@ -94,16 +94,9 @@ public class CreatePoolCommand extends ListenerAdapter implements Command, Slash
 
     @Override
     public void execute(SlashCommandEvent event) throws Exception {
-        EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Pool");
-        eb.setDescription(event.getOption("description").getAsString());
-        eb.addBlankField(false);
-        eb.addField("Help", "React with " + yes.getAsMention() + " to vote for yes and react with " + no.getAsMention() + " to vote for no!", false);
-
         event.reply("Please wait...").complete();
 
-        Message result = event.getHook().editOriginal("Please wait 2...").complete();
-        result.editMessage(eb.build());
+        Message result = event.getHook().editOriginal(String.format("**Pool**\n\n%s\n\n**Help**\nReact with %s to vote for yes and react with %s to vote for no!", event.getOption("description").getAsString(), yes.getAsMention(), no.getAsMention())).complete();
 
         result.addReaction(yes).complete();
         result.addReaction(no).complete();
