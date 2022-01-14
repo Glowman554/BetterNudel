@@ -330,6 +330,9 @@ public class Main {
 		Discord.discord.commandManager.addCommand("load-plugin", new LoadPluginCommand());
 		Discord.discord.commandManager.addCommand("upload", new UploadCommand());
 		Discord.discord.commandManager.addCommand("av_scan", new AvScanCommand());
+
+		CreatePoolCommand createPoolCommand;
+		Discord.discord.commandManager.addCommand("pool", (createPoolCommand = new CreatePoolCommand()));
 		// Discord.discord.commandManager.addCommand("translate", new TranslateCommand());
 
 		if (register_slash_commands)
@@ -357,6 +360,7 @@ public class Main {
 			Discord.discord.commandManager.addSlashCommand("yiff", new YiffCommand());
 			Discord.discord.commandManager.addSlashCommand("chatbot", new ChatBotCommand());
 			Discord.discord.commandManager.addSlashCommand("load-plugin", new LoadPluginCommand());
+			Discord.discord.commandManager.addSlashCommand("pool", createPoolCommand);
 			// Discord.discord.commandManager.addSlashCommand("translate", new TranslateCommand());
 		}
 
