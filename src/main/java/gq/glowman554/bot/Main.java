@@ -73,6 +73,19 @@ public class Main {
         commandManager.add_command("set_testing", new SetTestingCommand());
         commandManager.add_command("auth", new AuthCommand());
         commandManager.add_command("magic8", new Magic8Command());
+        commandManager.add_command("commit", new CommitCommand());
+        commandManager.add_command("corona", new CoronaCommand());
+        commandManager.add_command("exec", new ExecCommand());
+        commandManager.add_command("fact", new FactCommand());
+        commandManager.add_command("fox", new FoxCommand());
+        commandManager.add_command("furry", new FurryCommand());
+        commandManager.add_command("im_18", new Im18Command());
+        commandManager.add_command("joke", new JokeCommand());
+        commandManager.add_command("meme", new MemeCommand());
+        commandManager.add_command("tts", new TtsCommand());
+        commandManager.add_command("wikipedia", new WikipediaCommand());
+        commandManager.add_command("yiff", new YiffCommand());
+        commandManager.add_command("repeat", new RepeatCommand());
 
         new ConsolePlatform();
         new DiscordPlatform();

@@ -3,7 +3,7 @@ package gq.glowman554.bot.command;
 import java.io.File;
 
 public abstract class CommandEvent {
-    public final String _message;
+    public String _message;
     public final CommandPlatform command_platform;
 
     public CommandEvent(String message, CommandPlatform command_platform) {
@@ -11,7 +11,7 @@ public abstract class CommandEvent {
         this.command_platform = command_platform;
     }
 
-    private static String[] get_arguments(String[] array) {
+    public static String[] get_arguments(String[] array) {
         String[] args = new String[array.length - 1];
         System.arraycopy(array, 1, args, 0, array.length - 1);
         return args;

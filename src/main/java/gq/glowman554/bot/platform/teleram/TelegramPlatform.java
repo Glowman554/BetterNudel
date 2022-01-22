@@ -19,6 +19,7 @@ public class TelegramPlatform extends TelegramLongPollingBot {
     -test_reply - working
     -test_mention_ids - working
     -test_message_delete - working
+    -test_chat_name - working
      */
     TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
 

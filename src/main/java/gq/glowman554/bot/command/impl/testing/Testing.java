@@ -18,6 +18,7 @@ public class Testing {
         Main.commandManager.add_command("test_message_sender_id", new TestMessageSenderIdCommand());
         Main.commandManager.add_command("test_file_sending", new TestFileSendingCommand());
         Main.commandManager.add_command("test_formatting", new TestFormattingCommand());
+        Main.commandManager.add_command("test_chat_name", new TestChatNameCommand());
         Main.commandManager.add_command("crash", new CrashCommand());
     }
 }
