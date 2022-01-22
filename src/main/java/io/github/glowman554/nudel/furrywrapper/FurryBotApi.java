@@ -59,7 +59,7 @@ public class FurryBotApi
 
 		Json json = Json.json();
 		JsonNode root = json.parse(response);
-		String url = root.get("images").get(0).get("url").asString();
+		String url = root.get("images").get(0).get("yiffMediaURL").asString();
 
 		return new FurryResult(url);
 	}
