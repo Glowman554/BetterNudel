@@ -4,11 +4,16 @@ import gq.glowman554.bot.Main;
 import gq.glowman554.bot.command.Command;
 import gq.glowman554.bot.command.CommandConfig;
 import gq.glowman554.bot.command.CommandEvent;
+import gq.glowman554.bot.event.EventManager;
+import gq.glowman554.bot.event.EventTarget;
+import gq.glowman554.bot.event.impl.MessageEvent;
 import gq.glowman554.bot.externapi.FurryApi;
 import gq.glowman554.bot.utils.ArrayUtils;
 import gq.glowman554.bot.utils.FileUtils;
+import net.shadew.json.JsonSyntaxException;
 
 import java.io.File;
+import java.io.IOException;
 
 public class FurryCommand implements Command {
     @Override
@@ -45,6 +50,37 @@ public class FurryCommand implements Command {
 
     @Override
     public void on_register() {
+        EventManager.register(this);
+    }
 
+    @EventTarget
+    public void onMessage(MessageEvent event) {
+        if (event.commandEvent.get_message().startsWith(Main.commandManager.prefix)) {
+            return;
+        }
+
+        if (event.commandEvent.get_message().toLowerCase().contains("fursuit") || event.commandEvent.get_message().toLowerCase().contains("furry") || event.commandEvent.get_message().toLowerCase().contains("furries")) {
+            try {
+                FurryApi.FurryResult result = new FurryApi().furry_fursuit();
+                String tmp_file = FileUtils.randomTmpFile(FileUtils.getFileExtension(result.url));
+                result.download(tmp_file);
+                event.commandEvent.send_picture(new File(tmp_file));
+                return;
+            } catch (IOException | JsonSyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (event.commandEvent.get_message().toLowerCase().contains("hug")) {
+            try {
+                FurryApi.FurryResult result = new FurryApi().furry_hug();
+                String tmp_file = FileUtils.randomTmpFile(FileUtils.getFileExtension(result.url));
+                result.download(tmp_file);
+                event.commandEvent.send_picture(new File(tmp_file));
+                return;
+            } catch (IOException | JsonSyntaxException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
