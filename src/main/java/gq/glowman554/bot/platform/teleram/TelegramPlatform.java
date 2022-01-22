@@ -1,6 +1,7 @@
 package gq.glowman554.bot.platform.teleram;
 
 import gq.glowman554.bot.Main;
+import gq.glowman554.bot.event.impl.MessageEvent;
 import gq.glowman554.bot.log.Log;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -45,6 +46,13 @@ public class TelegramPlatform extends TelegramLongPollingBot {
             if (update.getMessage().getText() != null) {
                 TelegramCommandEvent commandEvent = new TelegramCommandEvent(update.getMessage().getText(), new TelegramCommandPlatform(), update, this);
 
+                MessageEvent event = new MessageEvent(commandEvent);
+                event.call();
+
+                if (event.isCanceled()) {
+                    return;
+                }
+
                 try {
                     Main.commandManager.on_command(commandEvent);
                 } catch (Exception e) {
@@ -54,6 +62,13 @@ public class TelegramPlatform extends TelegramLongPollingBot {
 
             if (update.getMessage().getCaption() != null) {
                 TelegramCommandEvent commandEvent = new TelegramCommandEvent(update.getMessage().getCaption(), new TelegramCommandPlatform(), update, this);
+
+                MessageEvent event = new MessageEvent(commandEvent);
+                event.call();
+
+                if (event.isCanceled()) {
+                    return;
+                }
 
                 try {
                     Main.commandManager.on_command(commandEvent);

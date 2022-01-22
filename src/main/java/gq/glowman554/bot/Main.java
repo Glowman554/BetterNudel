@@ -18,7 +18,28 @@ public class Main {
         TODO:
             add all commands from current stable (except discord specific ones)
             add web command platform (makes http request witch return the result after on_command returns)
-            port webinterface
+
+            port webinterface (
+                - /api/v2/uptime
+                - /api/v2/collect
+                - /api/v2/science
+                - /api/v2/commands
+                - /api/v2/uploads
+                - /api/v2/ipinfo
+                - /api/v2/suggest
+                - /api/v2/suggestions (gets suggestions)
+            )
+
+            /api/suggest (writes to file)
+
+            -roll (with a custom range)
+            -log (get the logfile)
+
+            -compile (takes attached file compiles and runs it (sends output))
+            -uptime
+
+            plugin loading
+
      */
 
     public static CommandManager commandManager;
@@ -43,6 +64,7 @@ public class Main {
         }
 
         commandManager.add_command("ping", new PingCommand());
+        commandManager.add_command("chatbor", new ChatBotCommand());
         commandManager.add_command("dog", new DogCommand());
         commandManager.add_command("cat", new CatCommand());
         commandManager.add_command("coinflip", new CoinFlipCommand());
@@ -50,6 +72,7 @@ public class Main {
         commandManager.add_command("role", new RoleCommand());
         commandManager.add_command("set_testing", new SetTestingCommand());
         commandManager.add_command("auth", new AuthCommand());
+        commandManager.add_command("magic8", new Magic8Command());
 
         new ConsolePlatform();
         new DiscordPlatform();

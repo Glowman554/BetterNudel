@@ -257,4 +257,16 @@ public class TelegramCommandEvent extends CommandEvent {
     public String get_sender_id() {
         return update.getMessage().getFrom().getUserName() != null ? "@" + update.getMessage().getFrom().getUserName() : update.getMessage().getFrom().getId().toString();
     }
+
+    @Override
+    public String get_chat_name() {
+        String chat_name = "";
+        if (update.getMessage().getChat().getUserName() == null) {
+            chat_name = update.getMessage().getChat().getTitle();
+        } else {
+            chat_name = update.getMessage().getChat().getUserName();
+        }
+
+        return chat_name;
+    }
 }

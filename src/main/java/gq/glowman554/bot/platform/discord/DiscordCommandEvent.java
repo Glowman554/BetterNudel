@@ -84,4 +84,9 @@ public class DiscordCommandEvent extends CommandEvent {
     public String get_sender_id() {
         return event.getAuthor().getId();
     }
+
+    @Override
+    public String get_chat_name() {
+        return event.getChannel().getName();
+    }
 }

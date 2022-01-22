@@ -76,4 +76,9 @@ public class ConsoleCommandEvent extends CommandEvent {
     public String get_sender_id() {
         return "<stdin>";
     }
+
+    @Override
+    public String get_chat_name() {
+        return "<stdin>";
+    }
 }

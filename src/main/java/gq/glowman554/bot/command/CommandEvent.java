@@ -50,4 +50,5 @@ public abstract class CommandEvent {
     }
 
     public abstract String get_sender_id();
+    public abstract String get_chat_name();
 }
