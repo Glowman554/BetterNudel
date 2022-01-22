@@ -57,7 +57,7 @@ public class UploadCommand implements Command {
 
                 FileHostObject object = FileHostObject.new_object(downloaded_file, event.get_sender_id(), false);
 
-                ret += http_host_url + "/files/" + object.getFile_id();
+                ret += http_host_url + "/files/" + object.getFile_id() + "\n";
             }
 
             event.message_send(ret);
