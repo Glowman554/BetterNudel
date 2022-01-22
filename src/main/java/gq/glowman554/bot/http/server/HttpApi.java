@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
 import gq.glowman554.bot.Main;
 import gq.glowman554.bot.http.server.api.HelloHandler;
+import gq.glowman554.bot.http.server.api.RootHandler;
 import gq.glowman554.bot.http.server.api.auth.AuthManager;
 import gq.glowman554.bot.http.server.api.legacy.ApiCollectHandler;
 import gq.glowman554.bot.log.Log;
@@ -43,6 +44,7 @@ public class HttpApi {
         instance = new HttpApi(port);
 
         new HelloHandler(instance, "/hello");
+        new RootHandler(instance, "/");
 
         // -------------- legacy api -----------------------
         new ApiCollectHandler(instance, "/api/collect");

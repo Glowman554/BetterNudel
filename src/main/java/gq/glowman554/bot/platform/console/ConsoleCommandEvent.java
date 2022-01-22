@@ -9,6 +9,7 @@ import java.io.File;
 
 public class ConsoleCommandEvent extends CommandEvent {
     private boolean want_file = false;
+    private boolean asked_want_file = false;
 
     public ConsoleCommandEvent(String message, CommandPlatform command_platform) {
         super(message, command_platform);
@@ -39,7 +40,12 @@ public class ConsoleCommandEvent extends CommandEvent {
 
     @Override
     public int get_num_files() {
-        return new FileChoseUi().want_chose() ? 1 : 0;
+        if (!asked_want_file) {
+            want_file = new FileChoseUi().want_chose();
+            asked_want_file = true;
+        }
+
+        return want_file ? 1 : 0;
     }
 
     @Override

@@ -15,7 +15,6 @@ public class Main {
 
     /*
         TODO:
-            add all commands from current stable (except discord specific ones)
             add web command platform (makes http request witch return the result after on_command returns)
 
             port webinterface (
@@ -29,7 +28,7 @@ public class Main {
                 - /api/v2/suggestions (gets suggestions)
             )
 
-            /api/suggest (writes to file)
+            /api/suggest (writes to file (legacy package))
 
             -roll (with a custom range)
             -log (get the logfile)
@@ -85,6 +84,7 @@ public class Main {
         commandManager.add_command("wikipedia", new WikipediaCommand());
         commandManager.add_command("yiff", new YiffCommand());
         commandManager.add_command("repeat", new RepeatCommand());
+        commandManager.add_command("upload", new UploadCommand());
 
         new ConsolePlatform();
         new DiscordPlatform();
