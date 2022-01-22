@@ -103,6 +103,11 @@ public class TestCommandManager implements Command{
             public String get_sender_id() {
                 return null;
             }
+
+            @Override
+            public String get_chat_name() {
+                return null;
+            }
         });
     }
 }
