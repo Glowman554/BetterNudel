@@ -2,7 +2,6 @@ package gq.glowman554.bot;
 
 import gq.glowman554.bot.command.CommandManager;
 import gq.glowman554.bot.command.impl.*;
-import gq.glowman554.bot.command.impl.testing.Testing;
 import gq.glowman554.bot.config.ConfigManager;
 import gq.glowman554.bot.config.impl.EnvConfigProvider;
 import gq.glowman554.bot.config.impl.FileConfigProvider;
@@ -58,13 +57,13 @@ public class Main {
 
         try {
             commandManager = new CommandManager(configManager.get_key_as_str("prefix"));
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             Log.log("Using default prefix '-'");
             commandManager = new CommandManager("-");
         }
 
         commandManager.add_command("ping", new PingCommand());
-        commandManager.add_command("chatbor", new ChatBotCommand());
+        commandManager.add_command("chatbot", new ChatBotCommand());
         commandManager.add_command("dog", new DogCommand());
         commandManager.add_command("cat", new CatCommand());
         commandManager.add_command("coinflip", new CoinFlipCommand());
