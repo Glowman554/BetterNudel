@@ -19,7 +19,6 @@ public class Main {
             add web command platform (makes http request witch return the result after on_command returns)
 
             port webinterface (
-                - /api/v2/uptime
                 - /api/v2/collect
                 - /api/v2/science
                 - /api/v2/commands
@@ -34,13 +33,13 @@ public class Main {
             -roll (with a custom range)
 
             -compile (takes attached file compiles and runs it (sends output))
-            -uptime
 
      */
 
     public static CommandManager commandManager;
     public static ConfigManager configManager;
     public static PluginLoader pluginLoader;
+    public static long startTime;
 
     public static void load_config() {
         Log.log("Loading config...");
@@ -51,6 +50,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
+        startTime = System.currentTimeMillis();
+
         load_config();
 
         try {
@@ -87,6 +88,7 @@ public class Main {
         commandManager.add_command("repeat", new RepeatCommand());
         commandManager.add_command("upload", new UploadCommand());
         commandManager.add_command("log", new LogCommand());
+        commandManager.add_command("uptime", new UptimeCommand());
 
         new ConsolePlatform();
         new DiscordPlatform();
