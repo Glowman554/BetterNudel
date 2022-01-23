@@ -31,7 +31,7 @@ public class TtsCommand implements Command {
 
             api.download(path);
 
-            event.send_picture(new File(path));
+            event.send_audio(new File(path));
         }
     }
 
