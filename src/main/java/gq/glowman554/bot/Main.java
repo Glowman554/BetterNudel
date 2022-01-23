@@ -31,7 +31,6 @@ public class Main {
             /api/suggest (writes to file (legacy package))
 
             -roll (with a custom range)
-            -log (get the logfile)
 
             -compile (takes attached file compiles and runs it (sends output))
             -uptime
@@ -85,6 +84,7 @@ public class Main {
         commandManager.add_command("yiff", new YiffCommand());
         commandManager.add_command("repeat", new RepeatCommand());
         commandManager.add_command("upload", new UploadCommand());
+        commandManager.add_command("log", new LogCommand());
 
         new ConsolePlatform();
         new DiscordPlatform();
