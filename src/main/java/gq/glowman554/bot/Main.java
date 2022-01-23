@@ -10,6 +10,7 @@ import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.platform.console.ConsolePlatform;
 import gq.glowman554.bot.platform.discord.DiscordPlatform;
 import gq.glowman554.bot.platform.teleram.TelegramPlatform;
+import gq.glowman554.bot.plugin.PluginLoader;
 
 public class Main {
 
@@ -35,12 +36,11 @@ public class Main {
             -compile (takes attached file compiles and runs it (sends output))
             -uptime
 
-            plugin loading
-
      */
 
     public static CommandManager commandManager;
     public static ConfigManager configManager;
+    public static PluginLoader pluginLoader;
 
     public static void load_config() {
         Log.log("Loading config...");
@@ -59,6 +59,8 @@ public class Main {
             Log.log("Using default prefix '-'");
             commandManager = new CommandManager("-");
         }
+
+        pluginLoader = new PluginLoader("plugins");
 
         commandManager.add_command("ping", new PingCommand());
         commandManager.add_command("chatbot", new ChatBotCommand());
@@ -91,5 +93,7 @@ public class Main {
         new TelegramPlatform();
 
         HttpApi.load();
+
+        pluginLoader.load();
     }
 }
