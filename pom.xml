@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>gq.glowman554</groupId>
-    <artifactId>BetterBot</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>BetterNudel</artifactId>
+    <version>1.0-SNAPSHOT-REWRITE</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

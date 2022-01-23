@@ -12,3 +12,4 @@ target
 logs
 host/files
 plugins
+dependency-reduced-pom.xml
