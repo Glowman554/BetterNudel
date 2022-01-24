@@ -1,6 +1,7 @@
 package gq.glowman554.bot.command;
 
 import gq.glowman554.bot.log.Log;
+import net.shadew.json.Json;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -109,5 +110,7 @@ public class TestCommandManager implements Command{
                 return null;
             }
         });
+
+        Log.log(Json.json().serialize(commandManager.toJson()));
     }
 }

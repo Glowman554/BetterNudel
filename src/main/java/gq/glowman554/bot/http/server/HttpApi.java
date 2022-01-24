@@ -3,6 +3,7 @@ package gq.glowman554.bot.http.server;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
 import gq.glowman554.bot.Main;
+import gq.glowman554.bot.http.server.api.ApiCommandsHandler;
 import gq.glowman554.bot.http.server.api.ApiUptimeHandler;
 import gq.glowman554.bot.http.server.api.HelloHandler;
 import gq.glowman554.bot.http.server.api.RootHandler;
@@ -48,6 +49,7 @@ public class HttpApi {
         new RootHandler(instance, "/");
 
         new ApiUptimeHandler(instance, "/api/v2/uptime");
+        new ApiCommandsHandler(instance, "/api/v2/commands");
 
         // -------------- legacy api -----------------------
         new ApiCollectHandler(instance, "/api/collect");

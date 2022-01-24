@@ -1,5 +1,7 @@
 package gq.glowman554.bot.command;
 
+import net.shadew.json.JsonNode;
+
 public class CommandConfig {
     public final String help_short;
     public final String help_long;
@@ -18,5 +20,15 @@ public class CommandConfig {
                 ", help_long='" + help_long + '\'' +
                 ", permission='" + permission + '\'' +
                 '}';
+    }
+
+    public JsonNode toJson() {
+        JsonNode root = JsonNode.object();
+
+        root.set("help_long", help_long);
+        root.set("help_short", help_short);
+        root.set("permission", permission);
+
+        return root;
     }
 }

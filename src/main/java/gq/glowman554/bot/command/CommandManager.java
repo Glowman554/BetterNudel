@@ -1,6 +1,7 @@
 package gq.glowman554.bot.command;
 
 import gq.glowman554.bot.log.Log;
+import net.shadew.json.JsonNode;
 
 import java.util.HashMap;
 
@@ -93,5 +94,15 @@ public class CommandManager {
 
         commands.put(what, command);
         Log.log(String.format("[%s] Command register complete", what));
+    }
+
+    public JsonNode toJson() {
+        JsonNode root = JsonNode.object();
+
+        commands.forEach((key, value) -> {
+            root.set(key, value.get_config().toJson());
+        });
+
+        return root;
     }
 }

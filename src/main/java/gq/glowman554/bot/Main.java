@@ -11,6 +11,7 @@ import gq.glowman554.bot.platform.console.ConsolePlatform;
 import gq.glowman554.bot.platform.discord.DiscordPlatform;
 import gq.glowman554.bot.platform.teleram.TelegramPlatform;
 import gq.glowman554.bot.plugin.PluginLoader;
+import net.shadew.json.Json;
 
 public class Main {
 
@@ -21,7 +22,6 @@ public class Main {
             port webinterface (
                 - /api/v2/collect
                 - /api/v2/science
-                - /api/v2/commands
                 - /api/v2/uploads
                 - /api/v2/ipinfo
                 - /api/v2/suggest
@@ -89,6 +89,7 @@ public class Main {
         commandManager.add_command("upload", new UploadCommand());
         commandManager.add_command("log", new LogCommand());
         commandManager.add_command("uptime", new UptimeCommand());
+        commandManager.add_command("roll", new RollCommand());
 
         new ConsolePlatform();
         new DiscordPlatform();
