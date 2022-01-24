@@ -23,9 +23,6 @@ public class Main {
                 - /api/v2/science
                 - /api/v2/uploads
             )
-
-            -compile (takes attached file compiles and runs it (sends output))
-
      */
 
     public static CommandManager commandManager;
@@ -82,6 +79,7 @@ public class Main {
         commandManager.add_command("log", new LogCommand());
         commandManager.add_command("uptime", new UptimeCommand());
         commandManager.add_command("roll", new RollCommand());
+        commandManager.add_command("compile", new CompileCommand());
 
         HttpApi.load();
 

@@ -22,6 +22,7 @@ public class ConsolePlatform extends Thread {
         Main.commandManager.permissionManager.add_permission("<stdin>", "im_18");
         Main.commandManager.permissionManager.add_permission("<stdin>", "no_limit");
         Main.commandManager.permissionManager.add_permission("<stdin>", "log");
+        Main.commandManager.permissionManager.add_permission("<stdin>", "compile");
 
         this.start();
     }
