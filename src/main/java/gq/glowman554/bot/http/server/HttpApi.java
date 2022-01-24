@@ -3,10 +3,7 @@ package gq.glowman554.bot.http.server;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
 import gq.glowman554.bot.Main;
-import gq.glowman554.bot.http.server.api.ApiCommandsHandler;
-import gq.glowman554.bot.http.server.api.ApiUptimeHandler;
-import gq.glowman554.bot.http.server.api.HelloHandler;
-import gq.glowman554.bot.http.server.api.RootHandler;
+import gq.glowman554.bot.http.server.api.*;
 import gq.glowman554.bot.http.server.api.auth.AuthManager;
 import gq.glowman554.bot.http.server.api.legacy.ApiCollectHandler;
 import gq.glowman554.bot.log.Log;
@@ -50,10 +47,14 @@ public class HttpApi {
 
         new ApiUptimeHandler(instance, "/api/v2/uptime");
         new ApiCommandsHandler(instance, "/api/v2/commands");
+        new ApiIpInfoHandler(instance, "/api/v2/ipinfo");
+        new ApiSuggestHandler(instance, "/api/v2/suggest");
+        new ApiSuggestionsHandler(instance, "/api/v2/suggestions");
 
         // -------------- legacy api -----------------------
         new ApiCollectHandler(instance, "/api/collect");
         new ApiCollectHandler(instance, "/api/science");
+        new ApiSuggestHandler(instance, "/api/suggest");
 
         AuthManager.load(instance);
     }

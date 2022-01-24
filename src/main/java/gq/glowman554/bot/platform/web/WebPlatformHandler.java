@@ -1,6 +1,7 @@
 package gq.glowman554.bot.platform.web;
 
 import gq.glowman554.bot.Main;
+import gq.glowman554.bot.event.impl.MessageEvent;
 import gq.glowman554.bot.http.server.HttpApi;
 import gq.glowman554.bot.http.server.HttpApiHandler;
 import gq.glowman554.bot.http.server.api.auth.AuthManager;
@@ -31,6 +32,13 @@ public class WebPlatformHandler extends HttpApiHandler {
         }
 
         WebCommandEvent commandEvent = new WebCommandEvent(message, new WebCommandPlatform(), token);
+
+        MessageEvent event = new MessageEvent(commandEvent);
+        event.call();
+
+        if (event.isCanceled()) {
+            return "[]";
+        }
 
         Main.commandManager.on_command(commandEvent);
 

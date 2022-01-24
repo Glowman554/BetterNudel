@@ -22,14 +22,7 @@ public class Main {
                 - /api/v2/collect
                 - /api/v2/science
                 - /api/v2/uploads
-                - /api/v2/ipinfo
-                - /api/v2/suggest
-                - /api/v2/suggestions (gets suggestions)
             )
-
-            /api/suggest (writes to file (legacy package))
-
-            -roll (with a custom range)
 
             -compile (takes attached file compiles and runs it (sends output))
 
