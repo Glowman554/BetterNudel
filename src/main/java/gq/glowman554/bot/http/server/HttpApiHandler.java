@@ -94,8 +94,9 @@ public abstract class HttpApiHandler {
                 exchange.sendResponseHeaders(404, 0);
             }
         } catch (Exception e) {
-            exchange.sendResponseHeaders(500, e.getMessage().length());
-            exchange.getResponseBody().write(e.getMessage().getBytes());
+            String ret = e.getClass().getSimpleName() + ": " + e.getMessage();
+            exchange.sendResponseHeaders(500, ret.length());
+            exchange.getResponseBody().write(ret.getBytes());
         }
 
         exchange.close();

@@ -10,6 +10,7 @@ import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.platform.console.ConsolePlatform;
 import gq.glowman554.bot.platform.discord.DiscordPlatform;
 import gq.glowman554.bot.platform.teleram.TelegramPlatform;
+import gq.glowman554.bot.platform.web.WebPlatform;
 import gq.glowman554.bot.plugin.PluginLoader;
 import net.shadew.json.Json;
 
@@ -17,8 +18,6 @@ public class Main {
 
     /*
         TODO:
-            add web command platform (makes http request witch return the result after on_command returns)
-
             port webinterface (
                 - /api/v2/collect
                 - /api/v2/science
@@ -91,11 +90,12 @@ public class Main {
         commandManager.add_command("uptime", new UptimeCommand());
         commandManager.add_command("roll", new RollCommand());
 
+        HttpApi.load();
+
         new ConsolePlatform();
         new DiscordPlatform();
         new TelegramPlatform();
-
-        HttpApi.load();
+        new WebPlatform();
 
         pluginLoader.load();
     }
