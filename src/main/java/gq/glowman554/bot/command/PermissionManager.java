@@ -1,5 +1,6 @@
 package gq.glowman554.bot.command;
 
+import gq.glowman554.bot.Main;
 import gq.glowman554.bot.utils.ArrayUtils;
 import gq.glowman554.bot.utils.FileUtils;
 import net.shadew.json.Json;
@@ -9,11 +10,9 @@ import net.shadew.json.JsonSyntaxException;
 import java.io.IOException;
 
 public class PermissionManager {
-    public String file;
     public String file_content;
 
-    public PermissionManager(String file) {
-        this.file = file;
+    public PermissionManager() {
         this.load();
     }
 
@@ -30,7 +29,7 @@ public class PermissionManager {
                 JsonNode user_node = JsonNode.stringArray();
                 root.set(user, user_node);
 
-                this.file_content = Json.json().serialize(root);
+                this.file_content = root.toString();
                 this.save();
                 return false;
             }
@@ -53,7 +52,7 @@ public class PermissionManager {
                 JsonNode user_node = JsonNode.stringArray();
                 root.set(user, user_node);
 
-                this.file_content = Json.json().serialize(root);
+                this.file_content = root.toString();
                 this.save();
                 return new String[]{};
             }
@@ -76,13 +75,13 @@ public class PermissionManager {
                     permissions = ArrayUtils.add(permissions, permission);
                     user_node = JsonNode.stringArray(permissions);
                     root.set(user, user_node);
-                    this.file_content = Json.json().serialize(root);
+                    this.file_content = root.toString();
                     this.save();
                 }
             } else {
                 JsonNode user_node = JsonNode.stringArray(permission);
                 root.set(user, user_node);
-                this.file_content = Json.json().serialize(root);
+                this.file_content = root.toString();
                 this.save();
             }
         } catch (JsonSyntaxException e) {
@@ -102,13 +101,13 @@ public class PermissionManager {
                     permissions = ArrayUtils.remove(permissions, permission);
                     user_node = JsonNode.stringArray(permissions);
                     root.set(user, user_node);
-                    this.file_content = Json.json().serialize(root);
+                    this.file_content = root.toString();
                     this.save();
                 }
             } else {
                 JsonNode user_node = JsonNode.stringArray();
                 root.set(user, user_node);
-                this.file_content = Json.json().serialize(root);
+                this.file_content = root.toString();
                 this.save();
             }
         } catch (JsonSyntaxException e) {
@@ -118,17 +117,14 @@ public class PermissionManager {
 
     private void load() {
         try {
-            file_content = FileUtils.readFile(file);
-        } catch (IOException e) {
+            file_content = Main.configManager.get_key_as_str("permission_config");
+        } catch (IllegalArgumentException e) {
             file_content = "{}";
+            save();
         }
     }
 
     private void save() {
-        try {
-            FileUtils.writeFile(file, file_content);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Main.configManager.set_key_as_str("permission_config", file_content);
     }
 }

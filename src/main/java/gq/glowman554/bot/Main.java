@@ -38,6 +38,14 @@ public class Main {
         configManager.register(new EnvConfigProvider());
     }
 
+    public static void load_config(String config_file) {
+        Log.log("--- WARNING --- Loading custom config " + config_file + "...");
+        configManager = new ConfigManager();
+
+        configManager.register(new FileConfigProvider(config_file));
+    }
+
+
     public static void main(String[] args) throws Exception {
         startTime = System.currentTimeMillis();
 

@@ -1,5 +1,6 @@
 package gq.glowman554.bot.http.server.api.auth;
 
+import gq.glowman554.bot.Main;
 import gq.glowman554.bot.http.server.HttpApi;
 import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.utils.FileUtils;
@@ -7,7 +8,6 @@ import net.shadew.json.Json;
 import net.shadew.json.JsonNode;
 import net.shadew.json.JsonSyntaxException;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -20,14 +20,16 @@ public class AuthManager {
     private String config_file = "tokens.json";
 
     public AuthManager(HttpApi api) throws IOException, JsonSyntaxException {
-        if (new File(config_file).exists()) {
-            String file_content = FileUtils.readFile(config_file);
+        try {
+            String file_content = Main.configManager.get_key_as_str("token_config");
             Json json = Json.json();
             JsonNode root = json.parse(file_content);
 
             for (JsonNode node : root) {
                 active_tokens.put(node.get("key").asString(), node.get("value").asString());
             }
+        } catch (IllegalArgumentException e) {
+            save();
         }
 
         new AuthLoginCheckHandler(api, "/api/v2/login/check", this);
@@ -37,7 +39,6 @@ public class AuthManager {
     }
 
     protected void save() throws IOException {
-        Json json = Json.json();
         JsonNode root = JsonNode.array();
 
         for (String key : active_tokens.keySet()) {
@@ -48,7 +49,7 @@ public class AuthManager {
             root.add(node);
         }
 
-        FileUtils.writeFile(config_file, json.serialize(root));
+        Main.configManager.set_key_as_str("token_config", root.toString());
     }
 
     public String get_user_by_token(String token) {
@@ -78,7 +79,7 @@ public class AuthManager {
 
     public String checkToken(String token) {
         if (token == null) {
-           return null;
+            return null;
         }
 
         if (get_user_by_token(token) == null) {

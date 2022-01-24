@@ -13,7 +13,7 @@ public class CommandManager {
     public CommandManager(String prefix) {
         this.prefix = prefix;
         commands = new HashMap<String, Command>();
-        permissionManager = new PermissionManager("perms.json");
+        permissionManager = new PermissionManager();
     }
 
     public void on_command(CommandEvent event) throws Exception {
