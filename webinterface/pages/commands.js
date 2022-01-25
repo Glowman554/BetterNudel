@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Card from '../components/card'
 import CommandsList from '../components/commands'
+import Footer from '../components/footer'
 import Heading from '../components/heading'
 import Navbar from '../components/navbar'
 import NoSSR from '../components/no_ssr'
@@ -24,6 +25,7 @@ export default function Commands() {
 					<CommandsList small={false} />
 				</Card>
 
+				<Footer />
 			</div>
 		</NoSSR>
 	)

@@ -74,7 +74,7 @@ export default class Navbar extends React.Component {
 					}>
 						<ul className={"bar card left-align " + get_color().base_color} style={{
 							margin: "0px",
-							padding: "0px",
+							padding: "0px"
 						}}>
 							{ Object.keys(sites).map(function(key) {
 								return (
@@ -87,7 +87,7 @@ export default class Navbar extends React.Component {
 											window.location.href = sites[key].url;
 										}
 									}>
-										<a href={sites[key].url}>{sites[key].name}</a>
+										{sites[key].name}
 									</li>
 								);
 							}) }

@@ -18,5 +18,8 @@ export function get_color() {
 
 export const root_style = {
 	padding: "0px",
-	margin: "0px"
+	margin: "0px",
+	fontFamily: "verdana, sans-serif",
+	fontSize: "15px",
+	lineHeight: "1.5"
 };

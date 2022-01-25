@@ -9,7 +9,9 @@ export default function Card(props) {
 			borderLeftWidth: "2px",
 			borderLeftStyle: "solid",
 		}} className={"card " + get_color().color}>
-			{props.children}
+			<div className="content">
+				{props.children}
+			</div>
 		</div>
 	)
 }
