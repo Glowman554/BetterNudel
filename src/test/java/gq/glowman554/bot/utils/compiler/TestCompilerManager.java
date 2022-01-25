@@ -53,4 +53,20 @@ public class TestCompilerManager {
 
         Log.log(Json.json().serialize(compilerManager.toJson()));
     }
+
+    @Test
+    public void test5() throws Exception {
+        if (!new File("/bin/mic").exists()) {
+            Log.log("Could not find mic compiler! Skipping...");
+            return;
+        }
+        
+        Main.load_config();
+
+        CompilerManager compilerManager = new CompilerManager();
+
+        FileUtils.writeFile("tmp/test.mik", "mikf puts(str s) -> int\nputs(\"Hello World\")\n");
+
+        assertEquals("Hello World\n", compilerManager.compile_and_run(new File("tmp/test.mik")));
+    }
 }

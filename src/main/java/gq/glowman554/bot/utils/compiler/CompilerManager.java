@@ -5,6 +5,7 @@ import gq.glowman554.bot.utils.FileUtils;
 import gq.glowman554.bot.utils.compiler.impl.BashCompiler;
 import gq.glowman554.bot.utils.compiler.impl.GccCompiler;
 import gq.glowman554.bot.utils.compiler.impl.GppCompiler;
+import gq.glowman554.bot.utils.compiler.impl.MicCompiler;
 import net.shadew.json.Json;
 import net.shadew.json.JsonNode;
 
@@ -22,6 +23,7 @@ public class CompilerManager {
         register(new GccCompiler());
         register(new GppCompiler());
         register(new BashCompiler());
+        register(new MicCompiler());
     }
 
     public void register(CompilerInterface compiler) {
@@ -43,6 +45,18 @@ public class CompilerManager {
         File compiled_file = compiler.compile_and_link(file);
 
         return compiler.execute(compiled_file);
+    }
+
+    public File compile_and_link(File file) throws Exception {
+        String file_extension = FileUtils.getFileExtension(file.getAbsolutePath());
+
+        if (!compilers.containsKey(file_extension)) {
+            throw new IllegalArgumentException("Could not find compiler for file extension " + file_extension);
+        }
+
+        CompilerInterface compiler = compilers.get(file_extension);
+
+        return compiler.compile_and_link(file);
     }
 
     public JsonNode toJson() {
