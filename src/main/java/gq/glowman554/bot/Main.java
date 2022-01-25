@@ -18,11 +18,7 @@ public class Main {
 
     /*
         TODO:
-            port webinterface (
-                - /api/v2/collect
-                - /api/v2/science
-                - /api/v2/uploads
-            )
+            port webinterface
      */
 
     public static CommandManager commandManager;

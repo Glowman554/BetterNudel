@@ -44,15 +44,21 @@ public class FileHostObject {
         return root;
     }
 
-    public static FileHostObject new_object(File file, String uploader, boolean system) throws IOException {
-        String file_id = FileUtils.randomFileId(FileUtils.getFileExtension(file.getAbsolutePath()));
-
+    public static String get_http_host_path() {
         String http_host_path;
         try {
             http_host_path = Main.configManager.get_key_as_str("http_host_path");
         } catch (IllegalArgumentException e) {
             http_host_path = System.getProperty("user.dir") + "/host";
         }
+
+        return http_host_path;
+    }
+
+    public static FileHostObject new_object(File file, String uploader, boolean system) throws IOException {
+        String file_id = FileUtils.randomFileId(FileUtils.getFileExtension(file.getAbsolutePath()));
+
+        String http_host_path = get_http_host_path();
 
         if (!new File(http_host_path + "/files/").isDirectory()) {
             Log.log("Creating " + http_host_path + "/files/...");
@@ -76,6 +82,10 @@ public class FileHostObject {
         return file_id;
     }
 
+    public FileHostObjectUploader getUploader() {
+        return uploader;
+    }
+
     public static class FileHostObjectUploader {
         private final String id;
         private final boolean system;
@@ -97,6 +107,14 @@ public class FileHostObject {
             root.set("system", system);
 
             return root;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public boolean getSystem() {
+            return system;
         }
     }
 }
