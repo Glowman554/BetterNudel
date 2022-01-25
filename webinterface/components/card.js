@@ -1,16 +1,14 @@
-import { get_color } from "../js/color";
+import { get_color } from "../js/style";
 
 export default function Card(props) {
 
-	var div_style = {
-		margin: "1rem",
-		padding: "1rem",
-		"border-left-width": "2px",
-		"border-left-style": "solid"
-	};
-
 	return (
-		<div style={div_style} className={"card " + get_color().color}>
+		<div style={{
+			margin: "1rem",
+			padding: "1rem",
+			borderLeftWidth: "2px",
+			borderLeftStyle: "solid",
+		}} className={"card " + get_color().color}>
 			{props.children}
 		</div>
 	)

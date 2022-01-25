@@ -1,6 +1,6 @@
 import React from "react";
 import { api_request } from "../js/api";
-import { get_color } from "../js/color";
+import { get_color } from "../js/style";
 import Card from "./card";
 
 export default class CommandsList extends React.Component {

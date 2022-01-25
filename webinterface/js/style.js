@@ -15,3 +15,8 @@ export function get_color() {
 		color: color
 	};
 }
+
+export const root_style = {
+	padding: "0px",
+	margin: "0px"
+};
