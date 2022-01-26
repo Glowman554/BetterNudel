@@ -30,6 +30,10 @@ export default class Navbar extends React.Component {
 			{
 				name: 'Api Playground',
 				url: '/api_playground'
+			},
+			{
+				name: 'Login',
+				url: '/login'
 			}
 		];
 
