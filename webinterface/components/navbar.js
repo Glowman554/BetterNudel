@@ -9,7 +9,7 @@ export default class Navbar extends React.Component {
 			navbar_title: "",
 		};
 
-		window.addEventListener("ready", () => {
+		window.addEventListener("load", () => {
 			this.setState({
 				navbar_shown: this.state.navbar_shown,
 				navbar_title: document.querySelector("title").innerHTML,
@@ -50,19 +50,21 @@ export default class Navbar extends React.Component {
 						}
 					}>&#9776;</a>
 
-					<td className={"padding-large hide-small " + get_color().color} style={{
+					<p className={"padding-large hide-small " + get_color().color} style={{
 						verticalAlign: "top",
 						textAlign: "left",
 						zIndex: 3,
 						top: 0,
 						left: 0,
 						position: "fixed",
+						padding: "0px",
+						margin: "0px",
 					}}>
 						{this.state.navbar_title}
-					</td>
+					</p>
 				</div>
 				<div className="top" style={{
-					"margin-top": "45px"
+					marginTop: "45px"
 				}}>
 				
 					<div style={{
