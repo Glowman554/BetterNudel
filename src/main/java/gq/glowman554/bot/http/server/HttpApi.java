@@ -7,6 +7,7 @@ import gq.glowman554.bot.http.server.api.*;
 import gq.glowman554.bot.http.server.api.auth.AuthManager;
 import gq.glowman554.bot.http.server.api.legacy.ApiCollectHandler;
 import gq.glowman554.bot.log.Log;
+import net.shadew.json.JsonNode;
 import net.shadew.json.JsonSyntaxException;
 
 import java.io.IOException;
@@ -52,6 +53,7 @@ public class HttpApi {
         new ApiSuggestionsHandler(instance, "/api/v2/suggestions");
         new ApiUploadsHandler(instance, "/api/v2/uploads");
         new ApiUploadsDeleteHandler(instance, "/api/v2/uploads/delete");
+        new ApiEndpointsHandler(instance, "/api/v2/endpoints");
 
         // -------------- legacy api -----------------------
         new ApiCollectHandler(instance, "/api/collect");
@@ -59,5 +61,17 @@ public class HttpApi {
         new ApiSuggestHandler(instance, "/api/suggest");
 
         AuthManager.load(instance);
+    }
+
+    public JsonNode toJson() {
+        JsonNode root = JsonNode.array();
+
+        for (String path : handlers.keySet()) {
+            if (!path.equals("/")) {
+                root.add(path);
+            }
+        }
+
+        return root;
     }
 }

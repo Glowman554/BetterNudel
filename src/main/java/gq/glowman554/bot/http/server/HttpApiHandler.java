@@ -13,6 +13,7 @@ import java.util.Map;
 
 public abstract class HttpApiHandler {
     public String http_host_path;
+    protected final HttpApi api;
 
     public HttpApiHandler(HttpApi api, String path) {
         HttpContext context = api.server.createContext(path);
@@ -20,6 +21,8 @@ public abstract class HttpApiHandler {
 
         Log.log(String.format("[%s] Registered handler!", path));
         api.handlers.put(path, this);
+
+        this.api = api;
 
         try {
             http_host_path = Main.configManager.get_key_as_str("http_host_path");
