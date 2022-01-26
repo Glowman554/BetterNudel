@@ -19,3 +19,15 @@ export async function api_request(url) {
 		return await (await fetch(api_path)).text();
 	}
 }
+
+export function process_url(url) {
+	var token = localStorage.getItem("token");
+
+	var api_path = get_api_path() + url;
+
+	if (token) {
+		return api_path + `${api_path.indexOf("?") != -1 ? "&" : "?"}token=${token}`;
+	} else {
+		return api_path;
+	}
+}

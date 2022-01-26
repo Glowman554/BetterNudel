@@ -9,7 +9,7 @@ export default class Navbar extends React.Component {
 			navbar_title: "",
 		};
 
-		window.addEventListener("load", () => {
+		window.addEventListener("ready", () => {
 			this.setState({
 				navbar_shown: this.state.navbar_shown,
 				navbar_title: document.querySelector("title").innerHTML,
@@ -26,6 +26,10 @@ export default class Navbar extends React.Component {
 			{
 				name: 'Commands',
 				url: '/commands'
+			},
+			{
+				name: 'Api Playground',
+				url: '/api_playground'
 			}
 		];
 
