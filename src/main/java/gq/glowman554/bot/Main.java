@@ -84,6 +84,7 @@ public class Main {
         commandManager.add_command("uptime", new UptimeCommand());
         commandManager.add_command("roll", new RollCommand());
         commandManager.add_command("compile", new CompileCommand());
+        commandManager.add_command("calc", new CalcCommand());
 
         HttpApi.load();
 
