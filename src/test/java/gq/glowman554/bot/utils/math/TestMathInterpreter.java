@@ -40,7 +40,7 @@ public class TestMathInterpreter {
 
     @Test
     public void test7() {
-        assertEquals(6.28d, MathInterpreter.eval("pi * 2", Log::log));
+        assertEquals(6.283185840707965d, MathInterpreter.eval("pi * 2", Log::log));
     }
 
 
@@ -49,5 +49,15 @@ public class TestMathInterpreter {
         assertThrows(IllegalStateException.class, () -> {
             MathInterpreter.eval("4 * 5 * * 7 bla", Log::log);
         });
+    }
+
+    @Test
+    public void test9() {
+        assertEquals(100000000000000000000d, MathInterpreter.eval("10 ^ 20", Log::log));
+    }
+
+    @Test
+    public void test10() {
+        assertEquals(6d, MathInterpreter.eval("sqrt(3 ^ 2) * 2", Log::log));
     }
 }

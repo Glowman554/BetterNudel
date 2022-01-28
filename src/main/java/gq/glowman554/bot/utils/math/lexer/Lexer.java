@@ -96,6 +96,12 @@ public class Lexer {
                 }
                 break;
 
+                case '^': {
+                    tokens.add(new LexerToken(LexerToken.LexerTokenType.pow));
+                    next();
+                }
+                break;
+
                 case '(': {
                     tokens.add(new LexerToken(LexerToken.LexerTokenType.lparen));
                     next();

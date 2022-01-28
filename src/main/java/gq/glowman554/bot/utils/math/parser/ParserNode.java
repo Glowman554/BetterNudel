@@ -12,7 +12,7 @@ public class ParserNode {
     public ParserNode(ParserNodeType type, ParserNode node_a, ParserNode node_b) {
         this.type = type;
 
-        if(type.only_1_element) {
+        if (type.only_1_element) {
             if (node_b != null) {
                 throw new IllegalArgumentException("Node takes only 1 argument!");
             }
@@ -27,8 +27,8 @@ public class ParserNode {
     public ParserNode(ParserNodeType type, Object value) {
         this.type = type;
 
-        if(!type.only_1_element) {
-                throw new IllegalArgumentException("Node does not take only 1 argument!");
+        if (!type.only_1_element) {
+            throw new IllegalArgumentException("Node does not take only 1 argument!");
         }
 
         this.node_a = null;
@@ -36,6 +36,20 @@ public class ParserNode {
 
         this.value = value;
     }
+
+    public ParserNode(ParserNodeType type, ParserNode node_a, Object value) {
+        this.type = type;
+
+        if (type.only_1_element) {
+            throw new IllegalArgumentException("Node takes only 1 argument!");
+        }
+
+        this.node_a = node_a;
+        this.node_b = null;
+
+        this.value = value;
+    }
+
 
     public Object getValue() {
         return value;
@@ -84,8 +98,11 @@ public class ParserNode {
         multiply_node(false),
         divide_node(false),
         modulo_node(false),
+        pow_node(false),
         plus_node(true),
+        fcall_node(false),
         minus_node(true);
+
         public final boolean only_1_element;
 
         ParserNodeType(boolean only_1_element) {

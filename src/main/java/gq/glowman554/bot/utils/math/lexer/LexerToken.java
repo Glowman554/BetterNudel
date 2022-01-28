@@ -52,6 +52,7 @@ public class LexerToken {
         multiply,
         divide,
         modulo,
+        pow,
         lparen,
         rparen,
         id
