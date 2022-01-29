@@ -5,7 +5,7 @@ export default function Footer(props) {
 		<footer className={"bar card left-align " + get_color().base_color}>
 			<p style={{
 				display: "inline-flexbox",
-			}}>Copyright (c) 2021 Glowman554</p>
+			}}>Copyright (c) 2022 Glowman554</p>
 		</footer>
 	)
 }

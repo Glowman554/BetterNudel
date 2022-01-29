@@ -17,6 +17,12 @@ export default class Navbar extends React.Component {
 		// })
 	}
 
+	componentDidMount() {
+		window.onload = function() {
+			document.body.setAttribute("style", "background-color: " + get_color().base_color + ";");
+		}
+	}
+
 	render() {
 		var sites = [
 			{
@@ -38,6 +44,10 @@ export default class Navbar extends React.Component {
 			{
 				name: 'Shell',
 				url: '/shell'
+			},
+			{
+				name: 'Settings',
+				url: '/settings'
 			}
 		];
 
