@@ -6,15 +6,15 @@ export default class Navbar extends React.Component {
 		super(props);
 		this.state = { 
 			navbar_shown: false,
-			navbar_title: "",
+			navbar_title: props.title,
 		};
 
-		window.addEventListener("load", () => {
-			this.setState({
-				navbar_shown: this.state.navbar_shown,
-				navbar_title: document.querySelector("title").innerHTML,
-			});
-		})
+		// window.addEventListener("load", () => {
+		// 	this.setState({
+		// 		navbar_shown: this.state.navbar_shown,
+		// 		navbar_title: document.querySelector("title").innerHTML,
+		// 	});
+		// })
 	}
 
 	render() {
@@ -34,6 +34,10 @@ export default class Navbar extends React.Component {
 			{
 				name: 'Login',
 				url: '/login'
+			},
+			{
+				name: 'Shell',
+				url: '/shell'
 			}
 		];
 

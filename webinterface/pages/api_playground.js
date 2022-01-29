@@ -17,7 +17,7 @@ export default function ApiPlayground_() {
 					<link rel="stylesheet" href="/style.css" />
 				</Head>
 
-				<Navbar />
+				<Navbar title="Api Playground"/>
 
 				<Heading title="BetterNudel" subtitle="Api Playground!"/>
 

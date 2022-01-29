@@ -16,7 +16,7 @@ export function get_color() {
 	};
 }
 
-export const root_style = {
+export var root_style = {
 	padding: "0px",
 	margin: "0px",
 	fontFamily: "verdana, sans-serif",

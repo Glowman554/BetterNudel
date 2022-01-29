@@ -1,5 +1,5 @@
 import React from "react";
-import { api_request } from "../js/api";
+import { api_request, has_valid_token } from "../js/api";
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -10,23 +10,15 @@ export default class Login extends React.Component {
 			auth_text: ""
 		}
 
-		if (localStorage.getItem("token")) {
-			api_request("/api/v2/login/check").then(data => {
-				data = JSON.parse(data);
-
-				if (data.msg == "ok") {
-					this.state.current_stage = -1;
-					this.setState(this.state);
-				} else {
-					localStorage.removeItem("token");
-					this.state.current_stage = 0;
-					this.setState(this.state);
-				}
-			});
-		} else {
-			this.state.current_stage = 0;
-			this.setState(this.state);
-		}
+		has_valid_token().then(data => {
+			if (data) {
+				this.state.current_stage = -1;
+				this.setState(this.state);
+			} else {
+				this.state.current_stage = 0;
+				this.setState(this.state);
+			}
+		})
 	}
 
 	render() {

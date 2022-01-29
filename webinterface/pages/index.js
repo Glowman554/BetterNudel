@@ -19,7 +19,7 @@ export default function Home() {
 					<link rel="stylesheet" href="/style.css" />
 				</Head>
 
-				<Navbar />
+				<Navbar title="Home" />
 
 				<Heading title="BetterNudel" subtitle="The home of better BetterNudel"/>
 

@@ -17,7 +17,7 @@ export default function Commands() {
 					<link rel="stylesheet" href="/style.css" />
 				</Head>
 
-				<Navbar />
+				<Navbar title="Commands" />
 
 				<Heading title="BetterNudel" subtitle="Supported commands!"/>
 

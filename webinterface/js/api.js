@@ -31,3 +31,22 @@ export function process_url(url) {
 		return api_path;
 	}
 }
+
+export function has_valid_token() {
+	return new Promise(async (resolve, reject) => {
+		if (localStorage.getItem("token")) {
+			api_request("/api/v2/login/check").then(data => {
+				data = JSON.parse(data);
+
+				if (data.msg == "ok") {
+					resolve(true);
+				} else {
+					localStorage.removeItem("token");
+					resolve(false);
+				}
+			});
+		} else {
+			resolve(false);
+		}
+	});
+}
