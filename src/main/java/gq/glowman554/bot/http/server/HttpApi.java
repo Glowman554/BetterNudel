@@ -54,6 +54,7 @@ public class HttpApi {
         new ApiUploadsHandler(instance, "/api/v2/uploads");
         new ApiUploadsDeleteHandler(instance, "/api/v2/uploads/delete");
         new ApiEndpointsHandler(instance, "/api/v2/endpoints");
+        new ApiHasPermissionHandler(instance, "/api/v2/has_permission");
 
         // -------------- legacy api -----------------------
         new ApiCollectHandler(instance, "/api/collect");

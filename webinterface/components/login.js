@@ -1,5 +1,7 @@
 import React from "react";
 import { api_request, has_valid_token } from "../js/api";
+import Button from "./button";
+import Card from "./card";
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -25,19 +27,15 @@ export default class Login extends React.Component {
 		return (
 			<div>
 				{ this.state.current_stage == -1 ? <div>
-					<div className="row-padding dark-grey padding-64 container">
-						<div className="content">
-							<div className="twothird">
-								<p>You are already logged in to log out please use the below button!</p>
-								<button className="button grey hover-black" onClick={
-									event => {
-										localStorage.removeItem("token");
-										location.reload();
-									}
-								}>LogOut</button>
-							</div>
-						</div>
-					</div>
+					<Card>
+						<p>You are already logged in to log out please use the below button!</p>
+						<Button onClick={
+							event => {
+								localStorage.removeItem("token");
+								location.reload();
+							}
+						}>LogOut</Button>
+					</Card>
 				</div> : null }
 
 				{ this.state.current_stage == 0 ? <div>
@@ -46,7 +44,7 @@ export default class Login extends React.Component {
 							<div className="twothird">
 								<p>Hello and Welcome to the authentication page!</p>
 								<p>I will guide you trough the whole process!</p>
-								<button className="button grey hover-black" onClick={
+								<Button onClick={
 									event => {
 										api_request("/api/v2/login/start").then(data => {
 											data = JSON.parse(data);
@@ -71,7 +69,7 @@ export default class Login extends React.Component {
 											}, 1000);
 										});
 									}
-								}>Next</button>
+								}>Next</Button>
 							</div>
 						</div>
 					</div>
