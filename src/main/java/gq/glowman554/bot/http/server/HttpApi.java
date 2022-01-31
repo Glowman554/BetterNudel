@@ -51,6 +51,7 @@ public class HttpApi {
         new ApiIpInfoHandler(instance, "/api/v2/ipinfo");
         new ApiSuggestHandler(instance, "/api/v2/suggest");
         new ApiSuggestionsHandler(instance, "/api/v2/suggestions");
+        new ApiSuggestionsDeleteHandler(instance, "/api/v2/suggestions/delete");
         new ApiUploadsHandler(instance, "/api/v2/uploads");
         new ApiUploadsDeleteHandler(instance, "/api/v2/uploads/delete");
         new ApiEndpointsHandler(instance, "/api/v2/endpoints");
