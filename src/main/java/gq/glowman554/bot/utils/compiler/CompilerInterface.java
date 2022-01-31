@@ -13,7 +13,7 @@ public abstract class CompilerInterface {
     public abstract File compile_and_link(File file) throws Exception;
     public abstract String execute(File compiled_file) throws Exception;
 
-    protected boolean allow_unsafe() {
+    protected boolean allow_safe_exec() {
         boolean allow_unsafe = false;
         try {
             allow_unsafe = Main.configManager.get_key_as_str("allow_unsafe_exec").equalsIgnoreCase("true");
@@ -21,6 +21,6 @@ public abstract class CompilerInterface {
 
         }
 
-        return allow_unsafe;
+        return !allow_unsafe;
     }
 }

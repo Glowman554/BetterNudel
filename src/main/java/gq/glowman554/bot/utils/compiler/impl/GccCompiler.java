@@ -28,6 +28,6 @@ public class GccCompiler extends CompilerInterface {
 
     @Override
     public String execute(File compiled_file) throws Exception {
-        return new ExecutionEngine(allow_unsafe()).execute(compiled_file.getAbsolutePath());
+        return new ExecutionEngine(allow_safe_exec()).execute(compiled_file.getAbsolutePath());
     }
 }
