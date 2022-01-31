@@ -46,87 +46,94 @@ export default class Shell extends React.Component {
 					{this.state.shell_entries.map((entry, index) => {
 						return entry;
 					})}
+					<div style={{
+						width: "100%",
+					}}>
+						<p style={{
+							display: "inline",
+							padding: "0px",
+							margin: "0px"
+						}}>{this.state.prompt}</p>
+						<input style={{
+							display: "inline",
+							width: "calc(100% - " + this.state.prompt.length + "ch)",
+							border: "none",
+							backgroundColor: "transparent",
+							outline: "none",
+							color: "green",
+							fontFamily: "Arial, Helvetica, sans-serif",
+							fontSize: "medium",
+						}} type="text" autoComplete="off" autoCapitalize="off" readOnly={!this.state.input_enabled}  onKeyDown={
+							event => {
+								if (event.key === "Enter") {
+									event.preventDefault();
 
-					<p style={{display: "inline"}}>{this.state.prompt}</p>
-					<input style={{
-						width: "70%",
-						border: "none",
-						backgroundColor: "transparent",
-						outline: "none",
-						color: "green",
-						fontFamily: "Arial, Helvetica, sans-serif",
-						fontSize: "medium",
-						display: "inline"
-					}} type="text" autoComplete="off" autoCapitalize="off" readOnly={!this.state.input_enabled}  onKeyDown={
-						event => {
-							if (event.key === "Enter") {
-								event.preventDefault();
+									let value = event.target.value.trim();
+									event.target.value = "";
 
-								let value = event.target.value.trim();
-								event.target.value = "";
+									this.state.shell_entries.push(<ShellEntry entry={this.state.prompt + value} />);
+									this.setState(this.state);
 
-								this.state.shell_entries.push(<ShellEntry entry={this.state.prompt + value} />);
-								this.setState(this.state);
+									let current_length = this.state.shell_entries.length;
 
-								let current_length = this.state.shell_entries.length;
+									api_request("/api/v2/web?message=" + encodeURIComponent(value)).then(data => {
+										data = JSON.parse(data);
 
-								api_request("/api/v2/web?message=" + encodeURIComponent(value)).then(data => {
-									data = JSON.parse(data);
+										console.log(data);
 
-									console.log(data);
+										for (let entry of data) {
+											switch (entry.type) {
+												case "text_message":
+												case "text_message_quote":
+													{
+														this.state.shell_entries.push(<ShellEntry entry={entry.message} />);
+													}
+													break;
+												
+												case "picture_send":
+													{
+														this.state.shell_entries.push(<ShellEntry entry={`<img src="${get_api_path() + "/files/" + entry.message}"></img>`} />);
+													}
+													break;
+												
+												case "audio_send":
+													{
+														this.state.shell_entries.push(<ShellEntry entry={`<audio src="${get_api_path() + "/files/" + entry.message}" controls></audio>`} />);
+													}
+													break;
 
-									for (let entry of data) {
-										switch (entry.type) {
-											case "text_message":
-											case "text_message_quote":
-												{
-													this.state.shell_entries.push(<ShellEntry entry={entry.message} />);
-												}
-												break;
-											
-											case "picture_send":
-												{
-													this.state.shell_entries.push(<ShellEntry entry={`<img src="${get_api_path() + "/files/" + entry.message}"></img>`} />);
-												}
-												break;
-											
-											case "audio_send":
-												{
-													this.state.shell_entries.push(<ShellEntry entry={`<audio src="${get_api_path() + "/files/" + entry.message}" controls></audio>`} />);
-												}
-												break;
+												case "video_send":
+													{
+														this.state.shell_entries.push(<ShellEntry entry={`<video src="${get_api_path() + "/files/" + entry.message}" controls></video>`} />);
+													}
+													break;
 
-											case "video_send":
-												{
-													this.state.shell_entries.push(<ShellEntry entry={`<video src="${get_api_path() + "/files/" + entry.message}" controls></video>`} />);
-												}
-												break;
+												case "file_send":
+													{
+														this.state.shell_entries.push(<ShellEntry entry={`<a href="${get_api_path() + "/files/" + entry.message}">${entry.message}</a>`} />);
+													}
+													break;
+												
+												case "message_delete":
+													{
+														this.state.shell_entries[current_length - 1] = null;
+													}
+													break;
+												
+												default:
+													throw new Error("Unknown type: " + entry.type);
+											}
 
-											case "file_send":
-												{
-													this.state.shell_entries.push(<ShellEntry entry={`<a href="${get_api_path() + "/files/" + entry.message}">${entry.message}</a>`} />);
-												}
-												break;
-											
-											case "message_delete":
-												{
-													this.state.shell_entries[current_length - 1] = null;
-												}
-												break;
-											
-											default:
-												throw new Error("Unknown type: " + entry.type);
+											this.setState(this.state);
+
 										}
 
-										this.setState(this.state);
-
-									}
-
-									event.target.scrollIntoView();
-								});
+										event.target.scrollIntoView();
+									});
+								}
 							}
-						}
-					}></input>
+						}></input>
+					</div>
 				</div>
 			</div>
 		)
