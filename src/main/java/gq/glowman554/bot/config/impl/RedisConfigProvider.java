@@ -127,4 +127,9 @@ public class RedisConfigProvider implements ConfigProvider {
 
         return jedis.keys("*").toArray(new String[0]);
     }
+
+    @Override
+    public int get_priority() {
+        return 2;
+    }
 }

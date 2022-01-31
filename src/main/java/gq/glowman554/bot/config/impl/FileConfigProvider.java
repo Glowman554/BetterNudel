@@ -86,6 +86,11 @@ public class FileConfigProvider implements ConfigProvider {
         return keys;
     }
 
+    @Override
+    public int get_priority() {
+        return 1;
+    }
+
     private void save() {
         Log.log(String.format("Saving config file %s!", config_file));
 

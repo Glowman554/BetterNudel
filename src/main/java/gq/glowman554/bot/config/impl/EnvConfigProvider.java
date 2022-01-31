@@ -35,4 +35,9 @@ public class EnvConfigProvider implements ConfigProvider {
 		Log.log("--- WARNING --- ignoring get_all_keys() call!");
 		return new String[0];
     }
+
+    @Override
+    public int get_priority() {
+        return -1;
+    }
 }

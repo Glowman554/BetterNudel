@@ -1,9 +1,9 @@
 package gq.glowman554.bot.config;
 
 import gq.glowman554.bot.log.Log;
-import gq.glowman554.bot.utils.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class ConfigManager {
@@ -50,6 +50,12 @@ public class ConfigManager {
     public void register(ConfigProvider provider) {
         Log.log(String.format("New config provider %s!", provider.getClass().getSimpleName()));
         configProviders.add(provider);
+
+        configProviders.sort(Comparator.comparingInt(ConfigProvider::get_priority));
+
+        for (ConfigProvider provider_ : configProviders) {
+            Log.log("provider list: " + provider_.getClass().getSimpleName());
+        }
     }
 
     public void sync() {
@@ -59,7 +65,7 @@ public class ConfigManager {
         for (ConfigProvider provider : configProviders) {
             for (String key : provider.get_all_keys()) {
                 if (config.containsKey(key)) {
-                    Log.log("--- WARNING --- overwriting key " + key + " in " + provider.getClass().getSimpleName());
+                    Log.log("--- WARNING --- overwriting key " + key + " from " + provider.getClass().getSimpleName());
                 }
 
                 config.put(key, provider.get_key_as_str(key));

@@ -10,4 +10,6 @@ public interface ConfigProvider {
     boolean has_key(String key);
 
     String[] get_all_keys();
+
+    int get_priority();
 }
