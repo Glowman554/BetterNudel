@@ -14,6 +14,7 @@ public class RedisConfigProvider implements ConfigProvider {
     private boolean connected = false;
 
 	private HashMap<String, String> config_cache = new HashMap<String, String>();
+	private HashMap<String, Boolean> has_key_cache = new HashMap<String, Boolean>();
 
     public RedisConfigProvider() {
         try {
@@ -87,11 +88,15 @@ public class RedisConfigProvider implements ConfigProvider {
             return false;
         }
 
-		if (config_cache.containsKey(key)) {
-			return true;
+		if (has_key_cache.containsKey(key)) {
+			Log.log("Returning cached value for " + key);
+			return has_key_cache.get(key);
 		}
 
-        return jedis.exists(key);
+		boolean result = jedis.exists(key);
+		has_key_cache.put(key, result);
+
+        return result;
     }
 
     @Override
