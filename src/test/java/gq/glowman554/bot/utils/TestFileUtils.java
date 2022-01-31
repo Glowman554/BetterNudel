@@ -19,5 +19,9 @@ public class TestFileUtils {
         InputStream is = new File("test.txt").toURI().toURL().openStream();
 
         assertEquals("hello world", FileUtils.readFile(is));
+
+        FileUtils.appendFile("test.txt", " 2");
+
+        assertEquals("hello world 2", FileUtils.readFile("test.txt"));
     }
 }

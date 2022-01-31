@@ -31,7 +31,7 @@ public class Log {
         }
 
         try {
-            FileUtils.writeFile(current_log_file, FileUtils.readFile(current_log_file) + "\n" + new_message);
+            FileUtils.appendFile(current_log_file, "\n" + new_message);
         } catch (IOException e) {
             e.printStackTrace();
         }

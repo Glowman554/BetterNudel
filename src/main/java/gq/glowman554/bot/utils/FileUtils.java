@@ -39,6 +39,12 @@ public class FileUtils {
         fw.close();
     }
 
+    public static void appendFile(String file_name, String file_contents) throws IOException {
+        FileWriter fw = new FileWriter(file_name, true);
+        fw.write(file_contents);
+        fw.close();
+    }
+
     public static String randomTmpFile(String extension) {
         File tmp = new File("tmp");
 
