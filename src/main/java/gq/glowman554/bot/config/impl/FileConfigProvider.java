@@ -2,6 +2,7 @@ package gq.glowman554.bot.config.impl;
 
 import gq.glowman554.bot.config.ConfigProvider;
 import gq.glowman554.bot.log.Log;
+import gq.glowman554.bot.utils.ArrayUtils;
 import gq.glowman554.bot.utils.FileUtils;
 import net.shadew.json.Json;
 import net.shadew.json.JsonNode;
@@ -68,6 +69,21 @@ public class FileConfigProvider implements ConfigProvider {
         }
 
         return config_json.get(key) != null;
+    }
+
+    @Override
+    public String[] get_all_keys() {
+        if (config_json == null) {
+            return new String[0];
+        }
+
+        String[] keys = new String[0];
+
+        for (String key : config_json.keys()) {
+            keys = ArrayUtils.add(keys, key);
+        }
+
+        return keys;
     }
 
     private void save() {

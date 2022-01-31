@@ -35,7 +35,7 @@ public class HttpApi {
         Log.log("Starting http api...");
 
         try {
-            port = Main.configManager.get_key_as_int("http_port");
+            port = Main.configManager.get_key_as_int("port");
         } catch (IllegalArgumentException e) {
             Log.log("Using default port!");
             port = 8888;

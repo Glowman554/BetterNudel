@@ -5,6 +5,7 @@ import gq.glowman554.bot.command.impl.*;
 import gq.glowman554.bot.config.ConfigManager;
 import gq.glowman554.bot.config.impl.EnvConfigProvider;
 import gq.glowman554.bot.config.impl.FileConfigProvider;
+import gq.glowman554.bot.config.impl.RedisConfigProvider;
 import gq.glowman554.bot.http.server.HttpApi;
 import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.platform.console.ConsolePlatform;
@@ -15,12 +16,6 @@ import gq.glowman554.bot.plugin.PluginLoader;
 import net.shadew.json.Json;
 
 public class Main {
-
-    /*
-        TODO:
-            port webinterface
-     */
-
     public static CommandManager commandManager;
     public static ConfigManager configManager;
     public static PluginLoader pluginLoader;
@@ -30,6 +25,7 @@ public class Main {
         Log.log("Loading config...");
         configManager = new ConfigManager();
 
+        configManager.register(new RedisConfigProvider());
         configManager.register(new FileConfigProvider("config.json"));
         configManager.register(new EnvConfigProvider());
     }
@@ -38,6 +34,7 @@ public class Main {
         Log.log("--- WARNING --- Loading custom config " + config_file + "...");
         configManager = new ConfigManager();
 
+        configManager.register(new RedisConfigProvider());
         configManager.register(new FileConfigProvider(config_file));
     }
 
@@ -46,6 +43,7 @@ public class Main {
         startTime = System.currentTimeMillis();
 
         load_config();
+        configManager.sync();
 
         try {
             commandManager = new CommandManager(configManager.get_key_as_str("prefix"));

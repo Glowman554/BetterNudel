@@ -27,6 +27,12 @@ public class EnvConfigProvider implements ConfigProvider {
 
     @Override
     public boolean has_key(String key) {
-        return System.getenv(key) != null;
+        return System.getenv(key.toUpperCase()) != null;
+    }
+
+    @Override
+    public String[] get_all_keys() {
+		Log.log("--- WARNING --- ignoring get_all_keys() call!");
+		return new String[0];
     }
 }

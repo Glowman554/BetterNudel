@@ -1,8 +1,10 @@
 package gq.glowman554.bot.config;
 
 import gq.glowman554.bot.log.Log;
+import gq.glowman554.bot.utils.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ConfigManager {
     private ArrayList<ConfigProvider> configProviders = new ArrayList<>();
@@ -48,5 +50,22 @@ public class ConfigManager {
     public void register(ConfigProvider provider) {
         Log.log(String.format("New config provider %s!", provider.getClass().getSimpleName()));
         configProviders.add(provider);
+    }
+
+    public void sync() {
+        Log.log("Syncing config providers...");
+        HashMap<String, String> config = new HashMap<>();
+
+        for (ConfigProvider provider : configProviders) {
+            for (String key : provider.get_all_keys()) {
+                if (config.containsKey(key)) {
+                    Log.log("--- WARNING --- overwriting key " + key + " in " + provider.getClass().getSimpleName());
+                }
+
+                config.put(key, provider.get_key_as_str(key));
+            }
+        }
+
+        config.forEach(this::set_key_as_str);
     }
 }

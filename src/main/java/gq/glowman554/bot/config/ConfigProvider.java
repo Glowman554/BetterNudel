@@ -8,4 +8,6 @@ public interface ConfigProvider {
     void set_key_as_int(String key, int value);
 
     boolean has_key(String key);
+
+    String[] get_all_keys();
 }
