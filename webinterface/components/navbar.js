@@ -48,6 +48,10 @@ export default class Navbar extends React.Component {
 			{
 				name: 'Settings',
 				url: '/settings'
+			},
+			{
+				name: 'Admin',
+				url: '/admin'
 			}
 		];
 

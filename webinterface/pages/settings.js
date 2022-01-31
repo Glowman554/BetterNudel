@@ -5,6 +5,7 @@ import Footer from '../components/footer'
 import Heading from '../components/heading'
 import Navbar from '../components/navbar'
 import NoSSR from '../components/no_ssr'
+import Uploads from '../components/uploads'
 import { reset_color, root_style, set_color } from '../js/style'
 
 export default function Shell_() {
@@ -88,6 +89,12 @@ export default function Shell_() {
 							location.reload();
 						}
 					}>Change api location</Button>
+				</Card>
+
+				<Card>
+					<h1>Uploads</h1>
+					<br />
+					<Uploads all_uploads={false}/>
 				</Card>
 
 				<Footer />
