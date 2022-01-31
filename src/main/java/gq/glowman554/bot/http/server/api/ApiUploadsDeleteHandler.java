@@ -32,7 +32,7 @@ public class ApiUploadsDeleteHandler extends HttpApiHandler {
 
         FileHostObject fileHostObject = new FileHostObject(Json.json().parse(FileUtils.readFile(FileHostObject.get_http_host_path() + "/files/" + file_id + "!!hidden!!.json")));
 
-        if ((!fileHostObject.getUploader().getSystem() && fileHostObject.getUploader().getId().equals(user)) || Main.commandManager.permissionManager.has_permission(user, "full_access")) {
+        if (!((!fileHostObject.getUploader().getSystem() && fileHostObject.getUploader().getId().equals(user)) || Main.commandManager.permissionManager.has_permission(user, "full_access"))) {
             return "Cannot delete file!";
         }
 

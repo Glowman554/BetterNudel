@@ -38,7 +38,7 @@ public class ApiUploadsHandler extends HttpApiHandler {
                 try {
                     FileHostObject fileHostObject = new FileHostObject(Json.json().parse(FileUtils.readFile(path.toFile().getAbsolutePath())));
 
-                    if ((!fileHostObject.getUploader().getSystem() && fileHostObject.getUploader().getId().equals(user)) || Main.commandManager.permissionManager.has_permission(user, "full_access")) {
+                    if ((!fileHostObject.getUploader().getSystem() && fileHostObject.getUploader().getId().equals(user)) || (Main.commandManager.permissionManager.has_permission(user, "full_access") && query.containsKey("all_files"))) {
                         root.add(fileHostObject.toJson());
                     }
 
