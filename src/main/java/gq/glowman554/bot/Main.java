@@ -24,6 +24,7 @@ public class Main {
     public static ConfigManager configManager;
     public static PluginLoader pluginLoader;
     public static long startTime;
+    public static boolean tiny_crash_report = false;
 
     public static void load_config() {
         Log.log("Loading config...");

@@ -40,7 +40,11 @@ public class WebPlatformHandler extends HttpApiHandler {
             return "[]";
         }
 
-        Main.commandManager.on_command(commandEvent);
+        try {
+            Main.commandManager.on_command(commandEvent);
+        } catch (Exception e) {
+            commandEvent.handle_exception(e);
+        }
 
         return Json.json().serialize(commandEvent.getSteps());
     }

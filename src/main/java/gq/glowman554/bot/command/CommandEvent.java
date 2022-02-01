@@ -1,6 +1,12 @@
 package gq.glowman554.bot.command;
 
+import gq.glowman554.bot.Main;
+import gq.glowman554.bot.log.Log;
+import gq.glowman554.bot.utils.StringUtils;
+
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 public abstract class CommandEvent {
     public String _message;
@@ -51,4 +57,22 @@ public abstract class CommandEvent {
 
     public abstract String get_sender_id();
     public abstract String get_chat_name();
+
+    public void handle_exception(Exception e) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+
+        String stacktrace = sw.toString();
+
+        Log.log(stacktrace);
+
+        if (Main.tiny_crash_report) {
+            message_send(command_platform.format_code_block(e.getClass().getSimpleName() + ": " + e.getMessage()));
+        } else {
+            for (String s : StringUtils.partition(stacktrace, 500)) {
+                message_send(command_platform.format_code_block(s));
+            }
+        }
+    }
 }

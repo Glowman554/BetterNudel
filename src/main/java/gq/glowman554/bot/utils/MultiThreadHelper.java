@@ -43,6 +43,8 @@ public class MultiThreadHelper {
         MultiThreadHelperLambdaWaiter waiter = new MultiThreadHelperLambdaWaiter();
 
         new Thread(() -> {
+            Log.log("Thread start (" + lambda.toString() + ")");
+
             lambda.exec();
             waiter.on_complete();
 
@@ -56,6 +58,8 @@ public class MultiThreadHelper {
         MultiThreadHelperClassWaiter waiter = new MultiThreadHelperClassWaiter();
 
         new Thread(() -> {
+            Log.log("Thread start (" + _class.getSimpleName() + ")");
+
             try {
                 waiter.instance = _class.newInstance();
             } catch (Exception e) {

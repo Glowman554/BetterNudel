@@ -2,6 +2,7 @@ package gq.glowman554.bot.platform.discord;
 
 import gq.glowman554.bot.Main;
 import gq.glowman554.bot.log.Log;
+import gq.glowman554.bot.utils.MultiThreadHelper;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -32,7 +33,7 @@ public class DiscordPlatform {
 
         this.setDefaultRP();
 
-        new Thread(() -> {
+        MultiThreadHelper.run(() -> {
             while (true) {
                 try {
                     Thread.sleep(1000 * 60);
@@ -43,7 +44,7 @@ public class DiscordPlatform {
 
                 updateRP();
             }
-        }).start();
+        });
     }
 
     public void setDefaultRP() {
