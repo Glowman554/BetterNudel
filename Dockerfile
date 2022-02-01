@@ -15,6 +15,6 @@ RUN npm install
 
 WORKDIR /srv/
 RUN mkdir -p tmp
-RUN mvn clean package
+RUN bash build.sh
 
 ENTRYPOINT ["java", "-jar", "/srv/target/BetterNudel-1.0-SNAPSHOT-REWRITE.jar"]

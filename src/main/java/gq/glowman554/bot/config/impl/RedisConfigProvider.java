@@ -5,6 +5,7 @@ import java.util.HashMap;
 import gq.glowman554.bot.config.ConfigProvider;
 import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.utils.ArrayUtils;
+import gq.glowman554.bot.utils.Pair;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisShardInfo;
 
@@ -14,12 +15,17 @@ public class RedisConfigProvider implements ConfigProvider {
 
     private boolean connected = false;
 
-	private HashMap<String, String> config_cache = new HashMap<String, String>();
-	private HashMap<String, Boolean> has_key_cache = new HashMap<String, Boolean>();
+	private HashMap<String, Pair<Long, String>> config_cache = new HashMap<>();
+	private HashMap<String, Pair<Long, Boolean>> has_key_cache = new HashMap<>();
 
     private void debug_cache() {
-        Log.log("config_cache: " + ArrayUtils.stringify(config_cache.keySet().toArray(new String[0]), ", "));
-        Log.log("has_key_cache: " + ArrayUtils.stringify(has_key_cache.keySet().toArray(new String[0]), ", "));
+        if (config_cache.size() != 0) {
+            Log.log("config_cache: " + ArrayUtils.stringify(config_cache.keySet().toArray(new String[0]), ", "));
+        }
+
+        if (has_key_cache.size() != 0) {
+            Log.log("has_key_cache: " + ArrayUtils.stringify(has_key_cache.keySet().toArray(new String[0]), ", "));
+        }
     }
 
     public RedisConfigProvider() {
@@ -40,36 +46,36 @@ public class RedisConfigProvider implements ConfigProvider {
         }
     }
 
-    @Override
-    public String get_key_as_str(String key) {
+    private String load_value(String key) {
         debug_cache();
-		if (config_cache.containsKey(key)) {
-			Log.log("Returning cached value for " + key);
-			return config_cache.get(key);
-		}
+
+        if (config_cache.containsKey(key)) {
+            Pair<Long, String> loaded_from_cache = config_cache.get(key);
+
+            if (loaded_from_cache.t1 + 1000 * 60 * 30 < System.currentTimeMillis()) {
+                Log.log("cached value for " + key + " to old!");
+            } else {
+                Log.log("Returning cached value for " + key);
+                return loaded_from_cache.t2;
+            }
+        }
 
         jedis.connect();
 
         String result = jedis.get(key);
-		config_cache.put(key, result);
+        config_cache.put(key, new Pair<>(System.currentTimeMillis(), result));
 
         return result;
     }
 
     @Override
+    public String get_key_as_str(String key) {
+        return load_value(key);
+    }
+
+    @Override
     public int get_key_as_int(String key) {
-        debug_cache();
-        if (config_cache.containsKey(key)) {
-			Log.log("Returning cached value for " + key);
-			return Integer.parseInt(config_cache.get(key));
-		}
-
-        jedis.connect();
-
-        String result = jedis.get(key);
-		config_cache.put(key, result);
-
-		return Integer.parseInt(result);
+        return Integer.parseInt(load_value(key));
     }
 
     @Override
@@ -78,7 +84,7 @@ public class RedisConfigProvider implements ConfigProvider {
             return;
         }
 
-		config_cache.put(key, value);
+		config_cache.put(key, new Pair<>(System.currentTimeMillis(), value));
 
         jedis.connect();
         jedis.set(key, value);
@@ -86,33 +92,32 @@ public class RedisConfigProvider implements ConfigProvider {
 
     @Override
     public void set_key_as_int(String key, int value) {
-        if (!connected) {
-            return;
-        }
-
-		config_cache.put(key, Integer.toString(value));
-
-        jedis.connect();
-        jedis.set(key, String.valueOf(value));
+        set_key_as_str(key, String.valueOf(value));
     }
 
     @Override
     public boolean has_key(String key) {
+        debug_cache();
+
         if (!connected) {
             return false;
         }
 
-        debug_cache();
-
         if (has_key_cache.containsKey(key)) {
-			Log.log("Returning cached value for " + key);
-			return has_key_cache.get(key);
-		}
+            Pair<Long, Boolean> loaded_from_cache = has_key_cache.get(key);
+
+            if (loaded_from_cache.t1 + 1000 * 60 * 30 < System.currentTimeMillis()) {
+                Log.log("cached value for " + key + " to old!");
+            } else {
+                Log.log("Returning cached value for " + key);
+                return loaded_from_cache.t2;
+            }
+        }
 
         jedis.connect();
 
         boolean result = jedis.exists(key);
-		has_key_cache.put(key, result);
+        has_key_cache.put(key, new Pair<>(System.currentTimeMillis(), result));
 
         return result;
     }

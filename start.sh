@@ -3,4 +3,6 @@
   npm install
 )
 
-screen -S better_nudel_rewrite mvn compile test exec:java
+bash build.sh
+
+screen -S better_nudel_rewrite mvn exec:java
