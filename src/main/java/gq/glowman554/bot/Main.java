@@ -13,7 +13,11 @@ import gq.glowman554.bot.platform.discord.DiscordPlatform;
 import gq.glowman554.bot.platform.teleram.TelegramPlatform;
 import gq.glowman554.bot.platform.web.WebPlatform;
 import gq.glowman554.bot.plugin.PluginLoader;
+import gq.glowman554.bot.utils.MultiThreadHelper;
 import net.shadew.json.Json;
+import net.shadew.json.JsonSyntaxException;
+
+import java.io.IOException;
 
 public class Main {
     public static CommandManager commandManager;
@@ -86,11 +90,18 @@ public class Main {
 
         HttpApi.load();
 
-        new ConsolePlatform();
-        new DiscordPlatform();
-        new TelegramPlatform();
-        new WebPlatform();
+        MultiThreadHelper.run(ConsolePlatform.class);
+        MultiThreadHelper.run(DiscordPlatform.class);
+        MultiThreadHelper.run(TelegramPlatform.class);
+        MultiThreadHelper.run(WebPlatform.class);
 
-        pluginLoader.load();
+        //pluginLoader.load();
+        MultiThreadHelper.run(() -> {
+            try {
+                pluginLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).complete();
     }
 }
