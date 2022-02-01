@@ -13,4 +13,5 @@ build_and_install_plugin test_plugin
 build_and_install_plugin bmi_plugin
 build_and_install_plugin lagersimulation_plugin
 
+mkdir -p plugins/.
 cp plugins_src/plugins/* plugins/. -v
