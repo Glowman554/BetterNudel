@@ -1,17 +1,14 @@
 function build_and_install_plugin {
-  echo "Buildind and installing $1"
+	echo "Building and installing $1"
 
-  (
-  cd plugins_src/$1
-  mvn package install
-  )
+	(
+		cd plugins_src/$1
+		mvn package install || (echo "Failed to build $1" && exit 1)
+	)
 }
 
-mvn package install
+mvn package install || (echo "Failed to build bot!" && exit 1)
 
 build_and_install_plugin test_plugin
 build_and_install_plugin bmi_plugin
 build_and_install_plugin lagersimulation_plugin
-
-mkdir -p plugins/.
-cp plugins_src/plugins/* plugins/. -v

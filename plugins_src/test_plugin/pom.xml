@@ -55,7 +55,7 @@
                                     <type>${project.packaging}</type>
                                 </artifactItem>
                             </artifactItems>
-                            <outputDirectory>../plugins/</outputDirectory>
+                            <outputDirectory>../../plugins/</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
