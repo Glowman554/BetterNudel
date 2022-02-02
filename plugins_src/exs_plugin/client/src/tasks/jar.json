@@ -1,0 +1,13 @@
+{
+	"name": "jar",
+	"commands": [
+		"jar cfe client.jar gq.glowman554.Entry ${findall class}"
+	],
+	"dependencies": [
+		"compile"
+	],
+	"run_after_task": [
+		"clean"
+	],
+	"allow_fail": false
+}

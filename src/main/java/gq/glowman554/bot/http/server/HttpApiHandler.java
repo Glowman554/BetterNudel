@@ -48,20 +48,20 @@ public abstract class HttpApiHandler {
     }
 
     private void handleRequest(HttpExchange exchange) throws IOException {
-        Log.log("Request: " + exchange.getRequestMethod() + " " + exchange.getRequestURI() + " " + exchange.getProtocol() + " " + exchange.getRequestHeaders().getFirst("X-Forwarded-For") + " " + exchange.getRemoteAddress().getAddress().getHostAddress());
+        // Log.log("Request: " + exchange.getRequestMethod() + " " + exchange.getRequestURI() + " " + exchange.getProtocol() + " " + exchange.getRequestHeaders().getFirst("X-Forwarded-For") + " " + exchange.getRemoteAddress().getAddress().getHostAddress());
 
         String request_uri = http_host_path + exchange.getRequestURI().toString();
 
         if (new File(request_uri).isDirectory()) {
             if (new File(request_uri + "/index.html").exists()) {
-                Log.log("Adding index.html to request");
+                // Log.log("Adding index.html to request");
                 request_uri += "/index.html";
             }
         }
 
         if (new File(request_uri).exists() && new File(request_uri).isFile()) {
             if (request_uri.contains("!!hidden!!")) {
-                Log.log("Requested file is hidden!!");
+                // Log.log("Requested file is hidden!!");
                 exchange.sendResponseHeaders(403, 0);
                 exchange.getResponseBody().write("403 Forbidden".getBytes());
                 exchange.getResponseBody().close();

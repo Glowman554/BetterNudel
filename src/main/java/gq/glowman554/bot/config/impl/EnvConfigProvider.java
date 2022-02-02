@@ -17,12 +17,12 @@ public class EnvConfigProvider implements ConfigProvider {
 
     @Override
     public void set_key_as_str(String key, String value) {
-        Log.log("Read only");
+        // Log.log("Read only");
     }
 
     @Override
     public void set_key_as_int(String key, int value) {
-       Log.log("Read only");
+    	//Log.log("Read only");
     }
 
     @Override

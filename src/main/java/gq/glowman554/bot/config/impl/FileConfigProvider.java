@@ -92,7 +92,7 @@ public class FileConfigProvider implements ConfigProvider {
     }
 
     private void save() {
-        Log.log(String.format("Saving config file %s!", config_file));
+        // Log.log(String.format("Saving config file %s!", config_file));
 
         try {
             FileUtils.writeFile(config_file, json.serialize(config_json));

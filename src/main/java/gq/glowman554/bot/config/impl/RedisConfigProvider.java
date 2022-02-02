@@ -55,7 +55,7 @@ public class RedisConfigProvider implements ConfigProvider {
             if (loaded_from_cache.t1 + 1000 * 60 * 30 < System.currentTimeMillis()) {
                 Log.log("cached value for " + key + " to old!");
             } else {
-                Log.log("Returning cached value for " + key);
+                // Log.log("Returning cached value for " + key);
                 return loaded_from_cache.t2;
             }
         }
@@ -109,7 +109,7 @@ public class RedisConfigProvider implements ConfigProvider {
             if (loaded_from_cache.t1 + 1000 * 60 * 30 < System.currentTimeMillis()) {
                 Log.log("cached value for " + key + " to old!");
             } else {
-                Log.log("Returning cached value for " + key);
+                // Log.log("Returning cached value for " + key);
                 return loaded_from_cache.t2;
             }
         }

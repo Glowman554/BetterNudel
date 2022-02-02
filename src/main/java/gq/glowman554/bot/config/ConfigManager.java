@@ -11,9 +11,9 @@ public class ConfigManager {
 
     public String get_key_as_str(String key) {
         for (ConfigProvider provider : configProviders) {
-            Log.log(String.format("Looking for key %s in %s.", key, provider.getClass().getSimpleName()));
+            // Log.log(String.format("Looking for key %s in %s.", key, provider.getClass().getSimpleName()));
             if (provider.has_key(key)) {
-                Log.log(String.format("Found key %s in %s it is '%s'", key, provider.getClass().getSimpleName(), provider.get_key_as_str(key)));
+                // Log.log(String.format("Found key %s in %s it is '%s'", key, provider.getClass().getSimpleName(), provider.get_key_as_str(key)));
                 return provider.get_key_as_str(key);
             }
         }
@@ -23,9 +23,9 @@ public class ConfigManager {
 
     public int get_key_as_int(String key) {
         for (ConfigProvider provider : configProviders) {
-            Log.log(String.format("Looking for key %s in %s.", key, provider.getClass().getSimpleName()));
+            // Log.log(String.format("Looking for key %s in %s.", key, provider.getClass().getSimpleName()));
             if (provider.has_key(key)) {
-                Log.log(String.format("Found key %s in %s it is %s", key, provider.getClass().getSimpleName(), provider.get_key_as_int(key)));
+                // Log.log(String.format("Found key %s in %s it is %s", key, provider.getClass().getSimpleName(), provider.get_key_as_int(key)));
                 return provider.get_key_as_int(key);
             }
         }
@@ -35,14 +35,14 @@ public class ConfigManager {
 
     public void set_key_as_int(String key, int value) {
         for (ConfigProvider provider : configProviders) {
-            Log.log(String.format("Setting key %s in %s to %s", key, provider.getClass().getSimpleName(), value));
+            // Log.log(String.format("Setting key %s in %s to %s", key, provider.getClass().getSimpleName(), value));
             provider.set_key_as_int(key, value);
         }
     }
 
     public void set_key_as_str(String key, String value) {
         for (ConfigProvider provider : configProviders) {
-            Log.log(String.format("Setting key %s in %s to '%s'", key, provider.getClass().getSimpleName(), value));
+            // Log.log(String.format("Setting key %s in %s to '%s'", key, provider.getClass().getSimpleName(), value));
             provider.set_key_as_str(key, value);
         }
     }
