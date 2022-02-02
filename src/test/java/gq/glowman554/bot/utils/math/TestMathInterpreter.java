@@ -60,4 +60,26 @@ public class TestMathInterpreter {
     public void test10() {
         assertEquals(6d, MathInterpreter.eval("sqrt(3 ^ 2) * 2", Log::log));
     }
+
+    @Test
+    public void test11() {
+        assertEquals(3.1415929203539825d, MathInterpreter.eval("pi", Log::log));
+    }
+
+    @Test
+    public void test12() {
+        assertEquals(9, MathInterpreter.eval("pow(3, 2)", Log::log));
+    }
+
+    @Test
+    public void test13() {
+        Log.log(String.valueOf(MathInterpreter.eval("random()", Log::log)));
+    }
+
+    @Test
+    public void test14() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Log.log(String.valueOf(MathInterpreter.eval("random(10)", Log::log)));
+        });
+    }
 }

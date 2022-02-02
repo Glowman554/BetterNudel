@@ -1,5 +1,6 @@
 package gq.glowman554.bot.utils.math.interpreter;
 
+import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.utils.math.parser.ParserNode;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,6 @@ public class TestInterpreter {
 
         Interpreter interpreter = new Interpreter();
 
-        assertEquals(2060d, interpreter.interpret(root_node));
+        assertEquals(2060d, interpreter.interpret(root_node, Log::log));
     }
 }

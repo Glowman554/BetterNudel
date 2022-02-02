@@ -1,8 +1,10 @@
 package gq.glowman554.bot.utils.math.parser;
 
 
+import gq.glowman554.bot.utils.Pair;
 import gq.glowman554.bot.utils.math.lexer.LexerToken;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Parser {
@@ -130,17 +132,27 @@ public class Parser {
             return new ParserNode(ParserNode.ParserNodeType.minus_node, factor());
         } else if (token.getType() == LexerToken.LexerTokenType.id) {
             next();
-            if (current_token.getType() == LexerToken.LexerTokenType.lparen) {
+            if (current_token != null && current_token.getType() == LexerToken.LexerTokenType.lparen) {
                 next();
-                ParserNode result = expr();
+                if (current_token.getType() == LexerToken.LexerTokenType.rparen) {
+                    return new ParserNode(ParserNode.ParserNodeType.fcall_node, new Pair<>(new ArrayList<ParserNode>(), token.getValue()));
+                }
+
+                reverse();
+
+                ArrayList<ParserNode> result = new ArrayList<>();
+
+                do {
+                    next();
+                    result.add(expr());
+                } while (current_token.getType() == LexerToken.LexerTokenType.comma);
 
                 if (current_token.getType() != LexerToken.LexerTokenType.rparen) {
                     fail();
                 }
 
                 next();
-
-                return new ParserNode(ParserNode.ParserNodeType.fcall_node, result, token.getValue());
+                return new ParserNode(ParserNode.ParserNodeType.fcall_node, new Pair<>(result, token.getValue()));
             } else {
                 reverse();
                 Double from_lookup = defined_variables.get((String) token.getValue());

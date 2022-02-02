@@ -26,7 +26,7 @@ public class MathInterpreter {
         ref.log(node.toString());
 
         Interpreter interpreter = new Interpreter();
-        return interpreter.interpret(node);
+        return interpreter.interpret(node, ref);
     }
 
     public static double eval(String expr) {

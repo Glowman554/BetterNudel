@@ -100,7 +100,7 @@ public class ParserNode {
         modulo_node(false),
         pow_node(false),
         plus_node(true),
-        fcall_node(false),
+        fcall_node(true),
         minus_node(true);
 
         public final boolean only_1_element;

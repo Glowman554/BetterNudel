@@ -114,6 +114,12 @@ public class Lexer {
                 }
                 break;
 
+                case ',': {
+                    tokens.add(new LexerToken(LexerToken.LexerTokenType.comma));
+                    next();
+                }
+                break;
+
                 default: {
                     if ("abcdefghijklmnopqrstuvwxyz".contains(String.valueOf(current_char).toLowerCase())) {
                         tokens.add(id());

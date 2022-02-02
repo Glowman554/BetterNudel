@@ -55,6 +55,7 @@ public class LexerToken {
         pow,
         lparen,
         rparen,
+        comma,
         id
     }
 }
