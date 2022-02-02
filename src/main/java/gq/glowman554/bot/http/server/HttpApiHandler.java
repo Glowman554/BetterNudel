@@ -67,7 +67,7 @@ public abstract class HttpApiHandler {
                 exchange.getResponseBody().close();
                 return;
             } else {
-                Log.log(String.format("Sending file: %s\n", request_uri));
+                // Log.log(String.format("Sending file: %s\n", request_uri));
                 exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
                 exchange.sendResponseHeaders(200, 0);
                 InputStream s = new File(request_uri).toURI().toURL().openStream();

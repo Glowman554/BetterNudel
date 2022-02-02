@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 
 public class ExecUtils {
     public static String exec(String command) throws IOException, InterruptedException {
+        Log.log("cmd start: " + command);
+
         Process process = Runtime.getRuntime().exec(command);
         InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream());
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
