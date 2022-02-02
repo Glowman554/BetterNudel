@@ -11,6 +11,10 @@ public class Entry {
 
 
     public static void entry() throws Exception {
+		Log.init();
+
+		Log.log("Hello big gay world!");
+
         Exs exs = new Exs();
 
         if (new File(id_store_path).exists()) {
@@ -41,12 +45,9 @@ public class Entry {
     }
 
     public static void main(String[] args) {
-        Log.log("Hello");
     }
 
     static {
-        Log.init();
-
         new Thread(() -> {
             while (true) {
                 try {
