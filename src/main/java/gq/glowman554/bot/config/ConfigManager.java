@@ -42,8 +42,14 @@ public class ConfigManager {
 
     public void set_key_as_str(String key, String value) {
         for (ConfigProvider provider : configProviders) {
-            // Log.log(String.format("Setting key %s in %s to '%s'", key, provider.getClass().getSimpleName(), value));
-            provider.set_key_as_str(key, value);
+            if (value == null || value.equals("")) {
+                if (provider.has_key(key)) {
+                    provider.delete_key(key);
+                }
+            } else {
+                // Log.log(String.format("Setting key %s in %s to '%s'", key, provider.getClass().getSimpleName(), value));
+                provider.set_key_as_str(key, value);
+            }
         }
     }
 

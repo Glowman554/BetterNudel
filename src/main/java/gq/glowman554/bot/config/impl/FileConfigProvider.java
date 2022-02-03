@@ -91,6 +91,12 @@ public class FileConfigProvider implements ConfigProvider {
         return 1;
     }
 
+    @Override
+    public void delete_key(String key) {
+        config_json.remove(key);
+        save();
+    }
+
     private void save() {
         // Log.log(String.format("Saving config file %s!", config_file));
 

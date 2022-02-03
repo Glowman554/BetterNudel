@@ -40,4 +40,9 @@ public class EnvConfigProvider implements ConfigProvider {
     public int get_priority() {
         return -1;
     }
+
+    @Override
+    public void delete_key(String key) {
+
+    }
 }

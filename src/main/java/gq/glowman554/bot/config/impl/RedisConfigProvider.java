@@ -137,4 +137,13 @@ public class RedisConfigProvider implements ConfigProvider {
     public int get_priority() {
         return 2;
     }
+
+    @Override
+    public void delete_key(String key) {
+        has_key_cache.remove(key);
+        config_cache.remove(key);
+
+        jedis.connect();
+        jedis.del(key);
+    }
 }

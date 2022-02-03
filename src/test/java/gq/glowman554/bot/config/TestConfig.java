@@ -16,5 +16,14 @@ public class TestConfig {
 
         Assertions.assertEquals(0xc0ffe, configManager.get_key_as_int("int_test"));
         Assertions.assertEquals("Hello world", configManager.get_key_as_str("str_test"));
+
+        configManager.set_key_as_str("str_test_2", "Hello world");
+        Assertions.assertEquals("Hello world", configManager.get_key_as_str("str_test_2"));
+
+        configManager.set_key_as_str("str_test_2", "");
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            configManager.get_key_as_str("str_test_2");
+        });
     }
 }

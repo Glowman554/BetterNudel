@@ -12,4 +12,6 @@ public interface ConfigProvider {
     String[] get_all_keys();
 
     int get_priority();
+
+    void delete_key(String key);
 }
