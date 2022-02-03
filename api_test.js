@@ -8,7 +8,7 @@ function stop_login(login_id) {
 	});
 }
 
-function start_login(discord_tag) {
+function start_login() {
 	return new Promise((resolve, reject) => {
 		fetch(base_api + "/start").then(response => response.json()).then(response => {
 			resolve(response.id);
@@ -32,8 +32,8 @@ function check_login(token) {
 	});
 }
 
-async function login(discord_tag) {
-	let login_id = await start_login(discord_tag);
+async function login() {
+	let login_id = await start_login();
 
 	console.log("-auth " + login_id)
 
