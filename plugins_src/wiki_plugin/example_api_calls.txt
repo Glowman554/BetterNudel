@@ -1,0 +1,8 @@
+http://localhost:8888/api/v2/wiki/page/create?token=HxtF0IT5Eb&page_title=dGVzdDEyMw==&page_text=dGVzdDEyMw==
+	-> {"page_id": "597275_62468", "page_title": "test123", "page_text": "test123"}
+
+http://localhost:8888/api/v2/wiki/page/get?page_id=597275_62468
+	-> {"page_id": "597275_62468", "page_title": "test123", "page_text": "test123"}
+
+http://localhost:8888/api/v2/wiki/page/edit?token=HxtF0IT5Eb&page_title=dGVzdDIzNA==&page_id=597275_62468
+	-> {"page_id": "597275_62468", "page_title": "test234", "page_text": "test123"}

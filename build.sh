@@ -13,3 +13,4 @@ build_and_install_plugin test_plugin
 build_and_install_plugin bmi_plugin
 build_and_install_plugin lagersimulation_plugin
 build_and_install_plugin exs_plugin
+build_and_install_plugin wiki_plugin
