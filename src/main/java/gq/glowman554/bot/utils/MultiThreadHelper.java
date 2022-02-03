@@ -46,9 +46,10 @@ public class MultiThreadHelper {
             Log.log("Thread start (" + lambda.toString() + ")");
 
             lambda.exec();
-            waiter.on_complete();
 
             Log.log("Thread exit (" + lambda.toString() + ")");
+
+            waiter.on_complete();
         }).start();
 
         return waiter;
@@ -66,9 +67,9 @@ public class MultiThreadHelper {
                 e.printStackTrace();
             }
 
-            waiter.on_complete();
-
             Log.log("Thread exit (" + _class.getSimpleName() + ")");
+
+            waiter.on_complete();
         }).start();
 
         return waiter;

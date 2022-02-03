@@ -14,10 +14,6 @@ import gq.glowman554.bot.platform.teleram.TelegramPlatform;
 import gq.glowman554.bot.platform.web.WebPlatform;
 import gq.glowman554.bot.plugin.PluginLoader;
 import gq.glowman554.bot.utils.MultiThreadHelper;
-import net.shadew.json.Json;
-import net.shadew.json.JsonSyntaxException;
-
-import java.io.IOException;
 
 public class Main {
     public static CommandManager commandManager;
@@ -25,6 +21,11 @@ public class Main {
     public static PluginLoader pluginLoader;
     public static long startTime;
     public static boolean tiny_crash_report = false;
+
+    public static DiscordPlatform discordPlatform;
+    public static TelegramPlatform telegramPlatform;
+    public static ConsolePlatform consolePlatform;
+    public static WebPlatform webPlatform;
 
     public static void load_config() {
         Log.log("Loading config...");
@@ -91,18 +92,20 @@ public class Main {
 
         HttpApi.load();
 
-        MultiThreadHelper.run(ConsolePlatform.class);
-        MultiThreadHelper.run(DiscordPlatform.class);
-        MultiThreadHelper.run(TelegramPlatform.class);
-        MultiThreadHelper.run(WebPlatform.class);
+        var consolePlatformWaiter = MultiThreadHelper.run(ConsolePlatform.class);
+        var discordPlatformWaiter = MultiThreadHelper.run(DiscordPlatform.class);
+        var telegramPlatformWaiter = MultiThreadHelper.run(TelegramPlatform.class);
+        var webPlatformWaiter = MultiThreadHelper.run(WebPlatform.class);
 
-        //pluginLoader.load();
-        MultiThreadHelper.run(() -> {
-            try {
-                pluginLoader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).complete();
+        consolePlatform = (ConsolePlatform) consolePlatformWaiter.complete().instance;
+        discordPlatform = (DiscordPlatform) discordPlatformWaiter.complete().instance;
+        telegramPlatform = (TelegramPlatform) telegramPlatformWaiter.complete().instance;
+        webPlatform = (WebPlatform) webPlatformWaiter.complete().instance;
+
+
+        pluginLoader.load();
+
+
+        Log.log("Startup complete!");
     }
 }
