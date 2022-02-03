@@ -71,6 +71,31 @@ public class PageManager {
 		save();
 	}
 
+	public void delete(String page_id) {
+		if (!ArrayUtils.contains(known_pages, page_id)) {
+			throw new IllegalArgumentException("Unknown page_id: " + page_id);
+		}
+
+		Main.configManager.set_key_as_str("wiki_" + page_id, "");
+		known_pages = ArrayUtils.remove(known_pages, page_id);
+
+		save();
+	}
+
+	public JsonNode toJson() {
+		JsonNode root = JsonNode.array();
+
+		for (String page_id : known_pages) {
+			JsonNode page_info = JsonNode.object();
+			page_info.set("page_id", page_id);
+			page_info.set("page_title", load(page_id).page_title);
+
+			root.add(page_info);
+		}
+
+		return root;
+	}
+
 	public static void load() {
 		Log.log("Loading PageManager...");
 		instance = new PageManager();

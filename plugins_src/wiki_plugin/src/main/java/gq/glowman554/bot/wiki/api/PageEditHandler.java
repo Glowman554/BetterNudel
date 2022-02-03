@@ -9,6 +9,7 @@ import gq.glowman554.bot.http.server.HttpApiHandler;
 import gq.glowman554.bot.http.server.api.auth.AuthManager;
 import gq.glowman554.bot.wiki.Page;
 import gq.glowman554.bot.wiki.PageManager;
+import gq.glowman554.bot.wiki.event.PageUpdateEvent;
 
 public class PageEditHandler extends HttpApiHandler {
 
@@ -53,6 +54,8 @@ public class PageEditHandler extends HttpApiHandler {
 		if (page_text != null) {
 			current_page.page_text = page_text;
 		}
+
+		new PageUpdateEvent(current_page).call();
 
 		PageManager.instance.edit(current_page);
 

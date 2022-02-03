@@ -7,8 +7,10 @@ import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.plugin.Plugin;
 import gq.glowman554.bot.wiki.PageManager;
 import gq.glowman554.bot.wiki.api.PageCreateHandler;
+import gq.glowman554.bot.wiki.api.PageDeleteHandler;
 import gq.glowman554.bot.wiki.api.PageEditHandler;
 import gq.glowman554.bot.wiki.api.PageGetHandler;
+import gq.glowman554.bot.wiki.api.PageListHandler;
 import gq.glowman554.bot.wiki.event.PageCreateEvent;
 import gq.glowman554.bot.wiki.event.PageDeleteEvent;
 import gq.glowman554.bot.wiki.event.PageUpdateEvent;
@@ -25,6 +27,8 @@ public class WikiPlugin implements Plugin {
 		new PageCreateHandler(HttpApi.instance, "/api/v2/wiki/page/create");
 		new PageGetHandler(HttpApi.instance, "/api/v2/wiki/page/get");
 		new PageEditHandler(HttpApi.instance, "/api/v2/wiki/page/edit");
+		new PageListHandler(HttpApi.instance, "/api/v2/wiki/page/list");
+		new PageDeleteHandler(HttpApi.instance, "/api/v2/wiki/page/delete");
     }
 
 	@EventTarget

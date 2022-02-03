@@ -7,7 +7,9 @@ import gq.glowman554.bot.Main;
 import gq.glowman554.bot.http.server.HttpApi;
 import gq.glowman554.bot.http.server.HttpApiHandler;
 import gq.glowman554.bot.http.server.api.auth.AuthManager;
+import gq.glowman554.bot.wiki.Page;
 import gq.glowman554.bot.wiki.PageManager;
+import gq.glowman554.bot.wiki.event.PageCreateEvent;
 
 public class PageCreateHandler extends HttpApiHandler {
 
@@ -40,7 +42,11 @@ public class PageCreateHandler extends HttpApiHandler {
 		}
 		page_text = new String(Base64.getDecoder().decode(page_text));
 
-		return PageManager.instance.create(page_title, page_text).toJson().toString();
+		Page page =  PageManager.instance.create(page_title, page_text);
+
+		new PageCreateEvent(page).call();
+
+		return page.toJson().toString();
 	}
 	
 }
