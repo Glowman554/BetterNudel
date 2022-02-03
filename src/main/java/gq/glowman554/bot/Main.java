@@ -92,6 +92,8 @@ public class Main {
 
         HttpApi.load();
 
+        pluginLoader.load();
+
         var consolePlatformWaiter = MultiThreadHelper.run(ConsolePlatform.class);
         var discordPlatformWaiter = MultiThreadHelper.run(DiscordPlatform.class);
         var telegramPlatformWaiter = MultiThreadHelper.run(TelegramPlatform.class);
@@ -101,10 +103,6 @@ public class Main {
         discordPlatform = (DiscordPlatform) discordPlatformWaiter.complete().instance;
         telegramPlatform = (TelegramPlatform) telegramPlatformWaiter.complete().instance;
         webPlatform = (WebPlatform) webPlatformWaiter.complete().instance;
-
-
-        pluginLoader.load();
-
 
         Log.log("Startup complete!");
     }
