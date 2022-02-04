@@ -24,5 +24,7 @@ public class TestPageManager {
 
 		Page page3 = PageManager.instance.load(page.page_id);
 		Log.log(Json.json().serialize(page3.toJson()));
+
+		PageManager.instance.delete(page3.page_id);
 	}
 }
