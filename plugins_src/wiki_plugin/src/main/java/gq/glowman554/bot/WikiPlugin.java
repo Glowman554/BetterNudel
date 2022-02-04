@@ -7,6 +7,7 @@ import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.plugin.Plugin;
 import gq.glowman554.bot.utils.MultiThreadHelper;
 import gq.glowman554.bot.wiki.PageManager;
+import gq.glowman554.bot.wiki.api.PageChangeLogHandler;
 import gq.glowman554.bot.wiki.api.PageCreateHandler;
 import gq.glowman554.bot.wiki.api.PageDeleteHandler;
 import gq.glowman554.bot.wiki.api.PageEditHandler;
@@ -30,6 +31,7 @@ public class WikiPlugin implements Plugin {
 		new PageEditHandler(HttpApi.instance, "/api/v2/wiki/page/edit");
 		new PageListHandler(HttpApi.instance, "/api/v2/wiki/page/list");
 		new PageDeleteHandler(HttpApi.instance, "/api/v2/wiki/page/delete");
+		new PageChangeLogHandler(HttpApi.instance, "/api/v2/wiki/page/changelog");
 
 		try {
 			String event_channel_id = Main.configManager.get_key_as_str("wiki_event_channel_id");

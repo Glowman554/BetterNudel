@@ -1,6 +1,6 @@
 import {existsSync} from "https://deno.land/std/fs/mod.ts";
 
-var base_api = "https://x.glowman554.gq/api/v2"
+var base_api = "http://localhost:8888/api/v2"
 
 function start_login() {
 	return new Promise((resolve, reject) => {
@@ -64,6 +64,14 @@ function wiki_delete(token, page_id) {
 	});
 }
 
+function wiki_changelog() {
+	return new Promise((resolve, reject) => {
+		fetch(base_api + "/wiki/page/changelog").then(response => response.json()).then(response => {
+			resolve(response);
+		});
+	});
+}
+
 async function login() {
 	let login_id = await start_login();
 
@@ -114,6 +122,8 @@ async function main() {
 	response = await wiki_delete(token, page_id);
 	console.log(response);
 
+	response = await wiki_changelog();
+	console.log(response);
 }
 
 main();
