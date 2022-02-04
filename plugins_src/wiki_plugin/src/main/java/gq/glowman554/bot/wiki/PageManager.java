@@ -27,6 +27,11 @@ public class PageManager {
 		}
 
 		Log.log("Found " + known_pages.length + " known pages.");
+
+		// done for migration purposes
+		for (String page : known_pages) {
+			save(load(page));
+		}
 	}
 
 	private void save() {
@@ -67,9 +72,16 @@ public class PageManager {
 	}
 
 	public void edit(Page page) {
+		page.page_edited = System.currentTimeMillis();
 		Main.configManager.set_key_as_str("wiki_" + page.page_id, page.toJson().toString());
 		save();
 	}
+
+	public void save(Page page) {
+		Main.configManager.set_key_as_str("wiki_" + page.page_id, page.toJson().toString());
+		save();
+	}
+
 
 	public void delete(String page_id) {
 		if (!ArrayUtils.contains(known_pages, page_id)) {
@@ -89,6 +101,8 @@ public class PageManager {
 			JsonNode page_info = JsonNode.object();
 			page_info.set("page_id", page_id);
 			page_info.set("page_title", load(page_id).page_title);
+			page_info.set("page_created", load(page_id).page_created);
+			page_info.set("page_edited", load(page_id).page_edited);
 
 			root.add(page_info);
 		}
