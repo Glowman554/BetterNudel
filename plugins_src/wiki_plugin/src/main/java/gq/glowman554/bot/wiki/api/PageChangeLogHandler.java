@@ -17,7 +17,7 @@ import net.shadew.json.JsonNode;
 import net.shadew.json.JsonSyntaxException;
 
 public class PageChangeLogHandler extends HttpApiHandler {
-	private Pair<String, Long>[] changelog = new Pair[20];
+	private Pair<String, Long>[] changelog = new Pair[30];
 
 	public PageChangeLogHandler(HttpApi api, String path) {
 		super(api, path);
