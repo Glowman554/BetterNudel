@@ -1,5 +1,7 @@
 package gq.glowman554.bot;
 
+import java.net.URLDecoder;
+
 import gq.glowman554.bot.event.EventManager;
 import gq.glowman554.bot.event.EventTarget;
 import gq.glowman554.bot.wiki.event.PageCreateEvent;
@@ -25,6 +27,7 @@ public class DiscordEventNotifier {
 	}
 
 	private void build_and_send_update(String type, String page_title) {
+		page_title = URLDecoder.decode(page_title);
 		EmbedBuilder eb = new EmbedBuilder();
 
 		eb.setTitle(type);
