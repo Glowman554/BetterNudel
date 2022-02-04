@@ -1,4 +1,4 @@
-#Building
+# Building
 
 1) Run `mvn install` in the main project
 2) Run `mvn package` here.

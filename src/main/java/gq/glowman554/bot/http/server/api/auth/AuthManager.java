@@ -38,6 +38,15 @@ public class AuthManager {
         new AuthLoginStopHandler(api, "/api/v2/login/stop", this);
     }
 
+    public void add_token(String token_owner, String token) {
+        active_tokens.put(token, token_owner);
+        try {
+            save();
+        } catch (IOException e) {
+            throw new IllegalStateException(e.getMessage());
+        }
+    }
+
     protected void save() throws IOException {
         JsonNode root = JsonNode.array();
 

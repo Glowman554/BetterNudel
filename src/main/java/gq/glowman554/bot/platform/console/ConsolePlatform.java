@@ -25,6 +25,7 @@ public class ConsolePlatform {
         Main.commandManager.permissionManager.add_permission("<stdin>", "log");
         Main.commandManager.permissionManager.add_permission("<stdin>", "compile");
         Main.commandManager.permissionManager.add_permission("<stdin>", "full_access");
+        Main.commandManager.permissionManager.add_permission("<stdin>", "token");
 
         MultiThreadHelper.run(this::run);
     }

@@ -89,10 +89,9 @@ public class Main {
         commandManager.add_command("roll", new RollCommand());
         commandManager.add_command("compile", new CompileCommand());
         commandManager.add_command("calc", new CalcCommand());
+        commandManager.add_command("token", new TokenCommand());
 
         HttpApi.load();
-
-        pluginLoader.load();
 
         var consolePlatformWaiter = MultiThreadHelper.run(ConsolePlatform.class);
         var discordPlatformWaiter = MultiThreadHelper.run(DiscordPlatform.class);
@@ -103,6 +102,8 @@ public class Main {
         discordPlatform = (DiscordPlatform) discordPlatformWaiter.complete().instance;
         telegramPlatform = (TelegramPlatform) telegramPlatformWaiter.complete().instance;
         webPlatform = (WebPlatform) webPlatformWaiter.complete().instance;
+
+        pluginLoader.load();
 
         Log.log("Startup complete!");
     }
