@@ -13,11 +13,13 @@ import gq.glowman554.bot.wiki.api.PageDeleteHandler;
 import gq.glowman554.bot.wiki.api.PageEditHandler;
 import gq.glowman554.bot.wiki.api.PageGetHandler;
 import gq.glowman554.bot.wiki.api.PageListHandler;
+import gq.glowman554.bot.wiki.command.WikiCommand;
 import gq.glowman554.bot.wiki.event.PageCreateEvent;
 import gq.glowman554.bot.wiki.event.PageDeleteEvent;
 import gq.glowman554.bot.wiki.event.PageUpdateEvent;
 
 public class WikiPlugin implements Plugin {
+	public static PageChangeLogHandler pageChangeLogHandlerInstance;
     @Override
     public void on_load() throws Exception {
         Log.log("Hello World!");
@@ -31,7 +33,9 @@ public class WikiPlugin implements Plugin {
 		new PageEditHandler(HttpApi.instance, "/api/v2/wiki/page/edit");
 		new PageListHandler(HttpApi.instance, "/api/v2/wiki/page/list");
 		new PageDeleteHandler(HttpApi.instance, "/api/v2/wiki/page/delete");
-		new PageChangeLogHandler(HttpApi.instance, "/api/v2/wiki/page/changelog");
+		pageChangeLogHandlerInstance = new PageChangeLogHandler(HttpApi.instance, "/api/v2/wiki/page/changelog");
+
+		Main.commandManager.add_command("wiki", new WikiCommand());
 
 		try {
 			String event_channel_id = Main.configManager.get_key_as_str("wiki_event_channel_id");
