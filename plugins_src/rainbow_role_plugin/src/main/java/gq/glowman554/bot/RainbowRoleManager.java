@@ -33,10 +33,7 @@ public class RainbowRoleManager {
 		process();
 
 		Log.log("Loaded " + roles.size() + " roles.");
-		MultiThreadHelper.run(() -> {
-		MultiThreadHelper.run(this::role_setter).complete();;
-		throw new RuntimeException("This should never happen!");
-		});
+		MultiThreadHelper.run(this::role_setter);
 	}
 
 	private void load() {
