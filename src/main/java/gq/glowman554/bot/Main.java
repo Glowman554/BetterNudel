@@ -61,6 +61,8 @@ public class Main {
 
         pluginLoader = new PluginLoader("plugins");
 
+        HttpApi.load();
+
         commandManager.add_command("ping", new PingCommand());
         commandManager.add_command("chatbot", new ChatBotCommand());
         commandManager.add_command("dog", new DogCommand());
@@ -93,7 +95,6 @@ public class Main {
         commandManager.add_command("token", new TokenCommand());
         commandManager.add_command("spotify", new SpotifyCommand());
 
-        HttpApi.load();
 
         var consolePlatformWaiter = MultiThreadHelper.run(ConsolePlatform.class);
         var discordPlatformWaiter = MultiThreadHelper.run(DiscordPlatform.class);
