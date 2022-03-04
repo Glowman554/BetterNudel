@@ -36,10 +36,14 @@ public class CoronaApi {
     };
 
     public CoronaApiResult fetchCountry(String country) throws IOException, JsonSyntaxException {
-        String res = HttpClient.request("https://disease.sh/v3/covid-19/countries/" + country);
+        String res = HttpClient.get("https://disease.sh/v3/covid-19/countries/" + country);
 
         Json json = Json.json();
         JsonNode root = json.parse(res);
+
+        if (root.get("message") != null && root.get("message").asString().equals("Country not found or doesn't have any cases")) {
+            throw new IllegalArgumentException();
+        }
 
         String countryName = root.get("country").asString();
         int confirmed = root.get("cases").asInt();

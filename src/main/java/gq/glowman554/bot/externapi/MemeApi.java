@@ -11,7 +11,7 @@ public class MemeApi {
     public String _url;
 
     public String getMeme() throws IOException, JsonSyntaxException {
-        String res = HttpClient.request("https://meme-api.herokuapp.com/gimme");
+        String res = HttpClient.get("https://meme-api.herokuapp.com/gimme");
 
         Json json = Json.json();
         JsonNode root = json.parse(res);

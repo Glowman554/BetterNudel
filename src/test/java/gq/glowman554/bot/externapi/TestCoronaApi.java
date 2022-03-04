@@ -28,7 +28,7 @@ public class TestCoronaApi {
 
     @Test
     public void test3() throws IOException, JsonSyntaxException {
-        assertThrows(FileNotFoundException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             CoronaApi coronaApi = new CoronaApi();
             CoronaApi.CoronaApiResult result = coronaApi.fetchCountry("invalid");
 

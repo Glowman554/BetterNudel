@@ -30,7 +30,7 @@ public class FurryApi {
     };
 
     public FurryResult random_image(String endpoint) throws IOException, JsonSyntaxException {
-        String response = HttpClient.request(String.format("https://v2.yiff.rest/%s?limit=1&notes=disabled", endpoint));
+        String response = HttpClient.get(String.format("https://v2.yiff.rest/%s?limit=1&notes=disabled", endpoint));
 
         Json json = Json.json();
         JsonNode root = json.parse(response);

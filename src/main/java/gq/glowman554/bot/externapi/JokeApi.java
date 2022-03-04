@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class JokeApi {
     public String getJoke() throws IOException, JsonSyntaxException {
-        String res = HttpClient.request("http://api.icndb.com/jokes/random");
+        String res = HttpClient.get("http://api.icndb.com/jokes/random");
         Json json = Json.json();
         JsonNode root = json.parse(res);
 

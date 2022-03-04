@@ -46,7 +46,7 @@ public class IpInfoApi {
     }
 
     public IpInfo request_info(String ip) throws IOException, JsonSyntaxException {
-        String raw_data = HttpClient.request("https://ipinfo.io/" + ip);
+        String raw_data = HttpClient.get("https://ipinfo.io/" + ip);
 
         Json _json = Json.json();
         JsonNode root = _json.parse(raw_data);

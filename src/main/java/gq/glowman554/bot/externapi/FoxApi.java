@@ -11,7 +11,7 @@ public class FoxApi {
     public String _url;
 
     public String getFox() throws IOException, JsonSyntaxException {
-        String res = HttpClient.request("https://randomfox.ca/floof/?ref=apilist.fun");
+        String res = HttpClient.get("https://randomfox.ca/floof/?ref=apilist.fun");
 
         Json json = Json.json();
         JsonNode root = json.parse(res);

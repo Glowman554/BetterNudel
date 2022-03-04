@@ -30,7 +30,7 @@ public class ChatBotApi {
         message = message.replace("?", "%3F");
         message = message.replace("=", "%3D");
 
-        String response = HttpClient.request(String.format("http://api.brainshop.ai/get?bid=%s&key=%s&uid=%s&msg=%s", bid, key, id, message));
+        String response = HttpClient.get(String.format("http://api.brainshop.ai/get?bid=%s&key=%s&uid=%s&msg=%s", bid, key, id, message));
 
         Json json = Json.json();
         JsonNode root = json.parse(response);

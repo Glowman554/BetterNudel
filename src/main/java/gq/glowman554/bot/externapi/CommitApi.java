@@ -6,6 +6,6 @@ import java.io.IOException;
 
 public class CommitApi {
     public String getCommit() throws IOException {
-        return HttpClient.request("http://whatthecommit.com/index.txt");
+        return HttpClient.get("http://whatthecommit.com/index.txt");
     }
 }

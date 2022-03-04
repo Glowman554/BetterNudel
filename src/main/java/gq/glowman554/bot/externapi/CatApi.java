@@ -11,7 +11,7 @@ public class CatApi {
     public String _url;
 
     public String getCat() throws IOException, JsonSyntaxException {
-        String res = HttpClient.request("https://aws.random.cat/meow");
+        String res = HttpClient.get("https://aws.random.cat/meow");
 
         Json json = Json.json();
         JsonNode root = json.parse(res);

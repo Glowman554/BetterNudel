@@ -11,7 +11,7 @@ public class DogApi {
     public String _url;
 
     public String getDog() throws IOException, JsonSyntaxException {
-        String res = HttpClient.request("https://dog.ceo/api/breeds/image/random");
+        String res = HttpClient.get("https://dog.ceo/api/breeds/image/random");
 
         Json json = Json.json();
         JsonNode root = json.parse(res);
