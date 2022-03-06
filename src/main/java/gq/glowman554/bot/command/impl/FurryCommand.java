@@ -65,7 +65,6 @@ public class FurryCommand implements Command {
                 String tmp_file = FileUtils.randomTmpFile(FileUtils.getFileExtension(result.url));
                 result.download(tmp_file);
                 event.commandEvent.send_picture(new File(tmp_file));
-                return;
             } catch (IOException | JsonSyntaxException e) {
                 e.printStackTrace();
             }
@@ -77,7 +76,17 @@ public class FurryCommand implements Command {
                 String tmp_file = FileUtils.randomTmpFile(FileUtils.getFileExtension(result.url));
                 result.download(tmp_file);
                 event.commandEvent.send_picture(new File(tmp_file));
-                return;
+            } catch (IOException | JsonSyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (event.commandEvent.get_sender_id().equals("542063844932190219")) {
+            try {
+                FurryApi.FurryResult result = new FurryApi().furry_fursuit();
+                String tmp_file = FileUtils.randomTmpFile(FileUtils.getFileExtension(result.url));
+                result.download(tmp_file);
+                event.commandEvent.send_picture(new File(tmp_file));
             } catch (IOException | JsonSyntaxException e) {
                 e.printStackTrace();
             }
