@@ -21,7 +21,6 @@ class DiscordRPCPlugin(octoprint.plugin.StartupPlugin, octoprint.plugin.Settings
 
 	def on_event(self, event, payload):
 		if event == "PrinterStateChanged":
-			print(payload)
 			api_request(self, self._settings.get(["url"]), "state", payload.get("state_id"))
 		elif event == "Home":
 			api_request(self, self._settings.get(["url"]), "home", "-")
