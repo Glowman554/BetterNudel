@@ -27,7 +27,7 @@ public class ApiOctoPrintHandler extends HttpApiHandler {
             case "state":
                 if (query.get("payload").equals("OPERATIONAL")) {
                     Main.discordPlatform.setDefaultRP();
-                } else if (query.get("payload").equals("OPERATIONAL")) {
+                } else if (query.get("payload").equals("FINISHING")) {
                     String message = String.format("Finished printing %s! @everyone", last_file);
                     String channel = Main.configManager.get_key_as_str("octoprint_channel");
 
