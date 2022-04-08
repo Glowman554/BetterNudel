@@ -8,6 +8,7 @@
     <artifactId>BetterNudel</artifactId>
     <version>1.0-SNAPSHOT-REWRITE</version>
 
+
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -46,6 +47,14 @@
                     <mainClass>gq.glowman554.bot.Main</mainClass>
                 </configuration>
             </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.10.1</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 
