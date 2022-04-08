@@ -96,12 +96,12 @@ public class Main {
         commandManager.add_command("spotify", new SpotifyCommand());
 
 
-        var consolePlatformWaiter = MultiThreadHelper.run(ConsolePlatform.class);
+        //var consolePlatformWaiter = MultiThreadHelper.run(ConsolePlatform.class);
         var discordPlatformWaiter = MultiThreadHelper.run(DiscordPlatform.class);
         var telegramPlatformWaiter = MultiThreadHelper.run(TelegramPlatform.class);
         var webPlatformWaiter = MultiThreadHelper.run(WebPlatform.class);
 
-        consolePlatform = (ConsolePlatform) consolePlatformWaiter.complete().instance;
+        //consolePlatform = (ConsolePlatform) consolePlatformWaiter.complete().instance;
         discordPlatform = (DiscordPlatform) discordPlatformWaiter.complete().instance;
         telegramPlatform = (TelegramPlatform) telegramPlatformWaiter.complete().instance;
         webPlatform = (WebPlatform) webPlatformWaiter.complete().instance;
