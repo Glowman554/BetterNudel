@@ -11,12 +11,12 @@ public class CatApi {
     public String _url;
 
     public String getCat() throws IOException, JsonSyntaxException {
-        String res = HttpClient.get("https://aws.random.cat/meow");
+        String res = HttpClient.get("https://api.thecatapi.com/v1/images/search");
 
         Json json = Json.json();
         JsonNode root = json.parse(res);
 
-        _url = root.get("file").asString();
+        _url = root.get(0).get("url").asString();
 
         return _url;
     }
