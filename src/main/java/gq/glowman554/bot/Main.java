@@ -94,6 +94,7 @@ public class Main {
         commandManager.add_command("calc", new CalcCommand());
         commandManager.add_command("token", new TokenCommand());
         commandManager.add_command("spotify", new SpotifyCommand());
+		commandManager.add_command("translate", new TranslateCommand());
 
 
         //var consolePlatformWaiter = MultiThreadHelper.run(ConsolePlatform.class);
