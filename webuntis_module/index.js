@@ -79,7 +79,7 @@ async function fetch_homework() {
 	var homework_string = "";
 
 	for (let x of homework.homeworks) {
-		var subject = homework.lessons.find(lesson => lesson.id == x.lessonId)?.subject;
+		var subject = homework.lessons.find(lesson => lesson.id == x.lessonId).subject;
 		var due_date = WebUntis.convertUntisDate(x.dueDate).toLocaleDateString();
 
 		homework_string += `**${subject}**: ${x.text} muss bis zum \`${due_date}\` erledigt sein!\n`;
