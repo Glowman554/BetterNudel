@@ -13,6 +13,9 @@ COPY . /srv/
 WORKDIR /srv/webinterface
 RUN npm install
 
+WORKDIR /srv/webuntis_module
+RUN npm install
+
 WORKDIR /srv/
 RUN mkdir -p tmp
 RUN bash build.sh

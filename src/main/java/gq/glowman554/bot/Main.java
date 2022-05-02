@@ -7,6 +7,7 @@ import gq.glowman554.bot.config.impl.EnvConfigProvider;
 import gq.glowman554.bot.config.impl.FileConfigProvider;
 import gq.glowman554.bot.config.impl.RedisConfigProvider;
 import gq.glowman554.bot.externapi.SpotifyApi;
+import gq.glowman554.bot.externapi.UntisApi;
 import gq.glowman554.bot.http.server.HttpApi;
 import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.platform.console.ConsolePlatform;
@@ -108,6 +109,15 @@ public class Main {
         webPlatform = (WebPlatform) webPlatformWaiter.complete().instance;
 
         pluginLoader.load();
+
+        MultiThreadHelper.run(() -> {
+            String[] users = Main.configManager.get_key_as_str("untis_cfg").split(";");
+            try {
+                new UntisApi(users).start_edit_loop();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         Log.log("Startup complete!");
     }

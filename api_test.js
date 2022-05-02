@@ -46,6 +46,8 @@ async function login() {
 		}
 	} while (token == null);
 
+    stop_login(login_id);
+
 	return token;
 }
 
