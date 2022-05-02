@@ -62,6 +62,7 @@ export default class Login extends React.Component {
 												clearInterval(this.interval);
 												localStorage.setItem("token", data2.token);
 												location.reload();
+												api_request("/api/v2/login/stop?login_id=" + data.id);
 											}
 										});
 									}, 1000);

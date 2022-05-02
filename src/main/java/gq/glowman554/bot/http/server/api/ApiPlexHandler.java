@@ -22,6 +22,10 @@ public class ApiPlexHandler extends HttpApiHandler {
             return "Invalid token";
         }
 
+        if (!Main.commandManager.permissionManager.has_permission(user, "plex")) {
+            return "Missing permission";
+        }
+
         switch (query.get("event")) {
             case "stream_stop": {
                 Main.discordPlatform.setDefaultRP();

@@ -23,6 +23,10 @@ public class ApiOctoPrintHandler extends HttpApiHandler {
             return "Invalid token";
         }
 
+        if (!Main.commandManager.permissionManager.has_permission(user, "octoprint")) {
+            return "Missing permission";
+        }
+
         switch (query.get("event")) {
             case "state":
                 if (query.get("payload").equals("OPERATIONAL")) {

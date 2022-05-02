@@ -27,6 +27,7 @@ public class AuthLoginStopHandler extends HttpApiHandler {
         }
 
         authManager.pending_tokens.remove(login_id);
+        authManager.save();
         return "{\"msg\": \"ok\"}";
     }
 }

@@ -27,7 +27,6 @@ public class AuthLoginStatusHandler extends HttpApiHandler {
         }
 
         if (session.ack) {
-            authManager.pending_tokens.remove(login_id);
             authManager.active_tokens.put(session.new_token, session.user_id);
             authManager.save();
 
