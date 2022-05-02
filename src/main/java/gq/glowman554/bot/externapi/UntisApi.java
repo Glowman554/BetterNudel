@@ -41,7 +41,11 @@ public class UntisApi {
 
         while (true) {
             untis_message.editMessage("Fetching data...").queue();
-            untis_message.editMessage(toString()).queue();
+            try {
+                untis_message.editMessage(toString()).queue();
+            } catch (RuntimeException e) {
+                untis_message.editMessage("Failed to fetch untis info: " + e.getMessage()).queue();
+            }
 
             Thread.sleep(1000 * 60 * 60);
         }
