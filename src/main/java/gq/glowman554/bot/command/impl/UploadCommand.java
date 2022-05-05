@@ -12,9 +12,8 @@ import java.io.File;
 import java.util.HashMap;
 
 public class UploadCommand implements Command {
-    private String http_host_url;
-
     HashMap<String, Long> rate_limit = new HashMap<String, Long>();
+    private String http_host_url;
 
     private void load_host_url() {
         try {

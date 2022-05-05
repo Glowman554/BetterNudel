@@ -9,7 +9,6 @@ import gq.glowman554.bot.event.EventTarget;
 import gq.glowman554.bot.event.impl.MessageEvent;
 import gq.glowman554.bot.externapi.ChatBotApi;
 import gq.glowman554.bot.utils.ArrayUtils;
-import net.shadew.json.JsonSyntaxException;
 
 import java.io.IOException;
 
@@ -41,7 +40,7 @@ public class ChatBotCommand implements Command {
             try {
                 event.commandEvent.message_send(api.response(event.commandEvent.get_message(), event.commandEvent.get_chat_name()));
                 event.setCanceled(true);
-            } catch (IOException | JsonSyntaxException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

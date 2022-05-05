@@ -3,42 +3,6 @@ package gq.glowman554.bot.utils;
 import gq.glowman554.bot.log.Log;
 
 public class MultiThreadHelper {
-    public interface MultiThreadHelperLambda {
-        void exec();
-    }
-
-    public static class MultiThreadHelperLambdaWaiter {
-        private volatile boolean complete = false;
-
-        protected void on_complete() {
-            complete = true;
-        }
-
-        public void complete() {
-            while (!complete) {
-                Thread.onSpinWait();
-            }
-        }
-    }
-
-    public static class MultiThreadHelperClassWaiter {
-        private volatile boolean complete = false;
-        public Object instance;
-
-        protected void on_complete() {
-            complete = true;
-        }
-
-        public MultiThreadHelperClassWaiter complete() {
-            while (!complete) {
-                Thread.onSpinWait();
-            }
-
-            return this;
-        }
-    }
-
-
     public static MultiThreadHelperLambdaWaiter run(MultiThreadHelperLambda lambda) {
         MultiThreadHelperLambdaWaiter waiter = new MultiThreadHelperLambdaWaiter();
 
@@ -73,5 +37,40 @@ public class MultiThreadHelper {
         }).start();
 
         return waiter;
+    }
+
+    public interface MultiThreadHelperLambda {
+        void exec();
+    }
+
+    public static class MultiThreadHelperLambdaWaiter {
+        private volatile boolean complete = false;
+
+        protected void on_complete() {
+            complete = true;
+        }
+
+        public void complete() {
+            while (!complete) {
+                Thread.onSpinWait();
+            }
+        }
+    }
+
+    public static class MultiThreadHelperClassWaiter {
+        public Object instance;
+        private volatile boolean complete = false;
+
+        protected void on_complete() {
+            complete = true;
+        }
+
+        public MultiThreadHelperClassWaiter complete() {
+            while (!complete) {
+                Thread.onSpinWait();
+            }
+
+            return this;
+        }
     }
 }

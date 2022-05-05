@@ -25,7 +25,7 @@ public class StringUtils {
 
             return res;
         } else {
-            return new String[] { in };
+            return new String[]{in};
         }
     }
 }

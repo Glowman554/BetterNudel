@@ -4,6 +4,7 @@ import gq.glowman554.bot.command.CommandPlatform;
 
 public class TelegramCommandPlatform implements CommandPlatform {
     public boolean reply_with_html = false;
+
     @Override
     public String format_bold(String source) {
         reply_with_html = true;

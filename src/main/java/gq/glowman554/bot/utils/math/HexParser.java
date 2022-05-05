@@ -10,6 +10,7 @@ public class HexParser {
 
         return num_digit;
     }
+
     public static int from_hex(String hex) {
         if (hex.startsWith("0x")) {
             hex = hex.substring(2);

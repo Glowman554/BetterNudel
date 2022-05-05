@@ -5,7 +5,6 @@ import gq.glowman554.bot.command.Command;
 import gq.glowman554.bot.command.CommandConfig;
 import gq.glowman554.bot.command.CommandEvent;
 import gq.glowman554.bot.externapi.CatApi;
-import gq.glowman554.bot.externapi.DogApi;
 import gq.glowman554.bot.utils.FileUtils;
 
 import java.io.File;

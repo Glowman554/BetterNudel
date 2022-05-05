@@ -3,7 +3,6 @@ package gq.glowman554.bot.http.server.api.auth;
 import gq.glowman554.bot.Main;
 import gq.glowman554.bot.http.server.HttpApi;
 import gq.glowman554.bot.log.Log;
-import gq.glowman554.bot.utils.FileUtils;
 import net.shadew.json.Json;
 import net.shadew.json.JsonNode;
 import net.shadew.json.JsonSyntaxException;
@@ -36,6 +35,11 @@ public class AuthManager {
         new AuthLoginStartHandler(api, "/api/v2/login/start", this);
         new AuthLoginStatusHandler(api, "/api/v2/login/status", this);
         new AuthLoginStopHandler(api, "/api/v2/login/stop", this);
+    }
+
+    public static void load(HttpApi api) throws JsonSyntaxException, IOException {
+        Log.log("Loading auth handler...");
+        instance = new AuthManager(api);
     }
 
     public void add_token(String token_owner, String token) {
@@ -104,17 +108,12 @@ public class AuthManager {
     }
 
     public static class AuthLoginSession {
-        public String user_id;
         public final String new_token;
+        public String user_id;
         public boolean ack = false;
 
         public AuthLoginSession(String new_token) {
             this.new_token = new_token;
         }
-    }
-
-    public static void load(HttpApi api) throws JsonSyntaxException, IOException {
-        Log.log("Loading auth handler...");
-        instance = new AuthManager(api);
     }
 }

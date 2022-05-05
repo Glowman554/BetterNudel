@@ -10,6 +10,7 @@ public class BinParser {
 
         return num_digit;
     }
+
     public static int from_bin(String bin) {
         if (bin.startsWith("0b")) {
             bin = bin.substring(2);

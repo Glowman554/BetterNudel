@@ -33,17 +33,6 @@ public class FileHostObject {
         uploader = new FileHostObjectUploader(root.get("uploader"));
     }
 
-    public JsonNode toJson() {
-        JsonNode root = JsonNode.object();
-
-        root.set("file_id", file_id);
-        root.set("original_name", original_name);
-        root.set("upload_time", upload_time);
-        root.set("uploader", uploader.toJson());
-
-        return root;
-    }
-
     public static String get_http_host_path() {
         String http_host_path;
         try {
@@ -76,6 +65,17 @@ public class FileHostObject {
         FileUtils.writeFile(http_host_path + "/files/" + file_id + "!!hidden!!.json", Json.json().serialize(object.toJson()));
 
         return object;
+    }
+
+    public JsonNode toJson() {
+        JsonNode root = JsonNode.object();
+
+        root.set("file_id", file_id);
+        root.set("original_name", original_name);
+        root.set("upload_time", upload_time);
+        root.set("uploader", uploader.toJson());
+
+        return root;
     }
 
     public String getFile_id() {

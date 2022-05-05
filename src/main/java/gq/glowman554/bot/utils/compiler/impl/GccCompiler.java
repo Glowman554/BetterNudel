@@ -5,7 +5,6 @@ import gq.glowman554.bot.utils.compiler.CompilerConfig;
 import gq.glowman554.bot.utils.compiler.CompilerInterface;
 
 import java.io.File;
-import java.io.IOException;
 
 public class GccCompiler extends CompilerInterface {
     @Override

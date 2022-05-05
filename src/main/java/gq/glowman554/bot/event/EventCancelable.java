@@ -1,6 +1,6 @@
 package gq.glowman554.bot.event;
 
-public class EventCancelable extends Event{
+public class EventCancelable extends Event {
     private boolean canceled = false;
 
     public boolean isCanceled() {

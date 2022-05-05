@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class ApiOctoPrintHandler extends HttpApiHandler {
     private String last_file = null;
+
     public ApiOctoPrintHandler(HttpApi api, String path) {
         super(api, path);
     }

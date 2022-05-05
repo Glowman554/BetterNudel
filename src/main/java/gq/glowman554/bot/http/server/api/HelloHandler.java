@@ -17,11 +17,11 @@ public class HelloHandler extends HttpApiHandler {
         };
 
         query.forEach((key, value) -> {
-            ref._return += key + "="+ value + "\n";
+            ref._return += key + "=" + value + "\n";
         });
 
         headers.forEach((key, value) -> {
-            ref._return += key + "="+ value + "\n";
+            ref._return += key + "=" + value + "\n";
         });
 
         return ref._return;

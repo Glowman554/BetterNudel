@@ -12,7 +12,7 @@ public class TestFilesCommand implements Command {
 
     @Override
     public void execute(CommandEvent event) throws Exception {
-        if (event.get_num_files() == 0 ) {
+        if (event.get_num_files() == 0) {
             event.message_send("No files!");
         } else {
             event.message_send(event.get_file(0));

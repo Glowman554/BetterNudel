@@ -6,7 +6,6 @@ import gq.glowman554.bot.http.server.HttpApi;
 import gq.glowman554.bot.http.server.HttpApiHandler;
 import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.utils.MultiThreadHelper;
-import gq.glowman554.bot.utils.Pair;
 import net.shadew.json.Json;
 import net.shadew.json.JsonNode;
 import net.shadew.json.JsonSyntaxException;
@@ -40,7 +39,7 @@ public class SpotifyApi {
             refresh_token = root.get("refresh_token").asString();
 
             refresh_token();
-        } catch (IllegalArgumentException | JsonSyntaxException | IOException e) {
+        } catch (IllegalArgumentException | IOException e) {
             Log.log("Could not load spotify config...");
             Log.log("Please open /spotify/login to start the login process...");
             login_start();

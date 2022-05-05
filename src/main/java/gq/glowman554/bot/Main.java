@@ -6,7 +6,6 @@ import gq.glowman554.bot.config.ConfigManager;
 import gq.glowman554.bot.config.impl.EnvConfigProvider;
 import gq.glowman554.bot.config.impl.FileConfigProvider;
 import gq.glowman554.bot.config.impl.RedisConfigProvider;
-import gq.glowman554.bot.externapi.SpotifyApi;
 import gq.glowman554.bot.externapi.UntisApi;
 import gq.glowman554.bot.http.server.HttpApi;
 import gq.glowman554.bot.log.Log;
@@ -95,7 +94,7 @@ public class Main {
         commandManager.add_command("calc", new CalcCommand());
         commandManager.add_command("token", new TokenCommand());
         commandManager.add_command("spotify", new SpotifyCommand());
-		commandManager.add_command("translate", new TranslateCommand());
+        commandManager.add_command("translate", new TranslateCommand());
 
 
         //var consolePlatformWaiter = MultiThreadHelper.run(ConsolePlatform.class);

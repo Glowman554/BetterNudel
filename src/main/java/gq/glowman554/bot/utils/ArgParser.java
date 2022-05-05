@@ -3,8 +3,8 @@ package gq.glowman554.bot.utils;
 import java.util.ArrayList;
 
 public class ArgParser {
-    ArrayList<ArgParserNode> args_list = new ArrayList<>();
     private final String[] args;
+    ArrayList<ArgParserNode> args_list = new ArrayList<>();
 
     public ArgParser(String[] args) {
         this.args = args;

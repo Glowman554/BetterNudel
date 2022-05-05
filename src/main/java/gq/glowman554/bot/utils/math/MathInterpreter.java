@@ -8,10 +8,6 @@ import gq.glowman554.bot.utils.math.parser.Parser;
 import gq.glowman554.bot.utils.math.parser.ParserNode;
 
 public class MathInterpreter {
-    public interface DebugPrint {
-        void log(String debug_msg);
-    }
-
     public static double eval(String expr, DebugPrint ref) {
         Lexer lexer = new Lexer(expr);
         LexerToken[] tokens = lexer.tokenize();
@@ -30,6 +26,11 @@ public class MathInterpreter {
     }
 
     public static double eval(String expr) {
-        return eval(expr, debug_msg -> {});
+        return eval(expr, debug_msg -> {
+        });
+    }
+
+    public interface DebugPrint {
+        void log(String debug_msg);
     }
 }

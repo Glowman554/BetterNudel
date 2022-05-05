@@ -11,9 +11,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class WebCommandEvent extends CommandEvent {
-    private JsonNode steps = JsonNode.array();
-
     private final String token;
+    private JsonNode steps = JsonNode.array();
 
     public WebCommandEvent(String message, CommandPlatform command_platform, String token) {
         super(message, command_platform);

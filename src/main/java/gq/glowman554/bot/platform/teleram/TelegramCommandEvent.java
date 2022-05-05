@@ -9,7 +9,10 @@ import org.telegram.telegrambots.facilities.filedownloader.TelegramFileDownloade
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.*;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
-import org.telegram.telegrambots.meta.api.objects.*;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
+import org.telegram.telegrambots.meta.api.objects.PhotoSize;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
@@ -63,7 +66,7 @@ public class TelegramCommandEvent extends CommandEvent {
     public String[] get_mention_ids() {
         String[] mentions = new String[0];
 
-        for(MessageEntity entity : update.getMessage().getEntities()) {
+        for (MessageEntity entity : update.getMessage().getEntities()) {
             if (entity.getType().equals("mention")) {
                 if (update.getMessage().getCaption() == null) {
                     String substr = update.getMessage().getText().substring(entity.getOffset(), entity.getOffset() + entity.getLength());

@@ -16,12 +16,10 @@ import java.util.HashMap;
 
 public class HttpApi {
 
-    public HttpServer server;
-    public HttpContext context;
-
     public static HttpApi instance;
     public static int port;
-
+    public HttpServer server;
+    public HttpContext context;
     public HashMap<String, HttpApiHandler> handlers = new HashMap<String, HttpApiHandler>();
 
     public HttpApi(int port) throws IOException {

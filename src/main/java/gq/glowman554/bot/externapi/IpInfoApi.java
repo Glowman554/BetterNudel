@@ -8,6 +8,23 @@ import net.shadew.json.JsonSyntaxException;
 import java.io.IOException;
 
 public class IpInfoApi {
+    public IpInfo request_info(String ip) throws IOException, JsonSyntaxException {
+        String raw_data = HttpClient.get("https://ipinfo.io/" + ip);
+
+        Json _json = Json.json();
+        JsonNode root = _json.parse(raw_data);
+
+        String ip_address = root.get("ip").asString();
+        String hostname = root.get("hostname").asString();
+        String city = root.get("city").asString();
+        String region = root.get("region").asString();
+        String country = root.get("country").asString();
+        String loc = root.get("loc").asString();
+        String postal = root.get("postal").asString();
+
+        return new IpInfo(ip_address, hostname, city, region, country, loc, postal);
+    }
+
     public class IpInfo {
         public String ip;
         public String hostname;
@@ -43,22 +60,5 @@ public class IpInfoApi {
             root.set("postal", postal);
             return root;
         }
-    }
-
-    public IpInfo request_info(String ip) throws IOException, JsonSyntaxException {
-        String raw_data = HttpClient.get("https://ipinfo.io/" + ip);
-
-        Json _json = Json.json();
-        JsonNode root = _json.parse(raw_data);
-
-        String ip_address = root.get("ip").asString();
-        String hostname = root.get("hostname").asString();
-        String city = root.get("city").asString();
-        String region = root.get("region").asString();
-        String country = root.get("country").asString();
-        String loc = root.get("loc").asString();
-        String postal = root.get("postal").asString();
-
-        return new IpInfo(ip_address, hostname, city, region, country, loc, postal);
     }
 }

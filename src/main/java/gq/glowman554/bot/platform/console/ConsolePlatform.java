@@ -1,8 +1,6 @@
 package gq.glowman554.bot.platform.console;
 
 import gq.glowman554.bot.Main;
-import gq.glowman554.bot.event.EventManager;
-import gq.glowman554.bot.event.EventTarget;
 import gq.glowman554.bot.event.impl.MessageEvent;
 import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.utils.MultiThreadHelper;

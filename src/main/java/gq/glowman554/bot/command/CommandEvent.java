@@ -9,8 +9,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 public abstract class CommandEvent {
-    public String _message;
     public final CommandPlatform command_platform;
+    public String _message;
 
     public CommandEvent(String message, CommandPlatform command_platform) {
         _message = message;
@@ -24,6 +24,7 @@ public abstract class CommandEvent {
     }
 
     public abstract void message_send(String message);
+
     public abstract void message_quote(String message);
 
     public String get_message() {
@@ -41,13 +42,17 @@ public abstract class CommandEvent {
     public abstract String[] get_mention_ids();
 
     public abstract int get_num_files();
+
     public abstract String get_file(int idx);
 
     public abstract void message_delete();
 
     public abstract void send_picture(File file);
+
     public abstract void send_audio(File file);
+
     public abstract void send_video(File file);
+
     public abstract void send_file(File file);
 
     @Override
@@ -56,6 +61,7 @@ public abstract class CommandEvent {
     }
 
     public abstract String get_sender_id();
+
     public abstract String get_chat_name();
 
     public void handle_exception(Exception e) {

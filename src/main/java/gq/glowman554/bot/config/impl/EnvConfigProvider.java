@@ -22,7 +22,7 @@ public class EnvConfigProvider implements ConfigProvider {
 
     @Override
     public void set_key_as_int(String key, int value) {
-    	//Log.log("Read only");
+        //Log.log("Read only");
     }
 
     @Override
@@ -32,8 +32,8 @@ public class EnvConfigProvider implements ConfigProvider {
 
     @Override
     public String[] get_all_keys() {
-		Log.log("--- WARNING --- ignoring get_all_keys() call!");
-		return new String[0];
+        Log.log("--- WARNING --- ignoring get_all_keys() call!");
+        return new String[0];
     }
 
     @Override

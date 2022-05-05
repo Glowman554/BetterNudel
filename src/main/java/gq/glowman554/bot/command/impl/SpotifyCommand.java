@@ -13,9 +13,10 @@ import java.io.File;
 
 public class SpotifyCommand implements Command {
     private SpotifyApi spotifyApi;
+
     @Override
     public CommandConfig get_config() {
-        return new CommandConfig("Search spotify for songs!", String.format( "Use '%sspotify [query]' to get a list of songs and small previews of them!", Main.commandManager.prefix), null);
+        return new CommandConfig("Search spotify for songs!", String.format("Use '%sspotify [query]' to get a list of songs and small previews of them!", Main.commandManager.prefix), null);
     }
 
     @Override

@@ -1,8 +1,6 @@
 package gq.glowman554.bot.utils.math.lexer;
 
 
-
-import gq.glowman554.bot.utils.ArrayUtils;
 import gq.glowman554.bot.utils.math.BinParser;
 import gq.glowman554.bot.utils.math.HexParser;
 

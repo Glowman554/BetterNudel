@@ -1,22 +1,37 @@
 package gq.glowman554.bot.config.impl;
 
-import java.util.HashMap;
-
 import gq.glowman554.bot.config.ConfigProvider;
 import gq.glowman554.bot.log.Log;
 import gq.glowman554.bot.utils.ArrayUtils;
 import gq.glowman554.bot.utils.Pair;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisShardInfo;
+import redis.clients.jedis.JedisPool;
+
+import java.util.HashMap;
 
 public class RedisConfigProvider implements ConfigProvider {
     private Jedis jedis;
-    private JedisShardInfo jedisShardInfo;
+    private JedisPool jedisPool;
 
     private boolean connected = false;
 
-	private HashMap<String, Pair<Long, String>> config_cache = new HashMap<>();
-	private HashMap<String, Pair<Long, Boolean>> has_key_cache = new HashMap<>();
+    private HashMap<String, Pair<Long, String>> config_cache = new HashMap<>();
+    private HashMap<String, Pair<Long, Boolean>> has_key_cache = new HashMap<>();
+
+    public RedisConfigProvider() {
+        try {
+            Log.log("Connecting to redis...");
+            jedisPool = new JedisPool(System.getenv("REDISHOST"), Integer.parseInt(System.getenv("REDISPORT")), System.getenv("REDISUSER"), System.getenv("REDISPASSWORD"));
+
+            jedis = jedisPool.getResource();
+            jedis.connect();
+
+            connected = true;
+        } catch (Exception e) {
+            Log.log("Could not connect to redis!");
+            Log.log(e.toString());
+        }
+    }
 
     private void debug_cache() {
         if (config_cache.size() != 0) {
@@ -25,24 +40,6 @@ public class RedisConfigProvider implements ConfigProvider {
 
         if (has_key_cache.size() != 0) {
             Log.log("has_key_cache: " + ArrayUtils.stringify(has_key_cache.keySet().toArray(new String[0]), ", "));
-        }
-    }
-
-    public RedisConfigProvider() {
-        try {
-            Log.log("Connecting to redis...");
-            jedisShardInfo = new JedisShardInfo(System.getenv("REDISHOST"), Integer.parseInt(System.getenv("REDISPORT")), System.getenv("REDISUSER"));
-            jedisShardInfo.setPassword(System.getenv("REDISPASSWORD"));
-
-            Log.log(jedisShardInfo.toString());
-
-            jedis = new Jedis(jedisShardInfo);
-            jedis.connect();
-
-            connected = true;
-        } catch (Exception e) {
-            Log.log("Could not connect to redis!");
-            Log.log(e.toString());
         }
     }
 
@@ -84,7 +81,7 @@ public class RedisConfigProvider implements ConfigProvider {
             return;
         }
 
-		config_cache.put(key, new Pair<>(System.currentTimeMillis(), value));
+        config_cache.put(key, new Pair<>(System.currentTimeMillis(), value));
 
         jedis.connect();
         jedis.set(key, value);

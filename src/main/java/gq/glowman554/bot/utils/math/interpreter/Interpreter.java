@@ -11,6 +11,10 @@ import java.util.HashMap;
 public class Interpreter {
     private HashMap<String, MathFunction> math_function = new HashMap<>();
 
+    public Interpreter() {
+        load_math_functions();
+    }
+
     private void fail(int num_args_expected) {
         throw new IllegalArgumentException("Expected " + num_args_expected + " arguments!");
     }
@@ -57,10 +61,6 @@ public class Interpreter {
             }
             return Math.tan(in[0]);
         });
-    }
-
-    public Interpreter() {
-        load_math_functions();
     }
 
     public double interpret(ParserNode root, MathInterpreter.DebugPrint dbg) {

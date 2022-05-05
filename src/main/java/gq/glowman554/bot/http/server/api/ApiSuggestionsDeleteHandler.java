@@ -4,7 +4,6 @@ import gq.glowman554.bot.Main;
 import gq.glowman554.bot.http.server.HttpApi;
 import gq.glowman554.bot.http.server.HttpApiHandler;
 import gq.glowman554.bot.http.server.api.auth.AuthManager;
-import net.shadew.json.Json;
 
 import java.util.Map;
 

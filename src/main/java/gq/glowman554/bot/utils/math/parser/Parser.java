@@ -14,15 +14,15 @@ public class Parser {
 
     private HashMap<String, Double> defined_variables = new HashMap<String, Double>();
 
-    private void load_defined_variables() {
-        defined_variables.put("pi", 355d / 113d);
-    }
-
     public Parser(LexerToken[] tokens) {
         this.tokens = tokens;
         next();
 
         load_defined_variables();
+    }
+
+    private void load_defined_variables() {
+        defined_variables.put("pi", 355d / 113d);
     }
 
     private void fail() {

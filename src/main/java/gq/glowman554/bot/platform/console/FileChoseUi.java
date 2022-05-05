@@ -18,7 +18,7 @@ public class FileChoseUi extends JDialog {
     }
 
     public boolean want_chose() {
-        String[] options = new String[] { "ok", "cancel" };
+        String[] options = new String[]{"ok", "cancel"};
         int x = JOptionPane.showOptionDialog(null, "Programs wants file length. Do you want to add a file?", "File request", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
 
         return x == 0;

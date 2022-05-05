@@ -2,12 +2,9 @@ package gq.glowman554.bot.command;
 
 import gq.glowman554.bot.Main;
 import gq.glowman554.bot.utils.ArrayUtils;
-import gq.glowman554.bot.utils.FileUtils;
 import net.shadew.json.Json;
 import net.shadew.json.JsonNode;
 import net.shadew.json.JsonSyntaxException;
-
-import java.io.IOException;
 
 public class PermissionManager {
     public String file_content;

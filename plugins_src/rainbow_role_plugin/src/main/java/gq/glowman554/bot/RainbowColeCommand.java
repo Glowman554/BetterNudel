@@ -4,6 +4,7 @@ import gq.glowman554.bot.command.Command;
 import gq.glowman554.bot.command.CommandConfig;
 import gq.glowman554.bot.command.CommandEvent;
 import gq.glowman554.bot.platform.discord.DiscordCommandEvent;
+import gq.glowman554.bot.Main;
 
 public class RainbowColeCommand implements Command {
 
@@ -42,7 +43,7 @@ public class RainbowColeCommand implements Command {
 
 	@Override
 	public CommandConfig get_config() {
-		return new CommandConfig("help_short", "help_long", "role");
+		return new CommandConfig("A rainbow role!", String.format("Use '%srainbow [add,remove][role]' to manage rainbow roles!", Main.commandManager.prefix), "role");
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class PluginJar {
 
     public void init() throws PluginLoadException {
         try {
-            this.child = new URLClassLoader(new URL[] { new URL("jar:file:" + jar_file + "!/") }, this.getClass().getClassLoader());
+            this.child = new URLClassLoader(new URL[]{new URL("jar:file:" + jar_file + "!/")}, this.getClass().getClassLoader());
 
             InputStream plugin_info = child.getResourceAsStream("plugin.json");
             String plugin_json = FileUtils.readFile(plugin_info);

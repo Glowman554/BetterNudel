@@ -10,7 +10,6 @@ import gq.glowman554.bot.event.impl.MessageEvent;
 import gq.glowman554.bot.externapi.FurryApi;
 import gq.glowman554.bot.utils.ArrayUtils;
 import gq.glowman554.bot.utils.FileUtils;
-import net.shadew.json.JsonSyntaxException;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,7 +64,7 @@ public class FurryCommand implements Command {
                 String tmp_file = FileUtils.randomTmpFile(FileUtils.getFileExtension(result.url));
                 result.download(tmp_file);
                 event.commandEvent.send_picture(new File(tmp_file));
-            } catch (IOException | JsonSyntaxException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -76,7 +75,7 @@ public class FurryCommand implements Command {
                 String tmp_file = FileUtils.randomTmpFile(FileUtils.getFileExtension(result.url));
                 result.download(tmp_file);
                 event.commandEvent.send_picture(new File(tmp_file));
-            } catch (IOException | JsonSyntaxException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -87,7 +86,7 @@ public class FurryCommand implements Command {
                 String tmp_file = FileUtils.randomTmpFile(FileUtils.getFileExtension(result.url));
                 result.download(tmp_file);
                 event.commandEvent.send_picture(new File(tmp_file));
-            } catch (IOException | JsonSyntaxException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

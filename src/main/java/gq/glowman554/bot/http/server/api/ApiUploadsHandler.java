@@ -8,7 +8,6 @@ import gq.glowman554.bot.http.server.filehost.FileHostObject;
 import gq.glowman554.bot.utils.FileUtils;
 import net.shadew.json.Json;
 import net.shadew.json.JsonNode;
-import net.shadew.json.JsonSyntaxException;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class ApiUploadsHandler extends HttpApiHandler {
                         root.add(fileHostObject.toJson());
                     }
 
-                } catch (JsonSyntaxException | IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }

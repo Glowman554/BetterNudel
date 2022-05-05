@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class HttpApiHandler {
-    public String http_host_path;
     protected final HttpApi api;
+    public String http_host_path;
 
     public HttpApiHandler(HttpApi api, String path) {
         HttpContext context = api.server.createContext(path);

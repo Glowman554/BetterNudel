@@ -26,6 +26,14 @@ public class CompilerManager {
         register(new MicCompiler());
     }
 
+    public static CompilerManager getInstance() {
+        if (instance == null) {
+            instance = new CompilerManager();
+        }
+
+        return instance;
+    }
+
     public void register(CompilerInterface compiler) {
         Log.log(String.format("Registering %s...", compiler.getClass().getSimpleName()));
         Log.log(Json.json().serialize(compiler.get_config().toJson()));
@@ -67,13 +75,5 @@ public class CompilerManager {
         });
 
         return root;
-    }
-
-    public static CompilerManager getInstance() {
-        if (instance == null) {
-            instance = new CompilerManager();
-        }
-
-        return instance;
     }
 }

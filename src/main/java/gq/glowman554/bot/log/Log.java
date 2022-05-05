@@ -4,7 +4,6 @@ import gq.glowman554.bot.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 public class Log {
     private static String current_log_file = "./logs/" + System.currentTimeMillis() + ".log";
