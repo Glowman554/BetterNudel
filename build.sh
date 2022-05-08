@@ -3,11 +3,11 @@ function build_and_install_plugin {
 
 	(
 		cd plugins_src/$1
-		mvn package install || (echo "Failed to build $1" && exit 1)
+		mvn package install || exit 1
 	)
 }
 
-mvn package install || (echo "Failed to build bot!" && exit 1)
+mvn package install || exit 1
 
 #build_and_install_plugin test_plugin
 #build_and_install_plugin bmi_plugin
