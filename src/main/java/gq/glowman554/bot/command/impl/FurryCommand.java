@@ -49,9 +49,10 @@ public class FurryCommand implements Command {
 
     @Override
     public void on_register() {
-        EventManager.register(this);
+        // EventManager.register(this);
     }
 
+    /*
     @EventTarget
     public void onMessage(MessageEvent event) {
         if (event.commandEvent.get_message().startsWith(Main.commandManager.prefix)) {
@@ -91,4 +92,5 @@ public class FurryCommand implements Command {
             }
         }
     }
+    */
 }
