@@ -62,6 +62,7 @@
 				<configuration>
 					<show>private</show>
 					<show>public</show>
+					<destDir>jdocs</destDir>
 				</configuration>
 			</plugin>
         </plugins>

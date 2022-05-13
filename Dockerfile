@@ -22,6 +22,6 @@ RUN bash build.sh
 
 
 RUN mvn javadoc:javadoc
-RUN cp target/site/apidocs ./host/jdoc -rv
+RUN cp target/site/apidocs/jdocs ./host/jdocs -rv
 
 ENTRYPOINT ["java", "-jar", "/srv/target/BetterNudel-1.0-SNAPSHOT-REWRITE.jar"]
