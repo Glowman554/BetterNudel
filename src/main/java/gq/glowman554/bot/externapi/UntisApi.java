@@ -7,6 +7,7 @@ import gq.glowman554.bot.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 public class UntisApi {
     private final String[] users;
@@ -42,7 +43,7 @@ public class UntisApi {
         while (true) {
             untis_message.editMessage("Fetching data...").queue();
             try {
-                untis_message.editMessage(toString()).queue();
+                untis_message.editMessage(toString() + String.format("\nLast update: %s", new Date())).queue();
             } catch (RuntimeException e) {
                 untis_message.editMessage("Failed to fetch untis info: " + e.getMessage()).queue();
             }

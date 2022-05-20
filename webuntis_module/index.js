@@ -96,7 +96,7 @@ async function fetch_homework() {
 	// }
 
 	if (homework_string == "") {
-		homework_string = "Keine Aufgaben für heute!";
+		homework_string = "Keine Aufgaben fuer heute!";
 	}
 
 	var class_services_string = "";
