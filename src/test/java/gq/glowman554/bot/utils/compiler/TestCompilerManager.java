@@ -12,6 +12,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCompilerManager {
+/*
     @Test
     public void test1() throws Exception {
         Main.load_config();
@@ -68,5 +69,5 @@ public class TestCompilerManager {
         FileUtils.writeFile("tmp/test.mik", "mikf puts(str s) -> int\nputs(\"Hello World\")\n");
 
         assertEquals("Hello World\n", compilerManager.compile_and_run(new File("tmp/test.mik")));
-    }
+*/
 }
