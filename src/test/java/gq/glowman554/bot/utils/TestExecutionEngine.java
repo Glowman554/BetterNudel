@@ -8,15 +8,15 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestExecutionEngine {
-    @Test
-    public void test1() throws ExecutionEngine.ExecutionEngineError, IOException {
-        ExecutionEngine ee = new ExecutionEngine(false);
-        String result = ee.execute("echo test");
+    // @Test
+    // public void test1() throws ExecutionEngine.ExecutionEngineError, IOException {
+    //     ExecutionEngine ee = new ExecutionEngine(false);
+    //     String result = ee.execute("echo test");
 
-        Log.log(result);
+    //     Log.log(result);
 
-        assertEquals("test\n", result);
-    }
+    //     assertEquals("test\n", result);
+    // }
 
     /*
     @Test

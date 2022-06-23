@@ -62,4 +62,48 @@ public class PageEditHandler extends HttpApiHandler {
 		return current_page.toJson().toString();
 	}
 	
+	@Override
+	public String execute(Map<String, String> query, Map<String, String> headers, String body) throws Exception {
+		String token = query.get("token");
+        String user = AuthManager.instance.checkToken(token);
+
+        if (user == null) {
+            return "{\"error\":\"Invalid token\"}";
+        }
+
+        if (!Main.commandManager.permissionManager.has_permission(user, "wiki_editor")) {
+            return "{\"error\":\"You do not have permission to edit wiki pages\"}";
+        }
+
+		String page_title = query.get("page_title");
+		if (page_title != null) {
+			page_title = new String(Base64.getDecoder().decode(page_title));
+		}
+
+		String page_text = body;
+		if (page_text != null) {
+			page_text = new String(Base64.getDecoder().decode(page_text));
+		}
+
+		String page_id = query.get("page_id");
+		if (page_id == null) {
+			return "{\"error\":\"Missing page_id\"}";
+		}
+
+		Page current_page = PageManager.instance.load(page_id);
+
+		if (page_title != null) {
+			current_page.page_title = page_title;
+		}
+
+		if (page_text != null) {
+			current_page.page_text = page_text;
+		}
+
+		new PageUpdateEvent(current_page).call();
+
+		PageManager.instance.edit(current_page);
+
+		return current_page.toJson().toString();
+	}
 }

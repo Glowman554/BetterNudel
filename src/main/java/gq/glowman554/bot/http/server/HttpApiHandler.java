@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import gq.glowman554.bot.Main;
 import gq.glowman554.bot.log.Log;
+import gq.glowman554.bot.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,7 +88,20 @@ public abstract class HttpApiHandler {
                 headers.put(key.toLowerCase(), header.get(0));
             });
 
-            String respone = execute(query, headers);
+			var body = exchange.getRequestBody();
+			String respone;
+			if (body.available() != 0) {
+				String body_str = FileUtils.readFile(body);
+				Log.log("body: " + body_str);
+
+				respone = execute(query, headers, body_str);
+			} else {
+				Log.log("no body");
+				respone = execute(query, headers);
+			}
+
+			body.close();
+
 
             if (respone != null) {
                 exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
@@ -106,4 +120,8 @@ public abstract class HttpApiHandler {
     }
 
     public abstract String execute(Map<String, String> query, Map<String, String> headers) throws Exception;
+
+    public String execute(Map<String, String> query, Map<String, String> headers, String body) throws Exception {
+		return execute(query, headers);
+	}
 }

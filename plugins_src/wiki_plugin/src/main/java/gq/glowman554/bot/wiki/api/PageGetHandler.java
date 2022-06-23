@@ -28,7 +28,7 @@ public class PageGetHandler extends HttpApiHandler {
 
 		if (query.keySet().contains("download")) {
 			String file = FileUtils.randomTmpFile("md");
-			FileUtils.writeFile(file, new URLDecoder().decode(_return.get("page_text").asString()));
+			// FileUtils.writeFile(file, new URLDecoder().decode(_return.get("page_text").asString()));
 			
 			FileHostObject fho = FileHostObject.new_object(new File(file), "<system>", true);
 

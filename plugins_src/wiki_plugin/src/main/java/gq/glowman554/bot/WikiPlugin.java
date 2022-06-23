@@ -13,7 +13,6 @@ import gq.glowman554.bot.wiki.api.PageDeleteHandler;
 import gq.glowman554.bot.wiki.api.PageEditHandler;
 import gq.glowman554.bot.wiki.api.PageGetHandler;
 import gq.glowman554.bot.wiki.api.PageListHandler;
-import gq.glowman554.bot.wiki.command.WikiCommand;
 import gq.glowman554.bot.wiki.event.PageCreateEvent;
 import gq.glowman554.bot.wiki.event.PageDeleteEvent;
 import gq.glowman554.bot.wiki.event.PageUpdateEvent;
@@ -35,7 +34,6 @@ public class WikiPlugin implements Plugin {
 		new PageDeleteHandler(HttpApi.instance, "/api/v2/wiki/page/delete");
 		pageChangeLogHandlerInstance = new PageChangeLogHandler(HttpApi.instance, "/api/v2/wiki/page/changelog");
 
-		Main.commandManager.add_command("wiki", new WikiCommand());
 
 		try {
 			String event_channel_id = Main.configManager.get_key_as_str("wiki_event_channel_id");

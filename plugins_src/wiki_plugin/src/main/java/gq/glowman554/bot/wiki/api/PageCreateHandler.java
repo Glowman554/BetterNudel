@@ -48,5 +48,32 @@ public class PageCreateHandler extends HttpApiHandler {
 
 		return page.toJson().toString();
 	}
-	
+
+	@Override
+	public String execute(Map<String, String> query, Map<String, String> headers, String body) throws Exception {
+		String token = query.get("token");
+        String user = AuthManager.instance.checkToken(token);
+
+        if (user == null) {
+            return "{\"error\":\"Invalid token\"}";
+        }
+
+        if (!Main.commandManager.permissionManager.has_permission(user, "wiki_editor")) {
+            return "{\"error\":\"You do not have permission to edit wiki pages\"}";
+        }
+
+		String page_title = query.get("page_title");
+		if (page_title == null) {
+			return "{\"error\":\"Missing page_title\"}";
+		}
+		page_title = new String(Base64.getDecoder().decode(page_title));
+
+		String page_text = new String(Base64.getDecoder().decode(body));
+
+		Page page =  PageManager.instance.create(page_title, page_text);
+
+		new PageCreateEvent(page).call();
+
+		return page.toJson().toString();
+	}
 }
