@@ -93,11 +93,11 @@ public abstract class HttpApiHandler {
 
 			String respone;
 			if (body_str.length() != 0) {
-				Log.log("body: " + body_str);
+				//Log.log("body: " + body_str);
 
 				respone = execute(query, headers, body_str);
 			} else {
-				Log.log("no body");
+				//Log.log("no body");
 				respone = execute(query, headers);
 			}
 
