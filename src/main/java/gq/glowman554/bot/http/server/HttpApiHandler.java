@@ -89,9 +89,10 @@ public abstract class HttpApiHandler {
             });
 
 			var body = exchange.getRequestBody();
+			String body_str = FileUtils.readFile(body);
+
 			String respone;
-			if (body.available() != 0) {
-				String body_str = FileUtils.readFile(body);
+			if (body_str.length() != 0) {
 				Log.log("body: " + body_str);
 
 				respone = execute(query, headers, body_str);
