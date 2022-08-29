@@ -18,3 +18,4 @@ webinterface/package-lock.json
 webinterface/.next
 webinterface/node_modules
 webinterface/out
+redis-data

@@ -7,7 +7,8 @@ services:
       - '6379:6379'
       - '8001:8001'
     volumes:
-      - ./redis-volume:/data
+      - ./redis-data:/data
+
   bot:
     build: .
     restart: always
