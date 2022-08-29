@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  redis:
+    image: redis/redis-stack:latest
+    restart: always
+    ports:
+      - '6379:6379'
+      - '8001:8001'
+    volumes:
+      - ./redis-volume:/data
+  bot:
+    build: .
+    restart: always
+    environment:
+      - REDISHOST=redis
+      - REDISPORT=6379
