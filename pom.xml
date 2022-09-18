@@ -67,6 +67,14 @@
 			</plugin>
         </plugins>
     </build>
+	
+	<distributionManagement>
+		<repository>
+		<id>github</id>
+		<name>GitHub Glowman554 Apache Maven Packages</name>
+		<url>https://maven.pkg.github.com/Glowman554/BetterNudel</url>
+		</repository>
+	</distributionManagement>
 
     <repositories>
         <repository>
